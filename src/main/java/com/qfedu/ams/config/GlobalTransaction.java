@@ -28,7 +28,7 @@ public class GlobalTransaction {
     private static final int TX_METHOD_TIMEOUT = 10;
 
     //restful包下所有service包或者service的子包的任意类的任意方法
-    private static final String AOP_POINTCUT_EXPRESSION = "execution (* com.carlos.emp.service.impl.*.*(..))";
+    private static final String AOP_POINTCUT_EXPRESSION = "execution (* com.carlos.ams.service.impl.*.*(..))";
 
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -37,14 +37,14 @@ public class GlobalTransaction {
     @Bean // 创建对象，对象的名称是方法名
     public TransactionInterceptor txAdvice() {
 
-        /**
+        /*
          * 这里配置只读事务
          */
         RuleBasedTransactionAttribute readOnlyTx = new RuleBasedTransactionAttribute();
         readOnlyTx.setReadOnly(true);
         readOnlyTx.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 
-        /**
+        /*
          * 必须带事务
          * 当前存在事务就使用当前事务，当前不存在事务,就开启一个新的事务
          */
@@ -55,7 +55,7 @@ public class GlobalTransaction {
         requiredTx.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
         requiredTx.setTimeout(TX_METHOD_TIMEOUT);
 
-        /***
+        /*
          * 无事务地执行，挂起任何存在的事务
          */
         RuleBasedTransactionAttribute noTx = new RuleBasedTransactionAttribute();
