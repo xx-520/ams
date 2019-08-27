@@ -1,10 +1,6 @@
 package com.qfedu.ams.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.apache.ibatis.annotations.Param;
 //简答题回答表
 @Data // 自动生成对应的getter和setter方法
 public class ShortAnswer {
