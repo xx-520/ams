@@ -15,7 +15,7 @@ public class User {
 
     private Integer scoreid;
 
-    private Integer lock;
+    private Boolean lock;
 
     private Integer subjectid;
 
@@ -75,11 +75,11 @@ public class User {
         this.scoreid = scoreid;
     }
 
-    public Integer getLock() {
+    public Boolean getLock() {
         return lock;
     }
 
-    public void setLock(Integer lock) {
+    public void setLock(Boolean lock) {
         this.lock = lock;
     }
 
