@@ -9,7 +9,7 @@ public class JudgeQuestion {
 
     private Integer choiceb;
 
-    private Integer judgeanswer;
+    private Boolean judgeanswer;
 
     private Integer subjectid;
 
@@ -47,11 +47,11 @@ public class JudgeQuestion {
         this.choiceb = choiceb;
     }
 
-    public Integer getJudgeanswer() {
+    public Boolean getJudgeanswer() {
         return judgeanswer;
     }
 
-    public void setJudgeanswer(Integer judgeanswer) {
+    public void setJudgeanswer(Boolean judgeanswer) {
         this.judgeanswer = judgeanswer;
     }
 
