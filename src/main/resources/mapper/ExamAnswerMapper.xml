@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.ams.dao.ExamAnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ExamAnswer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="examId" property="examid" jdbcType="INTEGER" />
+    <result column="choice_answer" property="choiceAnswer" jdbcType="VARCHAR" />
+    <result column="judge_answer" property="judgeAnswer" jdbcType="VARCHAR" />
+    <result column="short_answer" property="shortAnswer" jdbcType="VARCHAR" />
+    <result column="examNum" property="examnum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, examId, choice_answer, judge_answer, short_answer, examNum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ams_exam_answer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ams_exam_answer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.ams.entity.ExamAnswer" >
+    insert into ams_exam_answer (id, examId, choice_answer, 
+      judge_answer, short_answer, examNum
+      )
+    values (#{id,jdbcType=INTEGER}, #{examid,jdbcType=INTEGER}, #{choiceAnswer,jdbcType=VARCHAR}, 
+      #{judgeAnswer,jdbcType=VARCHAR}, #{shortAnswer,jdbcType=VARCHAR}, #{examnum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.ExamAnswer" >
+    insert into ams_exam_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="examid != null" >
+        examId,
+      </if>
+      <if test="choiceAnswer != null" >
+        choice_answer,
+      </if>
+      <if test="judgeAnswer != null" >
+        judge_answer,
+      </if>
+      <if test="shortAnswer != null" >
+        short_answer,
+      </if>
+      <if test="examnum != null" >
+        examNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="examid != null" >
+        #{examid,jdbcType=INTEGER},
+      </if>
+      <if test="choiceAnswer != null" >
+        #{choiceAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeAnswer != null" >
+        #{judgeAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="shortAnswer != null" >
+        #{shortAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="examnum != null" >
+        #{examnum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.ExamAnswer" >
+    update ams_exam_answer
+    <set >
+      <if test="examid != null" >
+        examId = #{examid,jdbcType=INTEGER},
+      </if>
+      <if test="choiceAnswer != null" >
+        choice_answer = #{choiceAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeAnswer != null" >
+        judge_answer = #{judgeAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="shortAnswer != null" >
+        short_answer = #{shortAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="examnum != null" >
+        examNum = #{examnum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamAnswer" >
+    update ams_exam_answer
+    set examId = #{examid,jdbcType=INTEGER},
+      choice_answer = #{choiceAnswer,jdbcType=VARCHAR},
+      judge_answer = #{judgeAnswer,jdbcType=VARCHAR},
+      short_answer = #{shortAnswer,jdbcType=VARCHAR},
+      examNum = #{examnum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,9 +1,23 @@
 package com.qfedu.ams.entity;
 
-import lombok.Data;
-//学科表
-@Data // 自动生成对应的getter和setter方法
 public class ExamSubject {
-    private Integer subjectId;//学科ID
-    private String subjectName;//学科名字
+    private Integer subjectid;
+
+    private String subjectname;
+
+    public Integer getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(Integer subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public String getSubjectname() {
+        return subjectname;
+    }
+
+    public void setSubjectname(String subjectname) {
+        this.subjectname = subjectname == null ? null : subjectname.trim();
+    }
 }

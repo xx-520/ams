@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.ams.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.Score" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="choiceScore" property="choicescore" jdbcType="INTEGER" />
+    <result column="totalJudgeScore" property="totaljudgescore" jdbcType="INTEGER" />
+    <result column="totalShortScore" property="totalshortscore" jdbcType="INTEGER" />
+    <result column="totalScore" property="totalscore" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, choiceScore, totalJudgeScore, totalShortScore, totalScore
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.ams.entity.Score" >
+    insert into score (id, choiceScore, totalJudgeScore, 
+      totalShortScore, totalScore)
+    values (#{id,jdbcType=INTEGER}, #{choicescore,jdbcType=INTEGER}, #{totaljudgescore,jdbcType=INTEGER}, 
+      #{totalshortscore,jdbcType=INTEGER}, #{totalscore,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="choicescore != null" >
+        choiceScore,
+      </if>
+      <if test="totaljudgescore != null" >
+        totalJudgeScore,
+      </if>
+      <if test="totalshortscore != null" >
+        totalShortScore,
+      </if>
+      <if test="totalscore != null" >
+        totalScore,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="choicescore != null" >
+        #{choicescore,jdbcType=INTEGER},
+      </if>
+      <if test="totaljudgescore != null" >
+        #{totaljudgescore,jdbcType=INTEGER},
+      </if>
+      <if test="totalshortscore != null" >
+        #{totalshortscore,jdbcType=INTEGER},
+      </if>
+      <if test="totalscore != null" >
+        #{totalscore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.Score" >
+    update score
+    <set >
+      <if test="choicescore != null" >
+        choiceScore = #{choicescore,jdbcType=INTEGER},
+      </if>
+      <if test="totaljudgescore != null" >
+        totalJudgeScore = #{totaljudgescore,jdbcType=INTEGER},
+      </if>
+      <if test="totalshortscore != null" >
+        totalShortScore = #{totalshortscore,jdbcType=INTEGER},
+      </if>
+      <if test="totalscore != null" >
+        totalScore = #{totalscore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.Score" >
+    update score
+    set choiceScore = #{choicescore,jdbcType=INTEGER},
+      totalJudgeScore = #{totaljudgescore,jdbcType=INTEGER},
+      totalShortScore = #{totalshortscore,jdbcType=INTEGER},
+      totalScore = #{totalscore,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

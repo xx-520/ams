@@ -1,12 +1,53 @@
 package com.qfedu.ams.entity;
 
-import lombok.Data;
-//考试分数
-@Data // 自动生成对应的getter和setter方法
 public class Score {
     private Integer id;
-    private Integer choiceScore; //单选题分数
-    private Integer totalJudgeScore; //多选题分数
-    private Integer totalShortScore; //简答题分数
-    private Integer totalScore; //总分
+
+    private Integer choicescore;
+
+    private Integer totaljudgescore;
+
+    private Integer totalshortscore;
+
+    private Integer totalscore;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getChoicescore() {
+        return choicescore;
+    }
+
+    public void setChoicescore(Integer choicescore) {
+        this.choicescore = choicescore;
+    }
+
+    public Integer getTotaljudgescore() {
+        return totaljudgescore;
+    }
+
+    public void setTotaljudgescore(Integer totaljudgescore) {
+        this.totaljudgescore = totaljudgescore;
+    }
+
+    public Integer getTotalshortscore() {
+        return totalshortscore;
+    }
+
+    public void setTotalshortscore(Integer totalshortscore) {
+        this.totalshortscore = totalshortscore;
+    }
+
+    public Integer getTotalscore() {
+        return totalscore;
+    }
+
+    public void setTotalscore(Integer totalscore) {
+        this.totalscore = totalscore;
+    }
 }
