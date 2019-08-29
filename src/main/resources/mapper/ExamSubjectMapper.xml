@@ -11,8 +11,12 @@
     subjectId, subjectName
   </sql>
 
+  <select id="findAll" resultType="com.qfedu.ams.entity.ExamSubject">
+    select * from exam_subject;
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from exam_subject
     where subjectId = #{subjectid,jdbcType=INTEGER}

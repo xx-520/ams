@@ -2,12 +2,21 @@ package com.qfedu.ams.service;
 
 import com.qfedu.ams.entity.ExamSubject;
 
+import java.util.List;
+
 /**
  * 学科管理 service接口层
  *
  * @author xx
  */
 public interface ExamSubjectService {
+
+    /**
+     * 查询所有学科信息
+     *
+     * @return
+     */
+    List<ExamSubject> findAll();
 
     /**
      * 删除学科信息

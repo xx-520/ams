@@ -6,6 +6,8 @@ import com.qfedu.ams.service.ExamSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 学科实现层
  *
@@ -16,6 +18,11 @@ public class ExamSubjectServiceImpl implements ExamSubjectService {
 
     @Autowired(required = false)
     private ExamSubjectMapper examSubjectMapper;
+
+    @Override
+    public List<ExamSubject> findAll() {
+        return examSubjectMapper.findAll();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer subjectid) {
