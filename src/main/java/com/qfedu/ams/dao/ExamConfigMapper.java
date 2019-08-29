@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ExamConfig;
-
+//考试时间表
 public interface ExamConfigMapper {
     int deleteByPrimaryKey(Integer id);
 

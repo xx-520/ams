@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.Permision;
-
+//权限表
 public interface PermisionMapper {
     int deleteByPrimaryKey(Integer pid);
 

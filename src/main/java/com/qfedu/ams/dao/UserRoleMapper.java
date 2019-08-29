@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.UserRole;
-
+//用户角色中间表
 public interface UserRoleMapper {
     int deleteByPrimaryKey(Integer userRoleId);
 

@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ShortQuestion;
-
+//简答题表
 public interface ShortQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 

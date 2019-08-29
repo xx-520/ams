@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.RolePermision;
-
+//角色权限中间表
 public interface RolePermisionMapper {
     int deleteByPrimaryKey(Integer rolePerId);
 

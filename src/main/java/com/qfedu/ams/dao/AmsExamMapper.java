@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.AmsExam;
-
+//试题表
 public interface AmsExamMapper {
     int deleteByPrimaryKey(Integer id);
 

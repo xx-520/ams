@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.JudgeQuestion;
-
+//判断题表
 public interface JudgeQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 

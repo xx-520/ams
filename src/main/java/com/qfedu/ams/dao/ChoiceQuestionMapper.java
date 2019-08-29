@@ -2,7 +2,7 @@ package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ChoiceQuestion;
 import com.qfedu.ams.entity.ChoiceQuestionWithBLOBs;
-
+//选择题表
 public interface ChoiceQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 

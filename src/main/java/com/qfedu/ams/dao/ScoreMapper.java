@@ -1,7 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.Score;
-
+//分数表
 public interface ScoreMapper {
     int deleteByPrimaryKey(Integer id);
 
