@@ -15,9 +15,19 @@ public class User {
 
     private Integer scoreid;
 
-    private Boolean lock;
+    private Boolean locks;
 
     private Integer subjectid;
+
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getUid() {
         return uid;
@@ -75,12 +85,12 @@ public class User {
         this.scoreid = scoreid;
     }
 
-    public Boolean getLock() {
-        return lock;
+    public Boolean getLocks() {
+        return locks;
     }
 
-    public void setLock(Boolean lock) {
-        this.lock = lock;
+    public void setLocks(Boolean locks) {
+        this.locks = locks;
     }
 
     public Integer getSubjectid() {

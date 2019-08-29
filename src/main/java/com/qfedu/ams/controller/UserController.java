@@ -44,13 +44,13 @@ public class UserController {
 
     /**
      * 查找指定ID的考生
-     * @param id 需要查询考生的ID
+     * @param uid 需要查询考生的ID
      * @return
      */
     @RequestMapping("/selectUser.do")
     @ResponseBody
-    public JsonResult select(Integer id) {
-        User user = userService.selectUserById(id);
+    public JsonResult select(Integer uid) {
+        User user = userService.selectUserById(uid);
         JsonResult jsonResult = new JsonResult(1,user);
         return jsonResult;
     }
@@ -71,13 +71,13 @@ public class UserController {
 
     /**
      * 删除指定ID的考生
-     * @param id 需要删除的考生ID
+     * @param uid 需要删除的考生ID
      * @return
      */
     @RequestMapping("/deleteUser.do")
     @ResponseBody
-    public JsonResult deleteUser(Integer id) {
-        userService.deleteUserById(id);
+    public JsonResult deleteUser(Integer uid) {
+        userService.deleteUserById(uid);
         JsonResult jsonResult = new JsonResult(1, null);
         return jsonResult;
     }

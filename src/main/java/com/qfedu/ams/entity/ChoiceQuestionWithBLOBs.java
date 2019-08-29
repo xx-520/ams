@@ -11,6 +11,16 @@ public class ChoiceQuestionWithBLOBs extends ChoiceQuestion {
 
     private String choiced;
 
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getQuestion() {
         return question;
     }
