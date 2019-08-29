@@ -8,51 +8,28 @@
   <sql id="Base_Column_List" >
     subjectId, subjectName
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from exam_subject
     where subjectId = #{subjectid,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from exam_subject
     where subjectId = #{subjectid,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject" >
     insert into exam_subject (subjectId, subjectName)
     values (#{subjectid,jdbcType=INTEGER}, #{subjectname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    insert into exam_subject
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="subjectid != null" >
-        subjectId,
-      </if>
-      <if test="subjectname != null" >
-        subjectName,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="subjectid != null" >
-        #{subjectid,jdbcType=INTEGER},
-      </if>
-      <if test="subjectname != null" >
-        #{subjectname,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    update exam_subject
-    <set >
-      <if test="subjectname != null" >
-        subjectName = #{subjectname,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where subjectId = #{subjectid,jdbcType=INTEGER}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamSubject" >
     update exam_subject
     set subjectName = #{subjectname,jdbcType=VARCHAR}
     where subjectId = #{subjectid,jdbcType=INTEGER}
   </update>
+
 </mapper>
