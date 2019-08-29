@@ -7,35 +7,27 @@
     <result column="subjectName" property="subjectname" jdbcType="VARCHAR" />
   </resultMap>
 
-  <sql id="Base_Column_List" >
-    subjectId, subjectName
-  </sql>
-
   <select id="findAll" resultType="com.qfedu.ams.entity.ExamSubject">
     select * from exam_subject;
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from exam_subject
-    where subjectId = #{subjectid,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select * from exam_subject where subjectId = #{id}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from exam_subject
-    where subjectId = #{subjectid,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from exam_subject where subjectId = #{id}
   </delete>
 
   <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    insert into exam_subject (subjectName)
-    values (#{subjectname,jdbcType=VARCHAR})
+    insert into exam_subject(subjectName)
+    values (#{name})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamSubject" >
     update exam_subject
-    set subjectName = #{subjectname,jdbcType=VARCHAR}
-    where subjectId = #{subjectid,jdbcType=INTEGER}
+    set subjectName = #{name}
+    where subjectId = #{id}
   </update>
 
 </mapper>
