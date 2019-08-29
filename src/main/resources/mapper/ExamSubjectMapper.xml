@@ -28,8 +28,8 @@
   </delete>
 
   <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    insert into exam_subject (subjectId, subjectName)
-    values (#{subjectid,jdbcType=INTEGER}, #{subjectname,jdbcType=VARCHAR})
+    insert into exam_subject (subjectName)
+    values (#{subjectname,jdbcType=VARCHAR})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamSubject" >
