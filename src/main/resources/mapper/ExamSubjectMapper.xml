@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qfedu.ams.dao.ExamSubjectMapper" >
+
   <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ExamSubject" >
     <id column="subjectId" property="subjectid" jdbcType="INTEGER" />
     <result column="subjectName" property="subjectname" jdbcType="VARCHAR" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     subjectId, subjectName
   </sql>
