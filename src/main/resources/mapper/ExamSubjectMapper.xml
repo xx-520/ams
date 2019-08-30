@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.ams.dao.ExamSubjectMapper" >
+<mapper namespace="com.qfedu.ams.dao.ExamSubjectMapper">
 
-  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ExamSubject" >
-    <id column="subjectId" property="subjectid" jdbcType="INTEGER" />
-    <result column="subjectName" property="subjectname" jdbcType="VARCHAR" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ExamSubject">
+        <id column="subjectId" property="subjectid" jdbcType="INTEGER"/>
+        <result column="subjectName" property="subjectname" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <select id="findAll" resultType="com.qfedu.ams.entity.ExamSubject">
-    select * from exam_subject;
+    <select id="findAll" resultType="com.qfedu.ams.entity.ExamSubject">
+    select * from exam_subject
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
-    select * from exam_subject where subjectId = #{id}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
+    select * from exam_subject where subjectId = #{subjectid}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="int" >
-    delete from exam_subject where subjectId = #{id}
+    <delete id="deleteByPrimaryKey" parameterType="int">
+    delete from exam_subject where subjectId = #{subjectid}
   </delete>
 
-  <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    insert into exam_subject values (null, #{subjectName})
+    <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject">
+    insert into ams.exam_subject(subjectId,subjectName) values(null ,#{subjectname})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    update exam_subject
-    set subjectName = #{name}
-    where subjectId = #{id}
-  </update>
-
-  <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
-    select * from exam_subject
-
-  </select>
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from exam_subject limit #{index},#{size}
+    </select>
 
 
 </mapper>

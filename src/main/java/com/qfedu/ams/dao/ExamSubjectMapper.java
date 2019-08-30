@@ -43,19 +43,4 @@ public interface ExamSubjectMapper {
      */
     ExamSubject selectByPrimaryKey(Integer subjectid);
 
-    /**
-     * 修改学科信息
-     *
-     * @param record 传入 record对象
-     * @return
-     */
-    int updateByPrimaryKey(ExamSubject record);
-
-    /**
-     *
-     *
-     * @param subjectName 科目名
-     * @return 返回 ExamSubject对象的 List集合
-     */
-    public List<ExamSubject> findByIndexAndSize(@Param("subjectName") String subjectName);
 }

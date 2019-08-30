@@ -30,21 +30,16 @@ public class ExamSubjectController {
     }
 
     @RequestMapping("/ES/add.do")
-    public String addES(ExamSubject examSubject){
-        examSubjectService.insert(examSubject);
-        return "redirect:/ES/list.do";
+    @ResponseBody
+    public JsonResult addES(ExamSubject examSubject){
+        int insert = examSubjectService.insert(examSubject);
+        return new JsonResult(1, insert);
     }
 
     @RequestMapping("/ES/delete.do")
-    public String deleteES(Integer id){
+    public JsonResult deleteES(Integer id){
         examSubjectService.deleteByPrimaryKey(id);
-        return "redirect:/ES/list.do";
-    }
-
-    @RequestMapping("/ES/update.do")
-    public String updateES(ExamSubject examSubject){
-        examSubjectService.updateByPrimaryKey(examSubject);
-        return "redirect:/ES/list.do";
+        return new JsonResult(1,null);
     }
 
     @RequestMapping("/ES/query.do")
@@ -55,8 +50,9 @@ public class ExamSubjectController {
     }
 
     @RequestMapping("/ES/page.do")
-    public Map<String, Object> findByPage(String subjectName, Integer page, Integer limit){
-        Map<String, Object> map = examSubjectService.findByIndexAndSize(subjectName,page, limit);
+    @ResponseBody
+    public Map<String, Object> findByPage(Integer page, Integer limit){
+        Map<String, Object> map = examSubjectService.findByIndexAndSize(page, limit);
         return map;
     }
 

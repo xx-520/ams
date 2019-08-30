@@ -10,11 +10,9 @@
 <div class="layui-container" style="margin-top: 30px;">
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">所属学科</label>
-            <div  class="layui-input-block">
-                <select id="select_subject" name="subjectId" lay-filter="aihao">
-                    <option value="">---下拉菜单---</option>
-                </select>
+            <label class="layui-form-label">新增学科名</label>
+            <div class="layui-input-block">
+                <input type="text" name="subjectname" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,33 +30,20 @@
             layedit = layui.layedit,
             laydate = layui.laydate;
 
-        //自定义验证规则
-        form.verify({
-            title: function(value) {
-                if (value.length < 1) {
-                    return '名称至少得1个字符啊';
-                }
-            },
-            content: function(value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-
         //监听提交
         form.on('submit(addCourse)', function(data) {
             $.ajax({
                 type:"post",
-                url:"/ES/add.do" + window.location.search,
+                url:"/ams/ES/add.do",
                 data:data.field,
                 dataType:"json",
                 success:function(data){  //{code:1,info:....}
-                    if(data.code == 0){
+                    if(data.code == 1){
                         layer.msg(data.data);
                         var t = parent.layui.table;
                         t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
-                        //var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        //parent.layer.close(index); //再执行关闭
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
                     }else{
                         layer.msg("添加失败");
                     }
@@ -70,31 +55,6 @@
 
 
     });
-</script>
-
-<script type="text/javascript">
-    layui.use(['form','layer'],function () {
-        var form = layui.form,
-            layer = layui.layer;
-        $(function searchSubject() {
-            $.ajax({
-                type:"get",
-                url:"/ES/query.do",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code == 0) {
-                        var infos = data.data;
-                        $(infos).each(function () {
-                            var html = '<option value="' + this.id + '"> ' + this.subjectName + ' </option>';
-                            $("#select_subject").append($(html));
-                        });
-                        layui.form.render("select");
-                    }
-                }
-            });
-        })
-    });
-
 </script>
 </body>
 </html>

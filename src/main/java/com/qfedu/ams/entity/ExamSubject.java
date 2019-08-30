@@ -18,6 +18,6 @@ public class ExamSubject {
     }
 
     public void setSubjectname(String subjectname) {
-        this.subjectname = subjectname == null ? null : subjectname.trim();
+        this.subjectname = subjectname;
     }
 }

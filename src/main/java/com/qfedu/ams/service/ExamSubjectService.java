@@ -43,15 +43,6 @@ public interface ExamSubjectService {
      */
     ExamSubject selectByPrimaryKey(Integer subjectid);
 
-    /**
-     * 修改学科信息
-     *
-     * @param record 传入 record对象
-     * @return
-     */
-    int updateByPrimaryKey(ExamSubject record);
-
-
-    public Map<String ,Object> findByIndexAndSize(String subjectName, Integer page, Integer limit);
+    Map<String ,Object> findByIndexAndSize( Integer page, Integer limit);
 
 }
