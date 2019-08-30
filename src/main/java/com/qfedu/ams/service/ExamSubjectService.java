@@ -3,6 +3,7 @@ package com.qfedu.ams.service;
 import com.qfedu.ams.entity.ExamSubject;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 学科管理 service接口层
@@ -49,4 +50,8 @@ public interface ExamSubjectService {
      * @return
      */
     int updateByPrimaryKey(ExamSubject record);
+
+
+    public Map<String ,Object> findByIndexAndSize(String subjectName, Integer page, Integer limit);
+
 }

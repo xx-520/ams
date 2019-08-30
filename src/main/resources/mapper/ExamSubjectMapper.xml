@@ -20,8 +20,7 @@
   </delete>
 
   <insert id="insert" parameterType="com.qfedu.ams.entity.ExamSubject" >
-    insert into exam_subject(subjectName)
-    values (#{name})
+    insert into exam_subject values (null, #{subjectName})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.ExamSubject" >
@@ -29,5 +28,23 @@
     set subjectName = #{name}
     where subjectId = #{id}
   </update>
+
+  <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.vo.VVideo">
+    select *
+    from exam_subject
+    <where>
+      <if test="title != null and title != ''">
+        title like CONCAT('%',CONCAT(#{title},'%'))
+      </if>
+      <if test="speakerName != null and speakerName != ''">
+        and speakerName = #{speakerName}
+      </if>
+      <if test="courseTitle != null and courseTitle != ''">
+        and courseTitle = #{courseTitle}
+      </if>
+    </where>
+
+  </select>
+
 
 </mapper>

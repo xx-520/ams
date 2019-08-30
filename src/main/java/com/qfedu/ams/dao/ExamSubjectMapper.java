@@ -1,6 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ExamSubject;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -49,4 +50,12 @@ public interface ExamSubjectMapper {
      * @return
      */
     int updateByPrimaryKey(ExamSubject record);
+
+    /**
+     *
+     *
+     * @param subjectName 科目名
+     * @return 返回 ExamSubject对象的 List集合
+     */
+    public List<ExamSubject> findByIndexAndSize(@Param("subjectName") String subjectName,Integer page, Integer limit);
 }
