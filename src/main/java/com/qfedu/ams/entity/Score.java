@@ -3,6 +3,12 @@ package com.qfedu.ams.entity;
 public class Score {
     private Integer id;
 
+    private Integer uid;
+
+    private Integer subjectid;
+
+    private Integer configid;
+
     private Integer choicescore;
 
     private Integer totaljudgescore;
@@ -12,6 +18,30 @@ public class Score {
     private Integer totalscore;
 
     private Integer status;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public Integer getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(Integer subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public Integer getConfigid() {
+        return configid;
+    }
+
+    public void setConfigid(Integer configid) {
+        this.configid = configid;
+    }
 
     public Integer getStatus() {
         return status;

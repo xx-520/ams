@@ -8,9 +8,7 @@
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="scoreId" property="scoreid" jdbcType="INTEGER" />
     <result column="locks" property="locks" jdbcType="INTEGER" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER"/>
   </resultMap>
 <!--  <sql id="Base_Column_List" >-->

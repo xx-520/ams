@@ -13,11 +13,7 @@ public class User {
 
     private String email;
 
-    private Integer scoreid;
-
     private Boolean locks;
-
-    private Integer subjectid;
 
     private Integer status;
 
@@ -77,13 +73,6 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
-    public Integer getScoreid() {
-        return scoreid;
-    }
-
-    public void setScoreid(Integer scoreid) {
-        this.scoreid = scoreid;
-    }
 
     public Boolean getLocks() {
         return locks;
@@ -93,11 +82,4 @@ public class User {
         this.locks = locks;
     }
 
-    public Integer getSubjectid() {
-        return subjectid;
-    }
-
-    public void setSubjectid(Integer subjectid) {
-        this.subjectid = subjectid;
-    }
 }
