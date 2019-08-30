@@ -57,5 +57,5 @@ public interface ExamSubjectMapper {
      * @param subjectName 科目名
      * @return 返回 ExamSubject对象的 List集合
      */
-    public List<ExamSubject> findByIndexAndSize(@Param("subjectName") String subjectName,Integer page, Integer limit);
+    public List<ExamSubject> findByIndexAndSize(@Param("subjectName") String subjectName);
 }

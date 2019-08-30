@@ -29,20 +29,8 @@
     where subjectId = #{id}
   </update>
 
-  <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.vo.VVideo">
-    select *
-    from exam_subject
-    <where>
-      <if test="title != null and title != ''">
-        title like CONCAT('%',CONCAT(#{title},'%'))
-      </if>
-      <if test="speakerName != null and speakerName != ''">
-        and speakerName = #{speakerName}
-      </if>
-      <if test="courseTitle != null and courseTitle != ''">
-        and courseTitle = #{courseTitle}
-      </if>
-    </where>
+  <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+    select * from exam_subject
 
   </select>
 
