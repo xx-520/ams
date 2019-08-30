@@ -5,19 +5,21 @@ public class ChoiceQuestion {
 
     private Integer score;
 
+    private String question;
+
+    private String choicea;
+
+    private String choiceb;
+
+    private String choicec;
+
+    private String choiced;
+
     private String rightanswer;
 
     private Integer subjectid;
 
     private Integer status;
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 
     public Integer getId() {
         return id;
@@ -40,7 +42,7 @@ public class ChoiceQuestion {
     }
 
     public void setRightanswer(String rightanswer) {
-        this.rightanswer = rightanswer == null ? null : rightanswer.trim();
+        this.rightanswer = rightanswer;
     }
 
     public Integer getSubjectid() {
@@ -49,5 +51,13 @@ public class ChoiceQuestion {
 
     public void setSubjectid(Integer subjectid) {
         this.subjectid = subjectid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qfedu.ams.dao.ChoiceQuestionMapper" >
+
   <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ChoiceQuestion" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="rightAnswer" property="rightanswer" jdbcType="VARCHAR" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.qfedu.ams.entity.ChoiceQuestionWithBLOBs" extends="BaseResultMap" >
     <result column="question" property="question" jdbcType="LONGVARCHAR" />
     <result column="choiceA" property="choicea" jdbcType="LONGVARCHAR" />
     <result column="choiceB" property="choiceb" jdbcType="LONGVARCHAR" />
     <result column="choiceC" property="choicec" jdbcType="LONGVARCHAR" />
     <result column="choiceD" property="choiced" jdbcType="LONGVARCHAR" />
+    <result column="rightAnswer" property="rightanswer" jdbcType="VARCHAR" />
+    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, score, rightAnswer, subjectId
   </sql>
   <sql id="Blob_Column_List" >
     question, choiceA, choiceB, choiceC, choiceD
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="com.qfedu.ams.entity.ChoiceQuestion" parameterType="int" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -28,11 +28,11 @@
     from choice_question
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="int" >
     delete from choice_question
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.qfedu.ams.entity.ChoiceQuestionWithBLOBs" >
+  <insert id="insert" parameterType="com.qfedu.ams.entity.ChoiceQuestion" >
     insert into choice_question (id, score, rightAnswer, 
       subjectId, question, choiceA, 
       choiceB, choiceC, choiceD
@@ -42,7 +42,7 @@
       #{choiceb,jdbcType=LONGVARCHAR}, #{choicec,jdbcType=LONGVARCHAR}, #{choiced,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.ChoiceQuestionWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.ChoiceQuestion" >
     insert into choice_question
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -103,7 +103,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.ChoiceQuestionWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.ChoiceQuestion" >
     update choice_question
     <set >
       <if test="score != null" >
@@ -133,7 +133,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qfedu.ams.entity.ChoiceQuestionWithBLOBs" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qfedu.ams.entity.ChoiceQuestion" >
     update choice_question
     set score = #{score,jdbcType=INTEGER},
       rightAnswer = #{rightanswer,jdbcType=VARCHAR},
