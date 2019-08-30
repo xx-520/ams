@@ -25,7 +25,11 @@ public class ExamSubjectServiceImpl implements ExamSubjectService {
 
     @Override
     public List<ExamSubject> findAll() {
-        return examSubjectMapper.findAll();
+        PageHelper.startPage(1, 5);
+        List<ExamSubject> list = examSubjectMapper.findAll();
+        // 获取总记录数
+        long total = ((Page) list).getTotal();
+        return list;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class ExamSubjectServiceImpl implements ExamSubjectService {
     @Override
     public Map<String, Object> findByIndexAndSize(String subjectName, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<ExamSubject> list = examSubjectMapper.findByIndexAndSize(subjectName,page,limit);
+        List<ExamSubject> list = examSubjectMapper.findByIndexAndSize(subjectName);
         // 获取总记录数
         long total = ((Page) list).getTotal();
         Map<String, Object> map = new HashMap<>();
