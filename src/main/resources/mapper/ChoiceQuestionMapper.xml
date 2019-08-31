@@ -14,19 +14,8 @@
     <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
   </resultMap>
 
-  <sql id="Base_Column_List" >
-    id, score, rightAnswer, subjectId
-  </sql>
-  <sql id="Blob_Column_List" >
-    question, choiceA, choiceB, choiceC, choiceD
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="com.qfedu.ams.entity.ChoiceQuestion" parameterType="int" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from choice_question
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select * from choice_question where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="int" >
     delete from choice_question
