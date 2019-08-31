@@ -25,7 +25,7 @@ public interface ExamSubjectService {
      * @param subjectid 传入一个学科 id
      * @return
      */
-    int deleteByPrimaryKey(Integer subjectid);
+    void deleteByPrimaryKey(Integer subjectid);
 
     /**
      * 添加学科信息

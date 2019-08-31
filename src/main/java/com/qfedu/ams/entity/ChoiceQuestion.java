@@ -1,5 +1,7 @@
 package com.qfedu.ams.entity;
 
+import java.util.List;
+
 public class ChoiceQuestion {
     private Integer id;
 
@@ -21,6 +23,8 @@ public class ChoiceQuestion {
 
     private Integer status;
 
+    private List<ExamSubject> ESlist;
+
     public Integer getId() {
         return id;
     }
@@ -35,6 +39,46 @@ public class ChoiceQuestion {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getChoicea() {
+        return choicea;
+    }
+
+    public void setChoicea(String choicea) {
+        this.choicea = choicea;
+    }
+
+    public String getChoiceb() {
+        return choiceb;
+    }
+
+    public void setChoiceb(String choiceb) {
+        this.choiceb = choiceb;
+    }
+
+    public String getChoicec() {
+        return choicec;
+    }
+
+    public void setChoicec(String choicec) {
+        this.choicec = choicec;
+    }
+
+    public String getChoiced() {
+        return choiced;
+    }
+
+    public void setChoiced(String choiced) {
+        this.choiced = choiced;
     }
 
     public String getRightanswer() {
@@ -59,5 +103,13 @@ public class ChoiceQuestion {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<ExamSubject> getESlist() {
+        return ESlist;
+    }
+
+    public void setESlist(List<ExamSubject> ESlist) {
+        this.ESlist = ESlist;
     }
 }

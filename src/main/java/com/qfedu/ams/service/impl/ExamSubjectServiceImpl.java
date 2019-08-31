@@ -33,8 +33,8 @@ public class ExamSubjectServiceImpl implements ExamSubjectService {
     }
 
     @Override
-    public int deleteByPrimaryKey(Integer subjectid) {
-        return examSubjectMapper.deleteByPrimaryKey(subjectid);
+    public void deleteByPrimaryKey(Integer subjectid) {
+        examSubjectMapper.deleteByPrimaryKey(subjectid);
     }
 
     @Override

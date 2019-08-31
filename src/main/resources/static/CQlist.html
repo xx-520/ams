@@ -28,6 +28,7 @@
 </div>
 
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">更新</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
@@ -45,7 +46,7 @@
             elem: '#demo'
             ,id:"demo"
             //,height: 500
-            ,url: '/ams/admin/ES/page.do' //数据接口
+            ,url: '/ams/admin/CQ/page.do' //数据接口
             ,title: '用户表'
             ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -55,18 +56,21 @@
                 ,last: false //不显示尾页
                 ,limits:[5,10,20]
 
-
-
             } //开启分页
             ,cols: [[ //表头
-                {field: 'subjectid', title: '科目编号', align:"center", width:100, sort: true, fixed: true}
-                ,{field: 'subjectname', title: '科目名', align:"center", width:90, sort: true}
+                {field: 'id', title: '科目编号', align:"center", width:100, sort: true, fixed: true}
+                ,{field: 'd.eslist[0].subjectname', title: '科目名', align:"center", width:90, templet:'<div>{{d.eslist[0].subjectname}}</div>',sort: true}
+                ,{field: 'question', title: '题目', align:"center", width:500, sort: true}
+                ,{field: 'choicea', title: '选项A', align:"center", width:180, sort: true}
+                ,{field: 'choiceb', title: '选项B', align:"center", width:180, sort: true}
+                ,{field: 'choicec', title: '选项C', align:"center", width:180, sort: true}
+                ,{field: 'choiced', title: '选项D', align:"center", width:180, sort: true}
+                ,{field: 'rightanswer', title: '正确答案', align:"center", width:180, sort: true}
+                ,{field: 'score', title: '分数', align:"center", width:90, sort: true}
 
-                ,{fixed: 'right', width: 90, align: 'center', toolbar: '#barDemo'}
+                ,{fixed: 'right', width: 120, align: 'center', toolbar: '#barDemo'}
             ]]
         });
-
-
 
 
         //监听行工具事件
@@ -80,18 +84,26 @@
                     //向服务端发送删除指令
                     $.ajax({
                         type:"get",
-                        url:"/ams/admin/ES/delete.do?id=" + data.subjectid,
+                        url:"/ams/admin/CQ/delete.do?id=" + data.id,
                         dataType:"json",
                         success:function(data){
                             if(data.code == 1){
                                 table.reload('demo');
-                                layer.msg(data.data)
+                                // layer.msg(data.data)
                             }else{
                                 alert(data.data);
                             }
                         }
                     })
                 });
+            } else if(layEvent === 'edit'){
+                //layer.msg('编辑操作');
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: '修改员工'
+                    , area: ['600px', '500px']
+                    , content: 'CQupdate.html?id=' + data.id
+                })
             }
         });
 
@@ -121,8 +133,8 @@
         layer.open({
             type: 2 //此处以iframe举例
             , title: '添加员工'
-            , area: ['600px', '500px']
-            , content: 'ESadd.html'
+            , area: ['650px', '550px']
+            , content: 'CQadd.html'
         })
     }
 

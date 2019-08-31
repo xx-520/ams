@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.ams.dao.ChoiceQuestionMapper" >
+<mapper namespace="com.qfedu.ams.dao.ChoiceQuestionMapper">
 
-  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ChoiceQuestion" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="question" property="question" jdbcType="LONGVARCHAR" />
-    <result column="choiceA" property="choicea" jdbcType="LONGVARCHAR" />
-    <result column="choiceB" property="choiceb" jdbcType="LONGVARCHAR" />
-    <result column="choiceC" property="choicec" jdbcType="LONGVARCHAR" />
-    <result column="choiceD" property="choiced" jdbcType="LONGVARCHAR" />
-    <result column="rightAnswer" property="rightanswer" jdbcType="VARCHAR" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.ChoiceQuestion">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="LONGVARCHAR"/>
+        <result column="choiceA" property="choicea" jdbcType="LONGVARCHAR"/>
+        <result column="choiceB" property="choiceb" jdbcType="LONGVARCHAR"/>
+        <result column="choiceC" property="choicec" jdbcType="LONGVARCHAR"/>
+        <result column="choiceD" property="choiced" jdbcType="LONGVARCHAR"/>
+        <result column="rightAnswer" property="rightanswer" jdbcType="VARCHAR"/>
+        <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
+        <collection property="ESlist" javaType="list" ofType="com.qfedu.ams.entity.ExamSubject"
+        resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
+        ></collection>
+    </resultMap>
 
-  <select id="findAll" resultMap="BaseResultMap" parameterType="com.qfedu.ams.entity.ChoiceQuestion">
-    select * from choice_question
+    <select id="findAll" resultMap="BaseResultMap">
+    select id, score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, a.subjectName
+    from choice_question c
+    inner join ams.exam_subject a
+    where status = 1 and a.subjectId = c.subjectId
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
-    select * from choice_question where id = #{id}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
+    select * from choice_question where id = #{id} and status = 1
   </select>
 
-  <update id="deleteByPrimaryKey" parameterType="int" >
-    update from choice_question
+    <insert id="insert" parameterType="com.qfedu.ams.entity.ChoiceQuestion">
+    insert into choice_question (score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, subjectId) values (#{score},#{question},#{choicea},#{choiceb},#{choicec},#{choiced},#{rightanswer},#{subjectid})
+  </insert>
+
+    <update id="falseDelete" parameterType="int">
+    update choice_question
     set status = 0
     where id = #{id}
   </update>
 
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.choice_question limit #{index},#{size}
+    </select>
 
 </mapper>
