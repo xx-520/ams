@@ -19,4 +19,8 @@ public interface AdminService {
     public List<String> findRoleByName(String username);
 
     public Admin findByName(String username);
+
+    public List<Admin> findAdmin(String username, Integer page, Integer limit);
+
+    public void addAdmin(Admin admin);
 }

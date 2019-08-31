@@ -1,5 +1,6 @@
 package com.qfedu.ams.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.AdminMapper;
 import com.qfedu.ams.entity.Admin;
 import com.qfedu.ams.service.AdminService;
@@ -42,5 +43,18 @@ public class AdminServiceImpl implements AdminService {
     public Admin findByName(String username) {
         Admin admin = adminMapper.findByName(username);
         return admin;
+    }
+
+    @Override
+    public List<Admin> findAdmin(String username, Integer page, Integer limit) {
+        // 设置页码和每页显示的记录数，该语句后面，紧跟着数据库查询相关的语句
+        PageHelper.startPage(page, limit);
+        List<Admin> list = adminMapper.findAdmin(username);
+        return list;
+    }
+
+    @Override
+    public void addAdmin(Admin admin) {
+        adminMapper.addAdmin(admin);
     }
 }

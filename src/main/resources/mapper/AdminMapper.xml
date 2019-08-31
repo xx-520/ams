@@ -20,7 +20,15 @@
       <result column="curl" property="curl"></result>
     </collection>
   </resultMap>
-
+  <resultMap id="adminMap" type="com.qfedu.ams.vo.VoAdmin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="roleId" property="roleid" jdbcType="INTEGER" />
+    <association property="role" javaType="com.qfedu.ams.entity.Role">
+      <result column="role" property="role"></result>
+    </association>
+  </resultMap>
 
 
   <!--<sql id="Base_Column_List" >
@@ -84,5 +92,19 @@
     on c.pid=rp.pid inner join a_user_role ur on ur.rid = rp.rid inner join admin a on a.id=ur.uid where
     a.username = #{username} and c.resource_type = 'menu'
   </select>
+
+  <select id="findAdmin" parameterType="string" resultMap="adminMap">
+    select a.*,r.role from admin a inner join a_role r on a.roleId = r.id
+    <where>
+      <if test="username != null and !username.equals('')">
+        username like concat('%', #{username}, '%')
+      </if>
+      and a.status = 1
+    </where>
+  </select>
+
+  <insert id="addAdmin" parameterType="admin">
+      insert into admin(username, password, roleId) values (#{username}, #{password}, #{roleid})
+  </insert>
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.Role;
+
+import java.util.List;
+
 //角色表
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    public List<Role> findAllRole();
 }

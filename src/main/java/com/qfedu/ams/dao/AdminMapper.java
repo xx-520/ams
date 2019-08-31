@@ -39,4 +39,8 @@ public interface AdminMapper {
     public List<String> findPermsByName(String username);
 
     public List<Pmenu> findMenu(String username);
+
+    public List<Admin> findAdmin(String username);
+
+    public void addAdmin(Admin admin);
 }

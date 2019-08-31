@@ -55,4 +55,8 @@
     set role = #{role,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAllRole" resultType="role">
+    select * from a_role where status = 1;
+  </select>
 </mapper>
