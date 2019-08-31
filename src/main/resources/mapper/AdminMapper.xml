@@ -7,6 +7,20 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="roleId" property="roleid" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="menuMap" type="com.qfedu.ams.vo.Pmenu">
+    <id column="pid" property="pid"></id>
+    <result column="pmenu" property="pmenu"></result>
+    <result column="resource_type" property="resourceType"></result>
+    <result column="url"></result>
+    <collection property="cmenu" javaType="list" ofType="com.qfedu.ams.vo.Cmenu">
+      <id column="cpid" property="cpid"></id>
+      <result column="cmenu" property="cmenu"></result>
+      <result column="cpermision_name" property="cpermisionName"></result>
+      <result column="cresource_type" property="cresourceType"></result>
+      <result column="curl" property="curl"></result>
+    </collection>
+  </resultMap>
+
 
 
   <!--<sql id="Base_Column_List" >
@@ -47,23 +61,28 @@
   <select id="findByName" parameterType="string" resultType="admin">
     select * from admin where username=#{username}
   </select>
-  
+
   <select id="findRolesByName" parameterType="string" resultType="string">
     select r.role from admin a
-    inner join a_role ar
-    on a.roleId = ar.id
-    where a.username=#{username}
+    inner join a_user_role ur on a.id = ur.uid
+    inner join a_role r on r.id = ur.rid where a.username=#{username};
   </select>
-  
+
   <select id="findPermsByName" parameterType="string" resultType="string">
-    select p.permision_name from admin a
-    inner join a_role ar
-    on a.roleId=ar.id
-    inner join a_role_permision rp
-    on rp.rid=ar.id
-    inner join a_permision ap
-    on rp.pid=ap.pid
-    where ap.permision_name is not null and a.username=#{username}
+    select DISTINCT p.permision_name from admin a
+    inner join a_user_role ur on ur.uid = a.id
+    inner join a_role_permision rp on rp.rid = ur.rid
+    inner join a_permision p on p.pid = rp.pid
+    where p.permision_name is not null and a.username = #{username}
+  </select>
+
+  <select id="findMenu" parameterType="string" resultMap="menuMap">
+    select p.pid,p.resource_name pmenu,p.resource_type,p.url,c.pid cpid,
+    c.resource_name cmenu,c.permision_name cpermision_name,
+    c.resource_type cresource_type,c.url curl from a_permision p
+    inner join a_permision c on p.pid = c.parent_id inner join a_role_permision rp
+    on c.pid=rp.pid inner join a_user_role ur on ur.rid = rp.rid inner join admin a on a.id=ur.uid where
+    a.username = #{username} and c.resource_type = 'menu'
   </select>
 
 </mapper>
