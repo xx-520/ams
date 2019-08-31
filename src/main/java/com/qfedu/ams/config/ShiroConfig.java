@@ -64,6 +64,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/admin/**", "authc");
         filterChainDefinitionMap.put("/user/**", "authc");
 
+
         filterChainDefinitionMap.put("/logout", "logout");
 
         // perms配置权限
