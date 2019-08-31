@@ -34,7 +34,7 @@
         form.on('submit(addCourse)', function(data) {
             $.ajax({
                 type:"post",
-                url:"/ams/ES/add.do",
+                url:"/ams/admin/ES/add.do",
                 data:data.field,
                 dataType:"json",
                 success:function(data){  //{code:1,info:....}

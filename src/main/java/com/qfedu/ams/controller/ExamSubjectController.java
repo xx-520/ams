@@ -22,34 +22,34 @@ public class ExamSubjectController {
     @Autowired
     private ExamSubjectService examSubjectService;
 
-    @RequestMapping("/ES/list.do")
+    @RequestMapping("/admin/ES/list.do")
     @ResponseBody
     public JsonResult listES(){
         List<ExamSubject> list = examSubjectService.findAll();
         return new JsonResult(1, list);
     }
 
-    @RequestMapping("/ES/add.do")
+    @RequestMapping("/admin/ES/add.do")
     @ResponseBody
     public JsonResult addES(ExamSubject examSubject){
         int insert = examSubjectService.insert(examSubject);
         return new JsonResult(1, insert);
     }
 
-    @RequestMapping("/ES/delete.do")
+    @RequestMapping("/admin/ES/delete.do")
     public JsonResult deleteES(Integer id){
         examSubjectService.deleteByPrimaryKey(id);
         return new JsonResult(1,null);
     }
 
-    @RequestMapping("/ES/query.do")
+    @RequestMapping("/admin/ES/query.do")
     @ResponseBody
     public JsonResult findByIdES(Integer id){
         ExamSubject examSubject = examSubjectService.selectByPrimaryKey(id);
         return new JsonResult(1,examSubject);
     }
 
-    @RequestMapping("/ES/page.do")
+    @RequestMapping("/admin/ES/page.do")
     @ResponseBody
     public Map<String, Object> findByPage(Integer page, Integer limit){
         Map<String, Object> map = examSubjectService.findByIndexAndSize(page, limit);

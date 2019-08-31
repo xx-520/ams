@@ -11,7 +11,7 @@ public interface ChoiceQuestionMapper {
 
     List<ChoiceQuestion> findAll(ChoiceQuestion choiceQuestion);
 
-    int deleteByPrimaryKey(Integer id);
+    int falseDelete(Integer id);
 
     int insert(ChoiceQuestion record);
 
@@ -19,5 +19,5 @@ public interface ChoiceQuestionMapper {
 
     int updateByPrimaryKeySelective(ChoiceQuestion record);
 
-    int updateByPrimaryKey(ChoiceQuestion record);
+
 }
