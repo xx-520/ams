@@ -13,7 +13,7 @@ public class User {
 
     private String email;
 
-    private Boolean locks;
+
 
     private Integer status;
 
@@ -74,12 +74,5 @@ public class User {
     }
 
 
-    public Boolean getLocks() {
-        return locks;
-    }
-
-    public void setLocks(Boolean locks) {
-        this.locks = locks;
-    }
 
 }

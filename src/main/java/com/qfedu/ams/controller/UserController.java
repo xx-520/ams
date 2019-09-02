@@ -26,7 +26,7 @@ public class UserController {
      * @param limit 限制多少条
      * @return
      */
-    @RequestMapping("/listAllUser.do")
+    @RequestMapping("/admin/us/listAllUser.do")
     @ResponseBody
     public Map<String, Object> listUser(User user, Integer page, Integer limit) {
         List<User> list = userService.selectUserList(user, page, limit);
@@ -47,7 +47,7 @@ public class UserController {
      * @param uid 需要查询考生的ID
      * @return
      */
-    @RequestMapping("/selectUser.do")
+    @RequestMapping("/admin/us/selectUser.do")
     @ResponseBody
     public JsonResult select(Integer uid) {
         User user = userService.selectUserById(uid);
@@ -61,7 +61,7 @@ public class UserController {
      * @param user 需要操作的user类对象
      * @return
      */
-    @RequestMapping("/addUser.do")
+    @RequestMapping("/admin/us/addUser.do")
     @ResponseBody
     public JsonResult addUser(User user) {
         userService.addUser(user);
@@ -74,7 +74,7 @@ public class UserController {
      * @param uid 需要删除的考生ID
      * @return
      */
-    @RequestMapping("/deleteUser.do")
+    @RequestMapping("/admin/us/deleteUser.do")
     @ResponseBody
     public JsonResult deleteUser(Integer uid) {
         userService.deleteUserById(uid);
@@ -87,7 +87,7 @@ public class UserController {
      * @param ids 需要删除的考生ID
      * @return
      */
-    @RequestMapping("/deleteUsers.do")
+    @RequestMapping("/admin/us/deleteUsers.do")
     @ResponseBody
     public JsonResult deleteUsers(Integer[] ids) {
         userService.deleteUserByIds(ids);
@@ -100,7 +100,7 @@ public class UserController {
      * @param user 需要操作的user类对象
      * @return
      */
-    @RequestMapping("/updateUser.do")
+    @RequestMapping("/admin/us/updateUser.do")
     @ResponseBody
     public JsonResult updateUser(User user) {
         userService.updateUser(user);
