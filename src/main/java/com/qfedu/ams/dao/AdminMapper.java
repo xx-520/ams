@@ -2,6 +2,7 @@ package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.Admin;
 import com.qfedu.ams.vo.Pmenu;
+import com.qfedu.ams.vo.VoAdmin;
 
 import java.util.List;
 
@@ -10,17 +11,10 @@ import java.util.List;
  */
 public interface AdminMapper {
 
-//    int deleteByPrimaryKey(Integer id);
+    public Admin selectByPrimaryKey(Integer id);
 
-//    int insert(Admin record);
 
-//    int insertSelective(Admin record);
-
-//    Admin selectByPrimaryKey(Integer id);
-
-//    int updateByPrimaryKeySelective(Admin record);
-
-//    int updateByPrimaryKey(Admin record);
+    int updateByPrimaryKey(Admin record);
 
 
     /**
@@ -40,7 +34,7 @@ public interface AdminMapper {
 
     public List<Pmenu> findMenu(String username);
 
-    public List<Admin> findAdmin(String username);
+    public List<VoAdmin> findAdmin(String username);
 
     public void addAdmin(Admin admin);
 

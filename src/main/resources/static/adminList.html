@@ -110,7 +110,7 @@
                 ,{templet: '#indexTpl', align:'center', title: '序号', width:80,totalRowText: '合计：'}
                 ,{field: 'username', align:'center', title: '用户名', width:200}
                 ,{field: 'password', align:'center', title: '密码', width:300}
-                ,{field: 'd.role.role', title: '管理员', align:"center", width:300, templet:'<div>{{d.role.role}}</div>',sort: true}
+                ,{field: 'd.role.role', title: '角色', align:"center", width:300, templet:'<div>{{d.role.role}}</div>',sort: true}
                 ,{title: '操作', width: 125, align:'center', toolbar: '#barDemo'}
             ]]
             ,id:'videoTable'
@@ -281,7 +281,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     maxmin: false,
-                    content:'/videos/modifyVideo.jsp?id=' + rowData.id
+                    content:'adminUpdate.html?id=' + rowData.id
                 });
             }
         });

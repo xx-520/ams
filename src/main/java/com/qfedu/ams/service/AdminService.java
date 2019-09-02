@@ -2,6 +2,7 @@ package com.qfedu.ams.service;
 
 import com.qfedu.ams.entity.Admin;
 import com.qfedu.ams.vo.Pmenu;
+import com.qfedu.ams.vo.VoAdmin;
 
 import java.util.List;
 
@@ -20,11 +21,15 @@ public interface AdminService {
 
     public Admin findByName(String username);
 
-    public List<Admin> findAdmin(String username, Integer page, Integer limit);
+    public List<VoAdmin> findAdmin(String username, Integer page, Integer limit);
 
     public void addAdmin(Admin admin);
 
     public void deleteOne(Integer id);
 
     public void deleteMany(Integer[] ids);
+
+    public Admin findAdminById(Integer id);
+
+    public void upateAdminById(Admin admin);
 }

@@ -31,17 +31,17 @@
   </resultMap>
 
 
-  <!--<sql id="Base_Column_List" >
+  <sql id="Base_Column_List" >
     id, username, password, roleId
-  </sql>-->
+  </sql>
 
 
-  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from admin
     where id = #{id,jdbcType=INTEGER}
-  </select>-->
+  </select>
 
 
   <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -58,13 +58,13 @@
   </insert>-->
 
 
-  <!--<update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.Admin" >
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.Admin" >
     update admin
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       roleId = #{roleid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>-->
+  </update>
 
   <select id="findByName" parameterType="string" resultType="admin">
     select * from admin where username=#{username}

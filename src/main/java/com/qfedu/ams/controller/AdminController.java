@@ -6,6 +6,7 @@ import com.qfedu.ams.entity.Admin;
 import com.qfedu.ams.service.AdminService;
 import com.qfedu.ams.utils.MD5Utils;
 import com.qfedu.ams.vo.Pmenu;
+import com.qfedu.ams.vo.VoAdmin;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -41,7 +42,7 @@ public class AdminController {
     @RequestMapping("/queryAdmin.do")
     @ResponseBody
     public Map<String, Object> queryAdmin(String username, Integer page, Integer limit) {
-        List<Admin> list = adminService.findAdmin(username, page, limit);
+        List<VoAdmin> list = adminService.findAdmin(username, page, limit);
         long total = ((Page) list).getTotal();
 
         HashMap<String, Object> map = new HashMap<>();
@@ -100,4 +101,25 @@ public class AdminController {
         return result;
     }
 
+    @RequestMapping("/queryById.do")
+    @ResponseBody
+    public JsonResult findAdminById(Integer id) {
+        Admin admin = adminService.findAdminById(id);
+        JsonResult result = new JsonResult(1, admin);
+        return result;
+    }
+
+    @RequestMapping("/updateAdmin.do")
+    @ResponseBody
+    public JsonResult updateAdminById(Admin admin) {
+        JsonResult result = null;
+        try {
+            adminService.upateAdminById(admin);
+            result = new JsonResult(1, "更新成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new JsonResult(0, "更新失败");
+        }
+        return result;
+    }
 }

@@ -1,41 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>考试管理系统后台</title>
+    <title>考试后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--可无视-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--主要样式-->
+    <link type="text/css" href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
-<style type="text/css">
-    *{padding:0px;margin:0px;}
-    body{font-family:Arial, Helvetica, sans-serif;background:url(images/grass.jpg) no-repeat 50% 0;font-size:12px;}
-    img{border:0;}
-    .lg{width:468px;height:468px;margin:100px auto;background:url(images/login_bg.png) no-repeat;}
-    .lg_top{ height:200px;width:468px;}
-    .lg_main{width:400px;height:180px;margin:0 25px;}
-    .lg_m_1{width:290px;height:100px;padding:60px 55px 20px 55px;}
-    .ur{height:37px;line-height:37px;border:0;color:#666;width:236px;margin:4px 28px;background:url(images/user.png) no-repeat;padding-left:10px;font-size:12px;font-family:Arial, Helvetica, sans-serif;}
-    .pw{height:37px;line-height:37px;border:0;color:#666;width:236px;margin:4px 28px;background:url(images/password.png) no-repeat;padding-left:10px;font-size:12px;font-family:Arial, Helvetica, sans-serif;}
-    .bn{width:330px;height:72px;background:url(images/enter.png) no-repeat;border:0;display:block;font-size:18px;color:#FFF;font-family:Arial, Helvetica, sans-serif;font-weight:bolder;cursor:pointer;}
-    .lg_foot{height:80px;width:330px;padding: 6px 68px 0 68px;}
-</style>
 
 </head>
-
 <body>
 
-<div class="lg">
-    <form class="layui-form" action="#" method="POST" onsubmit="return false;">
-        <div class="lg_top"></div>
-        <div class="lg_main">
-            <div class="lg_m_1">
-
-                <input name="username" placeholder="用户名" lay-verify="required" value="" class="ur">
-                <input name="password" placeholder="密码" type="password" lay-verify="required|password" value="" class="pw">
-
-            </div>
+<div class="container" align="center">
+    <div class="col-md-6" style="margin-top: 20%;">
+        <div class="inset">
+            <form class="layui-form" name="login" id="login" method="post" action="post" onSubmit="return false;">
+                <div>
+                    <h2>考试后台管理系统</h2>
+                    <span style="text-align: left;text-indent: 0.4em;"><label>用户名</label></span>
+                    <span><input type="text" name="username" class="textbox" lay-verify="required" ></span>
+                </div>
+                <div>
+                    <span style="text-align: left;text-indent: 0.4em;"><label>密码</label></span>
+                    <span><input name="password" type="password" class="password" lay-verify="required|password"></span>
+                </div>
+                <div class="sign">
+                    <input type="submit" value="登录" class="submit" lay-submit lay-filter="formDemo" />
+                    <input type="reset"  class="submit" value="重置"/>
+                </div>
+            </form>
         </div>
-        <div class="lg_foot">
-            <input type="submit" value="登录" class="bn" lay-submit lay-filter="formDemo"></div>
-    </form>
+    </div>
 </div>
 <script type="text/javascript" src="layui/layui.js"></script>
 <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
@@ -78,5 +75,6 @@
 
     });
 </script>
+
 </body>
 </html>

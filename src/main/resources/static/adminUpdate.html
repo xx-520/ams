@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>更新用户信息</title>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-container" style="margin-top: 30px;">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="title" placeholder="用户名" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="password" lay-verify="title" placeholder="密码" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div  class="layui-input-block">
+                <select id="update_role" name="roleid" lay-filter="aihao">
+                    <option value="">---下拉菜单---</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="updateVideo">更新</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
+
+
+        $.ajax({
+            type: "get",
+            url: "admin/role/selectRole.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value="' + this.id + '"> ' + this.role + ' </option>';
+                        $("#update_role").append($(html));
+                    });
+
+                    $.ajax({
+                        type:"get",
+                        url:"admin/queryById.do" + window.location.search,
+                        dataType:"json",
+                        success:function (data) {
+                            if (data.code == 1) {
+                                form.val('example', {
+                                    "username": data.info.username,
+                                    "password": data.info.password,
+                                    "roleid": data.info.roleid
+                                });
+                            } else {
+                                alert("操作失败");
+                            }
+                        }
+                    });
+
+                    layui.form.render("select");
+                }
+            }
+        });
+
+
+
+
+        //自定义验证规则
+        form.verify({
+            title: function(value) {
+                if (value.length < 1) {
+                    return '名称至少得1个字符啊';
+                }
+            },
+            content: function(value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+
+        //监听提交
+        form.on('submit(updateVideo)', function(data) {
+            $.ajax({
+                type:"post",
+                url:"admin/updateAdmin.do" + window.location.search,
+                data:data.field,
+                dataType:"json",
+                success:function(data){
+                    if(data.code == 1){
+                        //layer.msg(data.info);
+                        var t = parent.layui.table;
+                        t.reload('videoTable');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+
+                    }else{
+                        layer.msg("添加失败");
+                    }
+                }
+            });
+            //阻止默认提交
+            return false;
+        });
+
+
+    });
+</script>
+
+</body>
+</html>
