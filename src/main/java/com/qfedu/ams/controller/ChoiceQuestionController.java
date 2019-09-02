@@ -45,6 +45,13 @@ public class ChoiceQuestionController {
         return new JsonResult(1,null);
     }
 
+    @RequestMapping("/admin/CQ/deletes.do")
+    @ResponseBody
+    public JsonResult deletesCQ(Integer[] ids){
+        choiceQuestionService.falseDeletes(ids);
+        return new JsonResult(1,null);
+    }
+
     @RequestMapping("/admin/CQ/query.do")
     @ResponseBody
     public JsonResult findByIdCQ(Integer id){

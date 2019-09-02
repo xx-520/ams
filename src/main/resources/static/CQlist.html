@@ -14,6 +14,7 @@
             <div class="layui-col-xs3 layui-input-inline">
                 <div style="margin-left: 20px">
                     <button type="button" class="layui-btn layui-btn-normal" onclick="add()">添加</button>
+                    <button id="btn" class="layui-btn" type="button">批量删除<span class="badge"></span></button>
                 </div>
 
             </div>
@@ -58,7 +59,8 @@
 
             } //开启分页
             ,cols: [[ //表头
-                {field: 'id', title: '科目编号', align:"center", width:100, sort: true, fixed: true}
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: '科目编号', align:"center", width:100, sort: true, fixed: true}
                 ,{field: 'd.eslist[0].subjectname', title: '科目名', align:"center", width:90, templet:'<div>{{d.eslist[0].subjectname}}</div>',sort: true}
                 ,{field: 'question', title: '题目', align:"center", width:500, sort: true}
                 ,{field: 'choicea', title: '选项A', align:"center", width:180, sort: true}
@@ -105,6 +107,38 @@
                     , content: 'CQupdate.html?id=' + data.id
                 })
             }
+        });
+
+
+        //批量删除
+        $('#btn').click(function () {
+            var checkStatus = table.checkStatus('demo'),
+                data = checkStatus.data;
+
+            if (data == "") {
+                layer.msg('至少选择一个', {icon: 2});
+                return;
+            }
+            var ids = "";
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    ids += data[i].id + ",";
+                }
+            }
+            layer.confirm('确认删除吗？' + ids, function (index) {
+                $.ajax({
+                    type: "post",
+                    url: "/ams/admin/CQ/deletes.do?",
+                    data: {"ids": ids},
+                    success: function (data) {
+                    }
+                });
+                table.reload('demo');
+                layer.msg('删除成功!', {icon: 1});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
+            })
+            table.reload('demo');
+
         });
 
         var active = {

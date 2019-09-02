@@ -40,7 +40,16 @@
     update choice_question
     set status = 0
     where id = #{id}
-  </update>
+    </update>
+
+    <update id="falseDeletes" parameterType="list">
+        update choice_question
+        set status = 0
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 
     <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
         select * from ams.choice_question limit #{index},#{size}

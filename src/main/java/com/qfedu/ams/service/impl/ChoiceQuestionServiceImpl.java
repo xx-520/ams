@@ -33,6 +33,11 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     }
 
     @Override
+    public void falseDeletes(Integer[] ids) {
+        choiceQuestionMapper.falseDeletes(ids);
+    }
+
+    @Override
     public int insert(ChoiceQuestion record) {
         return choiceQuestionMapper.insert(record);
     }
@@ -43,8 +48,8 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(ChoiceQuestion record) {
-        return choiceQuestionMapper.updateByPrimaryKeySelective(record);
+    public int update(ChoiceQuestion record) {
+        return choiceQuestionMapper.update(record);
     }
 
     @Override

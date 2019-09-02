@@ -11,11 +11,13 @@ public interface ChoiceQuestionService {
 
     int falseDelete(Integer id);
 
+    void falseDeletes(Integer[] ids);
+
     int insert(ChoiceQuestion record);
 
     ChoiceQuestion selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(ChoiceQuestion record);
+    int update(ChoiceQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 }
