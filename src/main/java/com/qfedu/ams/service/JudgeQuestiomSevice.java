@@ -1,14 +1,12 @@
-package com.qfedu.ams.dao;
+package com.qfedu.ams.service;
+
 
 import com.qfedu.ams.entity.JudgeQuestion;
 
 import java.util.List;
 import java.util.Map;
 
-/**
- * 判断题dao层
- */
-public interface JudgeQuestionMapper {
+public interface JudgeQuestiomSevice {
 
     List<JudgeQuestion> findAll();
 
@@ -23,5 +21,4 @@ public interface JudgeQuestionMapper {
     int update(JudgeQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
-
 }

@@ -59,4 +59,11 @@ public class ChoiceQuestionController {
         return new JsonResult(1,cq);
     }
 
+    @RequestMapping("/admin/CQ/update.do")
+    @ResponseBody
+    public JsonResult updateCQ(ChoiceQuestion choiceQuestion){
+        choiceQuestionService.update(choiceQuestion);
+        return new JsonResult(1, null);
+    }
+
 }

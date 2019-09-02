@@ -1,133 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.ams.dao.JudgeQuestionMapper" >
-  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.JudgeQuestion" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="choiceA" property="choicea" jdbcType="INTEGER" />
-    <result column="choiceB" property="choiceb" jdbcType="INTEGER" />
-    <result column="judgeAnswer" property="judgeanswer" jdbcType="INTEGER" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.qfedu.ams.entity.JudgeQuestion" extends="BaseResultMap" >
-    <result column="question" property="question" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, score, choiceA, choiceB, judgeAnswer, subjectId
-  </sql>
-  <sql id="Blob_Column_List" >
-    question
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from judge_question
-    where id = #{id,jdbcType=INTEGER}
+<mapper namespace="com.qfedu.ams.dao.JudgeQuestionMapper">
+
+    <resultMap id="JQResultMap" type="com.qfedu.ams.entity.JudgeQuestion">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="INTEGER"/>
+        <result column="choiceA" property="choicea" jdbcType="INTEGER"/>
+        <result column="choiceB" property="choiceb" jdbcType="INTEGER"/>
+        <result column="judgeAnswer" property="judgeanswer" jdbcType="INTEGER"/>
+        <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
+        <collection property="ESlist" javaType="list" ofType="com.qfedu.ams.entity.ExamSubject"
+                    resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
+        ></collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="JQResultMap">
+    select id, score, question, judgeAnswer, a.subjectName
+    from ams.judge_question c
+    inner join ams.exam_subject a
+    where status = 1 and a.subjectId = c.subjectId
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from judge_question
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.qfedu.ams.entity.JudgeQuestion" >
-    insert into judge_question (id, score, choiceA, 
-      choiceB, judgeAnswer, subjectId, 
-      question)
-    values (#{id,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{choicea,jdbcType=INTEGER}, 
-      #{choiceb,jdbcType=INTEGER}, #{judgeanswer,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, 
-      #{question,jdbcType=LONGVARCHAR})
+
+    <select id="selectByPrimaryKey" resultMap="JQResultMap" parameterType="int">
+    select * from ams.judge_question jq
+    inner join exam_subject es
+    on jq.subjectId = es.subjectId
+    where jq.id = #{id}
+    and status = 1
+  </select>
+
+    <insert id="insert" parameterType="com.qfedu.ams.entity.JudgeQuestion">
+    insert into ams.judge_question (score, question, judgeAnswer, subjectId) values (#{score},#{question},#{judgeanswer},#{subjectid})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.JudgeQuestion" >
-    insert into judge_question
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="score != null" >
-        score,
-      </if>
-      <if test="choicea != null" >
-        choiceA,
-      </if>
-      <if test="choiceb != null" >
-        choiceB,
-      </if>
-      <if test="judgeanswer != null" >
-        judgeAnswer,
-      </if>
-      <if test="subjectid != null" >
-        subjectId,
-      </if>
-      <if test="question != null" >
-        question,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="score != null" >
-        #{score,jdbcType=INTEGER},
-      </if>
-      <if test="choicea != null" >
-        #{choicea,jdbcType=INTEGER},
-      </if>
-      <if test="choiceb != null" >
-        #{choiceb,jdbcType=INTEGER},
-      </if>
-      <if test="judgeanswer != null" >
-        #{judgeanswer,jdbcType=INTEGER},
-      </if>
-      <if test="subjectid != null" >
-        #{subjectid,jdbcType=INTEGER},
-      </if>
-      <if test="question != null" >
-        #{question,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.JudgeQuestion" >
-    update judge_question
-    <set >
-      <if test="score != null" >
-        score = #{score,jdbcType=INTEGER},
-      </if>
-      <if test="choicea != null" >
-        choiceA = #{choicea,jdbcType=INTEGER},
-      </if>
-      <if test="choiceb != null" >
-        choiceB = #{choiceb,jdbcType=INTEGER},
-      </if>
-      <if test="judgeanswer != null" >
-        judgeAnswer = #{judgeanswer,jdbcType=INTEGER},
-      </if>
-      <if test="subjectid != null" >
-        subjectId = #{subjectid,jdbcType=INTEGER},
-      </if>
-      <if test="question != null" >
-        question = #{question,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qfedu.ams.entity.JudgeQuestion" >
-    update judge_question
-    set score = #{score,jdbcType=INTEGER},
-      choiceA = #{choicea,jdbcType=INTEGER},
-      choiceB = #{choiceb,jdbcType=INTEGER},
-      judgeAnswer = #{judgeanswer,jdbcType=INTEGER},
-      subjectId = #{subjectid,jdbcType=INTEGER},
-      question = #{question,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.JudgeQuestion" >
-    update judge_question
-    set score = #{score,jdbcType=INTEGER},
-      choiceA = #{choicea,jdbcType=INTEGER},
-      choiceB = #{choiceb,jdbcType=INTEGER},
-      judgeAnswer = #{judgeanswer,jdbcType=INTEGER},
-      subjectId = #{subjectid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <update id="falseDelete" parameterType="int">
+    update ams.judge_question
+    set status = 0
+    where id = #{id}
+    </update>
+
+    <update id="falseDeletes" parameterType="list">
+        update ams.judge_question
+        set status = 0
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.judge_question limit #{index},#{size}
+    </select>
+
+    <update id="update" parameterType="com.qfedu.ams.entity.JudgeQuestion">
+        update ams.judge_question set score = #{score}, question = #{question}, judgeAnswer = #{judgeanswer}, subjectId = #{subjectid} where id = #{id}
+    </update>
+
 </mapper>

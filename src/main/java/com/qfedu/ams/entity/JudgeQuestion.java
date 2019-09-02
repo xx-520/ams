@@ -1,14 +1,13 @@
 package com.qfedu.ams.entity;
 
+import java.util.List;
+
 public class JudgeQuestion {
     private Integer id;
 
     private Integer score;
 
-    private Integer choicea;
-
-    private Integer choiceb;
-
+    // 0为 false  1为 true
     private Boolean judgeanswer;
 
     private Integer subjectid;
@@ -16,6 +15,8 @@ public class JudgeQuestion {
     private String question;
 
     private Integer status;
+
+    private List<ExamSubject> ESlist;
 
     public Integer getStatus() {
         return status;
@@ -41,22 +42,6 @@ public class JudgeQuestion {
         this.score = score;
     }
 
-    public Integer getChoicea() {
-        return choicea;
-    }
-
-    public void setChoicea(Integer choicea) {
-        this.choicea = choicea;
-    }
-
-    public Integer getChoiceb() {
-        return choiceb;
-    }
-
-    public void setChoiceb(Integer choiceb) {
-        this.choiceb = choiceb;
-    }
-
     public Boolean getJudgeanswer() {
         return judgeanswer;
     }
@@ -79,5 +64,13 @@ public class JudgeQuestion {
 
     public void setQuestion(String question) {
         this.question = question == null ? null : question.trim();
+    }
+
+    public List<ExamSubject> getESlist() {
+        return ESlist;
+    }
+
+    public void setESlist(List<ExamSubject> ESlist) {
+        this.ESlist = ESlist;
     }
 }

@@ -36,6 +36,10 @@
     insert into choice_question (score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, subjectId) values (#{score},#{question},#{choicea},#{choiceb},#{choicec},#{choiced},#{rightanswer},#{subjectid})
   </insert>
 
+    <update id="update" parameterType="com.qfedu.ams.entity.ChoiceQuestion">
+        update choice_question set score = #{score}, question = #{question}, choiceA = #{choicea},choiceB = #{choiceb},choiceC = #{choicec},choiceD = #{choiced}, rightAnswer = #{rightanswer}, subjectId = #{subjectid} where id = #{id}
+    </update>
+
     <update id="falseDelete" parameterType="int">
     update choice_question
     set status = 0

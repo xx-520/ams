@@ -24,5 +24,4 @@ public interface ChoiceQuestionMapper {
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
-
 }

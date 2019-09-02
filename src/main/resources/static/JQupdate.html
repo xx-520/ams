@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加课程信息</title>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-container" style="margin-top: 30px;">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属学科</label>
+            <div class="layui-input-block">
+                <select id="test1" name="subjectid" lay-filter="aihao">
+                    <option value="">--请选择--</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目</label>
+            <div class="layui-input-block">
+                <input type="text" name="question" lay-verify="title" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">正确答案</label>
+            <div class="layui-input-block">
+                <input type="radio" name="judgeanswer" value="0" title="错" checked>
+                <input type="radio" name="judgeanswer" value="1" title="对" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">分数</label>
+            <div class="layui-input-block">
+                <input type="text" name="score" lay-verify="title" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="update">更新</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
+
+        $.ajax({
+            type: "get",
+            url: "/ams/admin/ES/list.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value="' + this.subjectid + '">' + this.subjectname + '</option>'
+                        $("#test1").append($(html));
+                    })
+
+                    $.ajax({
+                        type: "get",
+                        url: "/ams/admin/JQ/query.do" + window.location.search,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 1) {
+                                //表单初始赋值
+                                form.val('example', {
+                                    "subjectid": data.info.eslist[0].subjectid
+                                    , "question": data.info.question
+                                    , "score": data.info.score
+                                })
+                            } else {
+                                alert(data.info);
+                            }
+                        }
+                    });
+
+                    form.render();
+                } else {
+                    alert(data.info);
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(update)', function (data) {
+            $.ajax({
+                type: "post",
+                url: "/ams/admin/JQ/update.do" + window.location.search,
+                data: data.field,
+                dataType: "json",
+                success: function (data) {  //{code:1,info:....}
+                    if (data.code == 1) {
+                        layer.msg(data.data);
+                        var t = parent.layui.table;
+                        t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+
+                    } else {
+                        layer.msg("修改失败");
+                    }
+                }
+            });
+            //阻止默认提交
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>
+
