@@ -107,4 +107,8 @@
       insert into admin(username, password, roleId) values (#{username}, #{password}, #{roleid})
   </insert>
 
+  <update id="deleteOne" parameterType="int">
+    update admin set status = 0 where id = #{id}
+  </update>
+
 </mapper>

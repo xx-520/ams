@@ -23,4 +23,6 @@ public interface AdminService {
     public List<Admin> findAdmin(String username, Integer page, Integer limit);
 
     public void addAdmin(Admin admin);
+
+    public void deleteOne(Integer id);
 }

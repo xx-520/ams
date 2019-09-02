@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.qfedu.ams.common.JsonResult;
 import com.qfedu.ams.entity.Admin;
 import com.qfedu.ams.service.AdminService;
+import com.qfedu.ams.utils.MD5Utils;
 import com.qfedu.ams.vo.Pmenu;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -55,6 +56,9 @@ public class AdminController {
     @RequestMapping("/addAdmin.do")
     @ResponseBody
     public JsonResult addAdmin(Admin admin) {
+        String password = admin.getPassword();
+        String s = MD5Utils.md5("ams" + password);
+        admin.setPassword(s);
         JsonResult result = null;
         try {
             adminService.addAdmin(admin);
@@ -62,6 +66,20 @@ public class AdminController {
         } catch (Exception e) {
             e.printStackTrace();
             result = new JsonResult(0, "添加失败");
+        }
+        return result;
+    }
+
+    @RequestMapping("/deleteOne.do")
+    @ResponseBody
+    public JsonResult deleteOne(Integer id) {
+        JsonResult result = null;
+        try {
+            adminService.deleteOne(id);
+            result = new JsonResult(1, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new JsonResult(0, "删除失败");
         }
         return result;
     }

@@ -43,4 +43,6 @@ public interface AdminMapper {
     public List<Admin> findAdmin(String username);
 
     public void addAdmin(Admin admin);
+
+    public void deleteOne(Integer id);
 }

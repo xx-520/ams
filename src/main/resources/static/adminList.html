@@ -95,7 +95,7 @@
             elem: '#demo'
             ,height: 420
             ,url: 'admin/queryAdmin.do' //数据接口
-            ,title: '视频表'
+            ,title: '管理员表'
             ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
                 //,curr: 5 //设定初始在第 5 页
@@ -108,8 +108,8 @@
                 {type: 'checkbox',id:'selectAll'}
                 ,{field: 'id', title: 'ID', style:'display:none;'}
                 ,{templet: '#indexTpl', align:'center', title: '序号', width:80,totalRowText: '合计：'}
-                ,{field: 'username', align:'center', title: '用户名', width:400}
-                ,{field: 'password', align:'center', title: '密码', width:400}
+                ,{field: 'username', align:'center', title: '用户名', width:200}
+                ,{field: 'password', align:'center', title: '密码', width:200}
                 ,{field: 'd.role.role', title: '管理员', align:"center", width:300, templet:'<div>{{d.role.role}}</div>',sort: true}
                 ,{title: '操作', width: 125, align:'center', toolbar: '#barDemo'}
             ]]
@@ -256,11 +256,11 @@
                 layer.confirm('真的删除该行么', function(index){
                     $.ajax({
                         type:'post',
-                        url:'video/deleteOne.do',
+                        url:'admin/deleteOne.do',
                         data:{'id':rowData.id},//向服务端发送删除的id
                         dataType:"json",
                         success:function(data){
-                            if(data.code == 0){
+                            if(data.code == 1){
                                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                                 layer.close(index);
                                 console.log(index);
