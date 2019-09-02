@@ -45,4 +45,6 @@ public interface AdminMapper {
     public void addAdmin(Admin admin);
 
     public void deleteOne(Integer id);
+
+    public void deleteMany(Integer[] ids);
 }

@@ -25,4 +25,6 @@ public interface AdminService {
     public void addAdmin(Admin admin);
 
     public void deleteOne(Integer id);
+
+    public void deleteMany(Integer[] ids);
 }

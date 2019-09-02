@@ -109,7 +109,7 @@
                 ,{field: 'id', title: 'ID', style:'display:none;'}
                 ,{templet: '#indexTpl', align:'center', title: '序号', width:80,totalRowText: '合计：'}
                 ,{field: 'username', align:'center', title: '用户名', width:200}
-                ,{field: 'password', align:'center', title: '密码', width:200}
+                ,{field: 'password', align:'center', title: '密码', width:300}
                 ,{field: 'd.role.role', title: '管理员', align:"center", width:300, templet:'<div>{{d.role.role}}</div>',sort: true}
                 ,{title: '操作', width: 125, align:'center', toolbar: '#barDemo'}
             ]]
@@ -170,37 +170,37 @@
                 }
 
                 //获取当前页码
-                var currPage = $(".layui-laypage-skip").find("input").val()
+                var currPage = $(".layui-laypage-skip").find("input").val();
                 //获取分页数据条数
-                var  pageInfo = $(".layui-laypage-limits").find("option:selected").val()
+                var  pageInfo = $(".layui-laypage-limits").find("option:selected").val();
                 //获取总页数
                 var  recodeCount = $(".layui-laypage-count").text();
                 var  recodeCount = recodeCount.replace(/[^0-9]/ig,"");
-                var  totalPageNum = Math.ceil(recodeCount/pageInfo)
-                var  lastNum = recodeCount%pageInfo
+                var  totalPageNum = Math.ceil(recodeCount/pageInfo);
+                var  lastNum = recodeCount%pageInfo;
 
                 layer.confirm('确定删除所选的'+l +'个选项吗？', function (index) {
                     $.ajax({
                         type: 'post',
-                        url: "video/deleteMany.do",
+                        url: "admin/deleteMany.do",
                         data: {"ids": ids},
                         dataType: 'json',
                         success: function (data) {
-                            if (data.code === 0) {
+                            if (data.code === 1) {
                                 layer.msg('删除成功', {icon: 1});
                                 $("#checkedNum").html(0);
                                 //当前所在的页码
                                 if (totalPageNum == currPage && (pageInfo == l||lastNum == l))  {
                                     table.reload('videoTable',{page:{curr:currPage - 1}})
 
-                                }  else{
+                                } else {
                                     $(".layui-laypage-btn").click()
                                 }
                             } else {
                                 layer.msg('删除失败');
                             }
                         },
-                        'error': function () {
+                        error: function () {
                             layer.msg('系统错误');
                         }
                     })
@@ -294,10 +294,6 @@
                 success:function(data){
                     var list = data.info;    //返回的数据
                     var role = $(".role");
-                    /*for(var i=0;i<list.length;i++){
-                        var option = $("<option value ="+list[i].id+">"+list[i].speaker_name+"</option>>");
-                        role.append(option)
-                    }*/
                     $(list).each(function () {
                         var option = $("<option value ="+ this.id + ">"+ this.role +"</option>>");
                         role.append(option)

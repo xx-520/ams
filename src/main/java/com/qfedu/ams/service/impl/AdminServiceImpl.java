@@ -62,4 +62,9 @@ public class AdminServiceImpl implements AdminService {
     public void deleteOne(Integer id) {
         adminMapper.deleteOne(id);
     }
+
+    @Override
+    public void deleteMany(Integer[] ids) {
+        adminMapper.deleteMany(ids);
+    }
 }

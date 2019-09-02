@@ -111,4 +111,11 @@
     update admin set status = 0 where id = #{id}
   </update>
 
+  <update id="deleteMany" parameterType="map">
+      update admin set status = 0 where id in
+      <foreach collection="array" item="ids" open="(" separator="," close=")">
+          #{ids}
+      </foreach>
+  </update>
+
 </mapper>

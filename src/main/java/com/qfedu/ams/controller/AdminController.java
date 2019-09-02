@@ -83,4 +83,21 @@ public class AdminController {
         }
         return result;
     }
+
+    @RequestMapping("/deleteMany.do")
+    @ResponseBody
+    public JsonResult deleteMany(Integer[] ids) {
+        JsonResult result = null;
+
+        try {
+            adminService.deleteMany(ids);
+            result = new JsonResult(1, "批量删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new JsonResult(0, "批量删除失败");
+        }
+
+        return result;
+    }
+
 }
