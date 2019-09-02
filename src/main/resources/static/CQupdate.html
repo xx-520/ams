@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>添加课程信息</title>
-    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="layui/layui.js"></script>
 </head>
@@ -11,9 +11,9 @@
     <form class="layui-form" action="" lay-filter="example">
         <div class="layui-form-item">
             <label class="layui-form-label">所属学科</label>
-            <div  class="layui-input-block">
+            <div class="layui-input-block">
                 <select id="test1" name="subjectid" lay-filter="aihao">
-                    <option value="">---下拉菜单---</option>
+                    <option value="">--请选择--</option>
                 </select>
             </div>
         </div>
@@ -63,14 +63,14 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="updateCourse">更新</button>
+                <button class="layui-btn" lay-submit="" lay-filter="update">更新</button>
             </div>
         </div>
     </form>
 </div>
 
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function() {
+<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form,
             layer = layui.layer,
             layedit = layui.layedit,
@@ -87,6 +87,30 @@
                         var html = '<option value="' + this.subjectid + '">' + this.subjectname + '</option>'
                         $("#test1").append($(html));
                     })
+
+                    $.ajax({
+                        type: "get",
+                        url: "/ams/admin/CQ/query.do" + window.location.search,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 1) {
+                                //表单初始赋值
+                                form.val('example', {
+                                    "subjectid": data.info.eslist[0].subjectid
+                                    , "question": data.info.question
+                                    , "choicea": data.info.choicea
+                                    , "choiceb": data.info.choiceb
+                                    , "choicec": data.info.choicec
+                                    , "choiced": data.info.choiced
+                                    , "rightanswer": data.info.rightanswer
+                                    , "score": data.info.score
+                                })
+                            } else {
+                                alert(data.info);
+                            }
+                        }
+                    });
+
                     form.render();
                 } else {
                     alert(data.info);
@@ -94,23 +118,22 @@
             }
         });
 
-
-
         //监听提交
-        form.on('submit(updateCourse)', function(data) {
+        form.on('submit(update)', function (data) {
             $.ajax({
-                type:"post",
-                url:"/ams/admin/CQ/update.do" + window.location.search,
-                data:data.field,
-                dataType:"json",
-                success:function(data){  //{code:1,info:....}
-                    if(data.code == 1){
+                type: "post",
+                url: "/ams/admin/CQ/update.do" + window.location.search,
+                data: data.field,
+                dataType: "json",
+                success: function (data) {  //{code:1,info:....}
+                    if (data.code == 1) {
                         layer.msg(data.data);
                         var t = parent.layui.table;
                         t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭
-                    }else{
+
+                    } else {
                         layer.msg("修改失败");
                     }
                 }
@@ -118,24 +141,8 @@
             //阻止默认提交
             return false;
         });
-
-        $.ajax({
-            type: "get",
-            url: "/ams/admin/CQ/query.do" + window.location.search,
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 1) {
-                    //表单初始赋值
-                    form.val('example', data.info);
-                } else {
-                    alert(data.info);
-                }
-            }
-
-        });
-
-
     });
+
 </script>
 </body>
 </html>

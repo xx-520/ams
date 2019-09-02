@@ -13,7 +13,7 @@
         <result column="rightAnswer" property="rightanswer" jdbcType="VARCHAR"/>
         <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
         <collection property="ESlist" javaType="list" ofType="com.qfedu.ams.entity.ExamSubject"
-        resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
+                    resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
         ></collection>
     </resultMap>
 
@@ -25,7 +25,11 @@
   </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
-    select * from choice_question where id = #{id} and status = 1
+    select * from choice_question cq
+    inner join exam_subject es
+    on cq.subjectId = es.subjectId
+    where cq.id = #{id}
+    and status = 1
   </select>
 
     <insert id="insert" parameterType="com.qfedu.ams.entity.ChoiceQuestion">
