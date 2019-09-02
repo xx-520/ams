@@ -1,5 +1,6 @@
 package com.qfedu.ams.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.RoleMapper;
 import com.qfedu.ams.entity.Role;
 import com.qfedu.ams.service.RoleService;
@@ -20,8 +21,36 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public List<Role> findAllRole() {
+    public List<Role> selectRole() {
         List<Role> list = roleMapper.findAllRole();
         return list;
+    }
+
+    @Override
+    public List<Role> findAllRole(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Role> list = roleMapper.findAllRole();
+        return list;
+    }
+
+    @Override
+    public void addRole(Role role) {
+        roleMapper.insertSelective(role);
+    }
+
+    @Override
+    public void deleteRoleById(Integer id) {
+        roleMapper.deleteRoleById(id);
+    }
+
+    @Override
+    public Role findRoleById(Integer id) {
+        Role role = roleMapper.selectByPrimaryKey(id);
+        return role;
+    }
+
+    @Override
+    public void updateRoleById(Role role) {
+        roleMapper.updateByPrimaryKey(role);
     }
 }

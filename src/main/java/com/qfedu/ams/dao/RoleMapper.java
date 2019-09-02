@@ -19,4 +19,6 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     public List<Role> findAllRole();
+
+    public void deleteRoleById(Integer id);
 }

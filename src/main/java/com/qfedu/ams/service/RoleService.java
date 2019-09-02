@@ -11,5 +11,15 @@ import java.util.List;
  * Time: 15:04
  */
 public interface RoleService {
-    public List<Role> findAllRole();
+    public List<Role> selectRole();
+
+    public List<Role> findAllRole(Integer page, Integer limit);
+
+    public void addRole(Role role);
+
+    public void deleteRoleById(Integer id);
+
+    public Role findRoleById(Integer id);
+
+    public void updateRoleById(Role role);
 }
