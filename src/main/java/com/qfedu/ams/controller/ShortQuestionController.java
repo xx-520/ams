@@ -70,4 +70,5 @@ public class ShortQuestionController {
         shortQuestionSevice.update(shortQuestion);
         return new JsonResult(1, null);
     }
+
 }

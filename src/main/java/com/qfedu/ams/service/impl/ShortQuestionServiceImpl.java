@@ -66,4 +66,11 @@ public class ShortQuestionServiceImpl implements ShortQuestionSevice {
 
         return map;
     }
+
+    @Override
+    public void inserts(List<ShortQuestion> list) {
+        shortQuestionMapper.inserts(list);
+    }
+
+
 }

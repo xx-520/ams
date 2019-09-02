@@ -24,4 +24,6 @@ public interface ShortQuestionMapper {
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
+    void inserts(List<ShortQuestion> list);
+
 }

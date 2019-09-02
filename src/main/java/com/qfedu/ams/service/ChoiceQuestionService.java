@@ -20,4 +20,6 @@ public interface ChoiceQuestionService {
     int update(ChoiceQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    void inserts(List<ChoiceQuestion> list);
 }

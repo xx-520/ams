@@ -1,11 +1,17 @@
 package com.qfedu.ams.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+
 import java.util.List;
 
 /**
  * 简答题表
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ShortQuestion {
     private Integer id;
 

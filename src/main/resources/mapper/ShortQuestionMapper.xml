@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.ams.dao.ShortQuestionMapper" >
+<mapper namespace="com.qfedu.ams.dao.ShortQuestionMapper">
 
-  <resultMap id="SQResultMap" type="com.qfedu.ams.entity.ShortQuestion" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="question" property="question" jdbcType="LONGVARCHAR" />
-    <result column="referenceAnswer" property="referenceanswer" jdbcType="LONGVARCHAR" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
-    <collection property="ESlist" javaType="list" ofType="com.qfedu.ams.entity.ExamSubject"
-                resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
-    ></collection>
-  </resultMap>
+    <resultMap id="SQResultMap" type="com.qfedu.ams.entity.ShortQuestion">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="LONGVARCHAR"/>
+        <result column="referenceanswer" property="referenceanswer" jdbcType="LONGVARCHAR"/>
+        <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
+        <collection property="ESlist" javaType="list" ofType="com.qfedu.ams.entity.ExamSubject"
+                    resultMap="com.qfedu.ams.dao.ExamSubjectMapper.BaseResultMap"
+        ></collection>
+    </resultMap>
 
-  <select id="findAll" resultMap="SQResultMap">
+    <select id="findAll" resultMap="SQResultMap">
     select id, score, question, referenceAnswer, a.subjectName
     from short_question c
     inner join exam_subject a
     where status = 1 and a.subjectId = c.subjectId
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="SQResultMap" parameterType="int">
+    <select id="selectByPrimaryKey" resultMap="SQResultMap" parameterType="int">
     select * from ams.short_question jq
     inner join exam_subject es
     on jq.subjectId = es.subjectId
@@ -28,31 +28,39 @@
     and status = 1
   </select>
 
-  <insert id="insert" parameterType="com.qfedu.ams.entity.ShortQuestion">
+    <insert id="insert" parameterType="com.qfedu.ams.entity.ShortQuestion">
     insert into ams.short_question (score, question, referenceAnswer, subjectId) values (#{score},#{question},#{referenceanswer},#{subjectid})
   </insert>
 
-  <update id="falseDelete" parameterType="int">
+    <update id="falseDelete" parameterType="int">
     update ams.short_question
     set status = 0
     where id = #{id}
     </update>
 
-  <update id="falseDeletes" parameterType="list">
-    update ams.short_question
-    set status = 0
-    where id in
-    <foreach collection="array" item="id" open="(" close=")" separator=",">
-      #{id}
-    </foreach>
-  </update>
+    <update id="falseDeletes" parameterType="list">
+        update ams.short_question
+        set status = 0
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 
-  <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
         select * from short_question limit #{index},#{size}
     </select>
 
-  <update id="update" parameterType="com.qfedu.ams.entity.ShortQuestion">
+    <update id="update" parameterType="com.qfedu.ams.entity.ShortQuestion">
         update ams.short_question set score = #{score}, question = #{question}, referenceAnswer = #{referenceanswer}, subjectId = #{subjectid} where id = #{id}
     </update>
+
+    <insert id="inserts" parameterType="list">
+        insert into ams.short_question (score, question, referenceanswer, subjectId)
+        values
+        <foreach collection="list" item="index" separator=",">
+            (#{index.score},#{index.question},#{index.referenceanswer},#{index.subjectid})
+        </foreach>
+    </insert>
 
 </mapper>

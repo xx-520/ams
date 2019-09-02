@@ -66,4 +66,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
 
         return map;
     }
+
+    @Override
+    public void inserts(List<ChoiceQuestion> list) {
+        choiceQuestionMapper.inserts(list);
+    }
 }

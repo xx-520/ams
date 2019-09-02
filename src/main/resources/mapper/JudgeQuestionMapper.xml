@@ -57,4 +57,12 @@
         update ams.judge_question set score = #{score}, question = #{question}, judgeAnswer = #{judgeanswer}, subjectId = #{subjectid} where id = #{id}
     </update>
 
+    <insert id="inserts" parameterType="list">
+        insert into ams.judge_question (score, question, judgeAnswer, subjectId)
+        values
+        <foreach collection="list" item="index" separator=",">
+            (#{index.score},#{index.question},#{index.judgeanswer},#{index.subjectid})
+        </foreach>
+    </insert>
+
 </mapper>

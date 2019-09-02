@@ -22,4 +22,6 @@ public interface ShortQuestionSevice {
     void update(ShortQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    void inserts(List<ShortQuestion> list);
 }

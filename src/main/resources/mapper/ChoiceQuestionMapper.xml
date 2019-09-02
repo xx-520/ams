@@ -59,4 +59,12 @@
         select * from ams.choice_question limit #{index},#{size}
     </select>
 
+    <insert id="inserts" parameterType="list">
+        insert into ams.choice_question (score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, subjectId)
+        values
+        <foreach collection="list" item="index" separator=",">
+            (#{index.score},#{index.question},#{index.choicea},#{index.choiceb},#{index.choicec},#{index.choiced},#{index.rightanswer},#{index.subjectid})
+        </foreach>
+    </insert>
+
 </mapper>

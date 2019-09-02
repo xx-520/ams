@@ -16,8 +16,11 @@
                     <button type="button" class="layui-btn layui-btn-normal" onclick="add()">添加</button>
                     <button id="btn" class="layui-btn" type="button">批量删除<span class="badge"></span></button>
                 </div>
-
             </div>
+            <form action="admin/JQ/upfile.do" method="post" enctype="multipart/form-data" style="float: right;">
+                <input type="file" name="upfile"/>
+                <button type="submit" class="layui-btn">批量上传</button>
+            </form>
             <div class="layui-col-xs9 layui-input-inline searchDiv">
             </div>
 

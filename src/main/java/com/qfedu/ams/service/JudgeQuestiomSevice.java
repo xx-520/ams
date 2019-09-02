@@ -21,4 +21,6 @@ public interface JudgeQuestiomSevice {
     void update(JudgeQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    void inserts(List<JudgeQuestion> list);
 }

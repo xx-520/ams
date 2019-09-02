@@ -24,4 +24,6 @@ public interface JudgeQuestionMapper {
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
+    void inserts(List<JudgeQuestion> list);
+
 }

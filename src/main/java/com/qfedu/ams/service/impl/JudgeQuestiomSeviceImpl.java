@@ -70,4 +70,9 @@ public class JudgeQuestiomSeviceImpl implements JudgeQuestiomSevice {
 
         return map;
     }
+
+    @Override
+    public void inserts(List<JudgeQuestion> list) {
+        judgeQuestionMapper.inserts(list);
+    }
 }
