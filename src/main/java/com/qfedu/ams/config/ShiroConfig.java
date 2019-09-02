@@ -58,6 +58,7 @@ public class ShiroConfig {
         // anon: 匿名访问
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/loginAdmin/**", "anon");
         filterChainDefinitionMap.put("/layui/**", "anon");
 
