@@ -2,9 +2,9 @@ package com.qfedu.ams.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.qfedu.ams.dao.JudgeQuestionMapper;
-import com.qfedu.ams.entity.JudgeQuestion;
-import com.qfedu.ams.service.JudgeQuestiomSevice;
+import com.qfedu.ams.dao.ShortQuestionMapper;
+import com.qfedu.ams.entity.ShortQuestion;
+import com.qfedu.ams.service.ShortQuestionSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 判断题实现
- *
- */
 @Service
-public class JudgeQuestiomSeviceImpl implements JudgeQuestiomSevice {
+public class ShortQuestionServiceImpl implements ShortQuestionSevice {
 
     @Autowired(required = false)
-    private JudgeQuestionMapper judgeQuestionMapper;
+    private ShortQuestionMapper shortQuestionMapper;
 
     @Override
-    public List<JudgeQuestion> findAll() {
-        List<JudgeQuestion> list = judgeQuestionMapper.findAll();
+    public List<ShortQuestion> findAll() {
+        List<ShortQuestion> list = shortQuestionMapper.findAll();
         if (list == null){
             throw new RuntimeException("题目不存在");
         }
@@ -33,33 +29,33 @@ public class JudgeQuestiomSeviceImpl implements JudgeQuestiomSevice {
 
     @Override
     public int falseDelete(Integer id) {
-        return judgeQuestionMapper.falseDelete(id);
+        return shortQuestionMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public void falseDeletes(Integer[] ids) {
-        judgeQuestionMapper.falseDeletes(ids);
+        shortQuestionMapper.falseDeletes(ids);
     }
 
     @Override
-    public int insert(JudgeQuestion record) {
-        return judgeQuestionMapper.insert(record);
+    public int insert(ShortQuestion record) {
+        return shortQuestionMapper.insert(record);
     }
 
     @Override
-    public JudgeQuestion selectByPrimaryKey(Integer id) {
-        return judgeQuestionMapper.selectByPrimaryKey(id);
+    public ShortQuestion selectByPrimaryKey(Integer id) {
+        return shortQuestionMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public void update(JudgeQuestion record) {
-        judgeQuestionMapper.update(record);
+    public void update(ShortQuestion record) {
+        shortQuestionMapper.update(record);
     }
 
     @Override
     public Map<String, Object> findByIndexAndSize(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<JudgeQuestion> list = judgeQuestionMapper.findAll();
+        List<ShortQuestion> list = shortQuestionMapper.findAll();
         // 获取总记录数
         long total = ((Page) list).getTotal();
         Map<String, Object> map = new HashMap<>();

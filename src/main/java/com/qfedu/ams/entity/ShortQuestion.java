@@ -1,15 +1,25 @@
 package com.qfedu.ams.entity;
 
+import java.util.List;
+
+/**
+ * 简答题表
+ *
+ */
 public class ShortQuestion {
     private Integer id;
 
     private Integer score;
 
-    private Integer subjectid;
-
     private String question;
 
+    private String  referenceanswer;
+
+    private Integer subjectid;
+
     private Integer status;
+
+    private List<ExamSubject> ESlist;
 
     public Integer getStatus() {
         return status;
@@ -43,11 +53,28 @@ public class ShortQuestion {
         this.subjectid = subjectid;
     }
 
+    public String getReferenceanswer() {
+        return referenceanswer;
+    }
+
+    public void setReferenceanswer(String referenceanswer) {
+        this.referenceanswer = referenceanswer;
+    }
+
     public String getQuestion() {
         return question;
     }
 
     public void setQuestion(String question) {
+
         this.question = question == null ? null : question.trim();
+    }
+
+    public List<ExamSubject> getESlist() {
+        return ESlist;
+    }
+
+    public void setESlist(List<ExamSubject> ESlist) {
+        this.ESlist = ESlist;
     }
 }

@@ -1,18 +1,17 @@
-package com.qfedu.ams.dao;
+package com.qfedu.ams.service;
+
+
 
 import com.qfedu.ams.entity.ShortQuestion;
 
 import java.util.List;
 import java.util.Map;
 
-/**
-    简答题dao层
- */
-public interface ShortQuestionMapper {
+public interface ShortQuestionSevice {
 
     List<ShortQuestion> findAll();
 
-    int deleteByPrimaryKey(Integer id);
+    int falseDelete(Integer id);
 
     void falseDeletes(Integer[] ids);
 
@@ -20,8 +19,7 @@ public interface ShortQuestionMapper {
 
     ShortQuestion selectByPrimaryKey(Integer id);
 
-    void update(ShortQuestion shortQuestion);
+    void update(ShortQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
-
 }

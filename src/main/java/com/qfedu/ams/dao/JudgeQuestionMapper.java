@@ -20,7 +20,7 @@ public interface JudgeQuestionMapper {
 
     JudgeQuestion selectByPrimaryKey(Integer id);
 
-    int update(JudgeQuestion record);
+    void update(JudgeQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
