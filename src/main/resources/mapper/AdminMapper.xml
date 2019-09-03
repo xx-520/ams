@@ -72,14 +72,13 @@
 
   <select id="findRolesByName" parameterType="string" resultType="string">
     select r.role from admin a
-    inner join a_user_role ur on a.id = ur.uid
-    inner join a_role r on r.id = ur.rid where a.username=#{username};
+    inner join a_role r on r.id = a.roleId where a.username = #{username};
   </select>
 
   <select id="findPermsByName" parameterType="string" resultType="string">
     select DISTINCT p.permision_name from admin a
-    inner join a_user_role ur on ur.uid = a.id
-    inner join a_role_permision rp on rp.rid = ur.rid
+    inner join a_role ur on ur.id = a.roleId
+    inner join a_role_permision rp on rp.rid = ur.id
     inner join a_permision p on p.pid = rp.pid
     where p.permision_name is not null and a.username = #{username}
   </select>
@@ -89,7 +88,7 @@
     c.resource_name cmenu,c.permision_name cpermision_name,
     c.resource_type cresource_type,c.url curl from a_permision p
     inner join a_permision c on p.pid = c.parent_id inner join a_role_permision rp
-    on c.pid=rp.pid inner join a_user_role ur on ur.rid = rp.rid inner join admin a on a.id=ur.uid where
+    on c.pid=rp.pid inner join a_role ur on ur.id = rp.rid inner join admin a on a.roleId=ur.id where
     a.username = #{username} and c.resource_type = 'menu'
   </select>
 
