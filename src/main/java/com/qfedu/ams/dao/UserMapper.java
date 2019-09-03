@@ -24,7 +24,7 @@ public interface UserMapper {
     //查询所有的考生
     public List<User> selectUserList(User users);
 
-//    //动态修改
+    //动态修改
 //    int updateByPrimaryKeySelective(User record);
 
     //修改指定ID的考生

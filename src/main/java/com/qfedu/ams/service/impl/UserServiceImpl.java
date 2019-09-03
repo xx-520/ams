@@ -1,4 +1,4 @@
-package com.qfedu.ams.service.Impl;
+package com.qfedu.ams.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.UserMapper;

@@ -151,7 +151,7 @@
       name = #{name},
       sex = #{sex},
       phone = #{phone},
-      email = #{email},
+      email = #{email}
     where uid = #{uid}
   </update>
 </mapper>

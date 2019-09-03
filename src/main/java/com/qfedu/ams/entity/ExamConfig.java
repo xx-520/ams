@@ -1,14 +1,17 @@
 package com.qfedu.ams.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ExamConfig {
     private Integer id;
 
     private Integer userid;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
     private Date starttime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endtime;
 
     private Integer examnum;
