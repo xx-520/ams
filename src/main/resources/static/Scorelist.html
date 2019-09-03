@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分数表管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+
+
+</head>
+<body>
+<div class="layui-form searchDiv">
+<!--    <div class="layui-input-inline">-->
+<!--        <input type="text" class="layui-input" id="title" placeholder="标题">-->
+<!--    </div>-->
+    <div class="layui-inline">
+
+<!--        <div class="layui-input-inline">-->
+<!--            <select id="subjectname" name="subjectid">-->
+<!--                <option value="">请选择科目</option>-->
+<!--            </select>-->
+
+        </div>
+<!--        <button type="button" class="layui-btn" data-type="reload" >搜索</button>-->
+    </div>
+</div>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+<!--        <button class="layui-btn layui-btn-sm" onclick="add()">添加</button>-->
+        <button class="layui-btn layui-btn-sm" lay-event="deleteMany">批量删除</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">更新</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script src="layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+
+
+    layui.use(['table', 'layer','form'], function () {
+        var table = layui.table
+            , layer = layui.layer
+            , form = layui.form;
+
+        loadList(form);
+
+        table.render({
+            elem: '#test'
+            , url: '/ams/Score/list.do'
+            , toolbar: '#toolbarDemo'
+            , title: '分数表'
+            , cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: '序号', width:80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '考生姓名', width:80, sort: true}
+                ,{field: 'uid', title: '序号', width:80, sort: true}
+                ,{field: 'username', title: '学生考号', width:80, sort: true}
+                , {
+                    field: 'subjectname', title: '科目', width: 350,sort: true
+                }
+                ,{field: 'choicescore', title: '选择题分数', width:80, sort: true}
+                ,{field: 'totaljudgescore', title: '判断题分数', width:80, sort: true}
+                ,{field: 'totalshortscore', title: '简答题分数', width:80, sort: true}
+                ,{field: 'totalscore', title: '总分数', width:80, sort: true}
+                , {field: 'right', toolbar: '#barDemo'}
+            ]]
+            , page: true
+        });
+
+        var $ = layui.$, active = {
+            reload: function () {
+                // var Title = $("#tid").val()
+                // var uid = $("#uid").val()
+                var subjectId = $("#subjectname").val()
+
+
+                //执行重载
+                table.reload('test', {
+                    url:"/ams/Score/findList.do"
+                    ,page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: { // 额外需要提交的参数
+                        // title:Title,
+                        subjectId: subjectId,
+                        // courseId: subjectid,
+                    }
+                });
+            }
+        };
+
+        $('.query').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        $('.searchDiv.layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+
+            var checkStatus = table.checkStatus(obj.config.id)
+                , data = checkStatus.data; //获取选中的数据
+
+            if (obj.event = 'deleteMany') {
+                if (data.length === 0) {
+                    layer.msg('请至少选择一行');
+                } else {
+
+                    var ids = "";
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            ids += data[i].id + ",";  //获取所选对象的id并进行拼接
+                        }
+                    }
+
+                    layer.confirm('确定删除信息吗？' + ids, function (index) {
+                        layer.close(index);
+                        $.ajax({
+                            type: "post",
+                            url: "/ams/Score/deleteMany.do",
+                            data: {"ids": ids},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == 1) {
+                                    alert(data.info);
+                                    table.reload('test');
+                                } else {
+                                    alert(data.info);
+                                }
+                            }
+                        })
+                    });
+                }
+            }
+        });
+
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('确定删除该条信息吗？', function (index) {
+                    obj.del();
+                    layer.close(index);
+
+                    $.ajax({
+                        type: "get",
+                        url: "/ams/Score/delete.do?id=" + data.uid,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 1) {
+                                table.reload('test');
+                            } else {
+                                alert(data.info);
+                            }
+                        }
+                    })
+                });
+            } else if (obj.event === 'edit') {
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: '修改分数表'
+                    , area: ['600px', '400px']
+                    , content: 'updateScore.html?id=' + data.id
+                })
+            }
+        });
+        var active = {
+            reload: function () {
+                //执行重载
+                table.reload('score', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: { // 额外需要提交的参数
+                        // courseId: $("#course").val(),
+                        subjectid: $("#subjectname").val(),
+                        // title: $("#title").val()
+                    }
+                });
+            }
+        };
+
+
+    });
+
+</script>
+<script type="text/javascript">
+
+    function loadList(form) {
+        $.ajax({
+            url: "/ams/admin/ES/list.do",
+            type: "post",
+            dadaType: "json",
+            success: function (data) {
+                var html = "";
+                var infos = data.info;
+                $.each(infos, function () {
+                    html += '<option value="' + this.subjectid + '">' + this.subjectname + '</option>'
+                })
+                $("#subjectname").append($(html));
+                form.render();
+            }
+        })
+    }
+
+</script>
+
+
+</body>
+</html>
