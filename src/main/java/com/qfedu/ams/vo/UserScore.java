@@ -1,6 +1,9 @@
-package com.qfedu.ams.entity;
+package com.qfedu.ams.vo;
 
-public class Score {
+import com.qfedu.ams.entity.ExamSubject;
+
+public class UserScore {
+
     private Integer id;
 
     private Integer uid;
@@ -18,6 +21,28 @@ public class Score {
     private Integer totalscore;
 
     private Integer status;
+
+    private String username;
+
+    private String name;
+
+    private String subjectname;
+
+    public String getSubjectname() {
+        return subjectname;
+    }
+
+    public void setSubjectname(String subjectname) {
+        this.subjectname = subjectname;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUid() {
         return uid;
@@ -43,22 +68,6 @@ public class Score {
         this.configid = configid;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Integer getChoicescore() {
         return choicescore;
     }
@@ -76,7 +85,6 @@ public class Score {
     }
 
     public Integer getTotalshortscore() {
-
         return totalshortscore;
     }
 
@@ -85,11 +93,34 @@ public class Score {
     }
 
     public Integer getTotalscore() {
-        totalscore = totaljudgescore + choicescore + totalshortscore;
         return totalscore;
     }
 
     public void setTotalscore(Integer totalscore) {
         this.totalscore = totalscore;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

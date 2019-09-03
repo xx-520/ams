@@ -43,4 +43,6 @@ public interface ExamSubjectMapper {
      */
     ExamSubject selectByPrimaryKey(Integer subjectid);
 
+
+    public List<ExamSubject> findAllSubject();
 }

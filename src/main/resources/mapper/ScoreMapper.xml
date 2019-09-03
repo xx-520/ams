@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.Score" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER"></result>
-    <result column="subjectid" property="subjectid" jdbcType="INTEGER"></result>
+    <result column="subjectId" property="subjectid" jdbcType="INTEGER"></result>
     <result column="configid" property="configid" jdbcType="INTEGER"></result>
     <result column="choiceScore" property="choicescore" jdbcType="INTEGER" />
     <result column="totalJudgeScore" property="totaljudgescore" jdbcType="INTEGER" />
     <result column="totalShortScore" property="totalshortscore" jdbcType="INTEGER" />
     <result column="totalScore" property="totalscore" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="selectScore" parameterType="int" resultType="score">
@@ -21,6 +22,49 @@
     on u.subjectId=es.subjectId
     where u.uid=#{uid}
   </select>
+
+  <select id="findAllScore" resultType="com.qfedu.ams.vo.UserScore">
+  select ams.user.username, ams.user.name, ams.exam_subject.subjectName,ams.score.*
+from ams.score
+         inner join
+     ams.user on user.uid = score.uid
+inner  join exam_subject
+on ams.exam_subject.subjectId = ams.score.subjectId
+where ams.score.status = 1
+</select>
+
+  <update id="deleteScore" parameterType="int">
+    update ams.user set status = 0 where ams.user.uid = #{id}
+  </update>
+
+  <update id="updateScore" parameterType="score">
+    update ams.score set ams.score.choicescore = #{choicescore},ams.score.totaljudgescore = #{totaljudgescore},
+    ams.score.totalshortscore = #{totalshortscore} where id = #{id}
+
+  </update>
+
+  <select id="findById" parameterType="int" resultType="score">
+    select * from ams.score where id = #{id}
+  </select>
+
+  <update id="deleteMany" parameterType="list">
+    update ams.score set ams.score.status = 0 where ams.score.id in
+    <foreach collection="list" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </update>
+
+    <select id="findList" parameterType="map" resultType="com.qfedu.ams.vo.UserScore">
+        select ams.user.username, ams.user.name, ams.exam_subject.subjectName,ams.score.*
+from ams.score
+    inner join
+    ams.user on user.uid = score.uid
+    inner  join exam_subject
+    on ams.exam_subject.subjectId = ams.score.subjectId
+where ams.score.status = 1
+    </select>
+
+
 
 
 </mapper>
