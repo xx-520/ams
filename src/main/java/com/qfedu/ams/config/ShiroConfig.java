@@ -140,6 +140,8 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(host);
         redisManager.setPort(port);
+        // 配置过期时间
+        redisManager.setExpire(1800);
         return redisManager;
     }
 
