@@ -8,8 +8,8 @@ public class ExamConfig {
     private Integer id;
 
     private Integer userid;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date starttime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endtime;

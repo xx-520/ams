@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
-    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
-    <script type="text/javascript" src="layui/layui.js"></script>
+
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+        <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+        <script type="text/javascript" src="layui/layui.js"></script>
+
 </head>
 <body>
 <div>
@@ -125,7 +127,7 @@
             var data = obj.data //获得当前行数据
                 , layEvent = obj.event; //获得 lay-event 对应的值
             if (layEvent === 'del') {
-                layer.confirm('真的删除【' + data.d.user.name + '】么', function (index) {
+                layer.confirm('真的删除【' + data.user.name + '】么', function (index) {
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
@@ -147,8 +149,8 @@
                 // layer.msg('编辑视频');
                 layer.open({
                     type: 2 //此处以iframe举例
-                    , title: '修改视频'
-                    , area: ['600px', '500px']
+                    , title: '修改考试信息'
+                    , area: ['500px', '550px']
                     , content: 'ECupdate.html?id=' + data.id
                 })
             }
@@ -228,8 +230,9 @@
 <script type="text/javascript">
     function deleteAll() {
         var ids = new Array();
-        layui.use(['table'], function () {
-            var table = layui.table;
+        layui.use(['table', 'layer'], function () {
+            var table = layui.table,
+            layer = layui.layer;
             var checkStatus = table.checkStatus('demo');
             var data = checkStatus.data;
             if (data.length == 0) {
@@ -248,15 +251,16 @@
                 $.ajax({
                     type: "POST",
                     url: "admin/EC/deleteECs.do",
-                    traditional: true,
+                    // traditional: true,
                     data: {'ids': ids},
                     dataType: "json",
                     success: function (data) {
                         if (data.code == 1) {
-                            layer.msg(data.info);
-                            var t = layui.table;
-                            t.reload('demo');
+                            //var t = layui.table;
+                            table.reload('demo');
                             $("#span_deleteAll").html(0)
+                            //t.reload('demo');
+                            // layer.msg(data.info);
                         }
                     }
                 });
@@ -270,8 +274,8 @@
     function add() {
         layer.open({
             type: 2 //此处以iframe举例
-            , title: '添加员工'
-            , area: ['390px', '400px']
+            , title: '添加考试信息'
+            , area: ['800px', '550px']
             , content: 'ECadd.html'
         })
     }
