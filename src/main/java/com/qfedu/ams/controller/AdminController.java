@@ -97,7 +97,6 @@ public class AdminController {
             e.printStackTrace();
             result = new JsonResult(0, "批量删除失败");
         }
-
         return result;
     }
 

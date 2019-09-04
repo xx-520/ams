@@ -6,7 +6,7 @@ package com.qfedu.ams.vo;
  * Date: 2019/8/30
  * Time: 20:56
  */
-public class Cmenu {
+public class  Cmenu {
     private Integer cpid;
     private String cmenu;
     private String cpermisionName;

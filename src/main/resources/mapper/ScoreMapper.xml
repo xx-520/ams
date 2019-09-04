@@ -39,7 +39,7 @@ from ams.score
      ams.user on user.uid = score.uid
 inner  join exam_subject
 on ams.exam_subject.subjectId = ams.score.subjectId
-where ams.score.status = 1
+where ams.user.status = 1
 </select>
 
   <update id="deleteScore" parameterType="int">
