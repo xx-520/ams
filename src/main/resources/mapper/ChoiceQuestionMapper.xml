@@ -17,6 +17,10 @@
         ></collection>
     </resultMap>
 
+    <select id="CQfindAll" resultType="int">
+        select id from ams.choice_question where subjectId = 1 order by rand()  limit 5;
+    </select>
+
     <select id="findAll" resultMap="BaseResultMap">
     select id, score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, a.subjectName
     from choice_question c

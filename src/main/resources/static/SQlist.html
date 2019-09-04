@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>课程管理</title>
+    <title>简答题管理</title>
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="layui/layui.js"></script>
@@ -109,7 +109,7 @@
                 //layer.msg('编辑操作');
                 layer.open({
                     type: 2 //此处以iframe举例
-                    , title: '修改员工'
+                    , title: '修改简答题'
                     , area: ['600px', '500px']
                     , content: 'SQupdate.html?id=' + data.id
                 })
@@ -173,7 +173,7 @@
     function add() {
         layer.open({
             type: 2 //此处以iframe举例
-            , title: '添加员工'
+            , title: '添加简答题'
             , area: ['650px', '550px']
             , content: 'SQadd.html'
         })

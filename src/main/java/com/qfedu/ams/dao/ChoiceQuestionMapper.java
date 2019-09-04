@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public interface ChoiceQuestionMapper {
 
+    List<Integer> CQfindAll();
+
     List<ChoiceQuestion> findAll();
 
     int falseDelete(Integer id);

@@ -1,106 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.ams.dao.AmsExamMapper" >
-  <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.AmsExam" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userId" property="userid" jdbcType="INTEGER" />
-    <result column="choiceId" property="choiceid" jdbcType="VARCHAR" />
-    <result column="judgeId" property="judgeid" jdbcType="VARCHAR" />
-    <result column="shortId" property="shortid" jdbcType="VARCHAR" />
-    <result column="examNum" property="examnum" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, userId, choiceId, judgeId, shortId, examNum
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from ams_exam
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ams_exam
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.qfedu.ams.entity.AmsExam" >
-    insert into ams_exam (id, userId, choiceId, 
-      judgeId, shortId, examNum
-      )
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{choiceid,jdbcType=VARCHAR}, 
-      #{judgeid,jdbcType=VARCHAR}, #{shortid,jdbcType=VARCHAR}, #{examnum,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.AmsExam" >
-    insert into ams_exam
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="userid != null" >
-        userId,
-      </if>
-      <if test="choiceid != null" >
-        choiceId,
-      </if>
-      <if test="judgeid != null" >
-        judgeId,
-      </if>
-      <if test="shortid != null" >
-        shortId,
-      </if>
-      <if test="examnum != null" >
-        examNum,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="choiceid != null" >
-        #{choiceid,jdbcType=VARCHAR},
-      </if>
-      <if test="judgeid != null" >
-        #{judgeid,jdbcType=VARCHAR},
-      </if>
-      <if test="shortid != null" >
-        #{shortid,jdbcType=VARCHAR},
-      </if>
-      <if test="examnum != null" >
-        #{examnum,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.AmsExam" >
-    update ams_exam
-    <set >
-      <if test="userid != null" >
-        userId = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="choiceid != null" >
-        choiceId = #{choiceid,jdbcType=VARCHAR},
-      </if>
-      <if test="judgeid != null" >
-        judgeId = #{judgeid,jdbcType=VARCHAR},
-      </if>
-      <if test="shortid != null" >
-        shortId = #{shortid,jdbcType=VARCHAR},
-      </if>
-      <if test="examnum != null" >
-        examNum = #{examnum,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.AmsExam" >
-    update ams_exam
-    set userId = #{userid,jdbcType=INTEGER},
-      choiceId = #{choiceid,jdbcType=VARCHAR},
-      judgeId = #{judgeid,jdbcType=VARCHAR},
-      shortId = #{shortid,jdbcType=VARCHAR},
-      examNum = #{examnum,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.qfedu.ams.dao.AmsExamMapper">
+
+    <resultMap id="AEResultMap" type="com.qfedu.ams.entity.AmsExam">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userId" property="userid" jdbcType="INTEGER"/>
+        <result column="choiceId" property="choiceid" jdbcType="VARCHAR"/>
+        <result column="judgeId" property="judgeid" jdbcType="VARCHAR"/>
+        <result column="shortId" property="shortid" jdbcType="VARCHAR"/>
+        <result column="examNum" property="examnum" jdbcType="INTEGER"/>
+        <result column="locks" property="locks" jdbcType="INTEGER"/>
+        <collection property="choiceQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.ChoiceQuestion"
+                    resultMap="com.qfedu.ams.dao.ChoiceQuestionMapper.BaseResultMap">
+        </collection>
+        <collection property="judgeQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.JudgeQuestion"
+                    resultMap="com.qfedu.ams.dao.JudgeQuestionMapper.JQResultMap">
+        </collection>
+        <collection property="shortQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.ShortQuestion"
+                    resultMap="com.qfedu.ams.dao.ShortQuestionMapper.SQResultMap">
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="AEResultMap">
+        select * from ams.ams_exam a, ams.choice_question c, ams.judge_question j, ams.short_question s
+        choiceId in
+        <foreach collection="list" item="list">
+            #{list.choiceid}
+        </foreach>
+    </select>
+
+
+
 </mapper>

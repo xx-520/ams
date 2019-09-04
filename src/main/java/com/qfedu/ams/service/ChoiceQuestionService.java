@@ -7,6 +7,8 @@ import java.util.Map;
 
 public interface ChoiceQuestionService {
 
+    List<Integer> CQfindAll();
+
     List<ChoiceQuestion> findAll();
 
     int falseDelete(Integer id);

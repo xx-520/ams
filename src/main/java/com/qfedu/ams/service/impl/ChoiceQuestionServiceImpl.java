@@ -19,6 +19,15 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     private ChoiceQuestionMapper choiceQuestionMapper;
 
     @Override
+    public List<Integer> CQfindAll() {
+        List<Integer> list = choiceQuestionMapper.CQfindAll();
+        if (list == null){
+            throw new RuntimeException("题目id不存在");
+        }
+        return list;
+    }
+
+    @Override
     public List<ChoiceQuestion> findAll() {
         List<ChoiceQuestion> list = choiceQuestionMapper.findAll();
         if (list == null){

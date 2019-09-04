@@ -89,6 +89,7 @@
             <version>1.2.5</version>
         </dependency>
 
+        <!-- Jedis是 redis的 java版本的客户端实现，Jedis提供了完整 Redis命令 -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -147,6 +148,7 @@
             <version>2.4.2.1-RELEASE</version>
         </dependency>
 
+        <!-- poi批量上传相关jar包 -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
