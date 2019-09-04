@@ -9,6 +9,11 @@ public class RolePermision {
 
     private Integer status;
 
+    public RolePermision(Integer rid, Integer pid) {
+        this.rid = rid;
+        this.pid = pid;
+    }
+
     public Integer getStatus() {
         return status;
     }

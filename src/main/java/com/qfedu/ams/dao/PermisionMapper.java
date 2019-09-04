@@ -1,17 +1,18 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.Permision;
+import com.qfedu.ams.entity.RolePermision;
+
+import java.util.List;
+
 //权限表
 public interface PermisionMapper {
-    int deleteByPrimaryKey(Integer pid);
 
-    int insert(Permision record);
+    public List<Permision> findAll();
 
-    int insertSelective(Permision record);
+    public List<Permision> findPermisionByRoles(Integer id);
 
-    Permision selectByPrimaryKey(Integer pid);
+    public void deleteRoPermisionByRid(Integer rid);
 
-    int updateByPrimaryKeySelective(Permision record);
-
-    int updateByPrimaryKey(Permision record);
+    public void updateRopermisionByIds(List<RolePermision> list);
 }

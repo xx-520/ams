@@ -9,98 +9,40 @@
     <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    pid, resource_name, parent_id, permision_name, resource_type, url
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from a_permision
-    where pid = #{pid,jdbcType=INTEGER}
+
+  <resultMap id="permisionMap" type="permision">
+    <id column="pid" property="pid"></id>
+    <result column="resource_name" property="resourceName"></result>
+    <result column="parent_id" property="parentId"></result>
+    <result column="cpid" property="pid"></result>
+    <result column="sonName" property="resourceName"></result>
+    <result column="sonParent" property="parentId"></result>
+  </resultMap>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from a_permision
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from a_permision
-    where pid = #{pid,jdbcType=INTEGER}
+
+ <select id="findPermisionByRoles" parameterType="int" resultMap="permisionMap">
+    SELECT p.pid,p.resource_name,p.parent_id,c.pid cpid,c.parent_id sonParent,c.resource_name sonName from a_permision p inner join a_permision c on p.pid = c.parent_id inner join a_role_permision rp on c.pid=rp.pid where rp.rid = #{id};
+  </select>
+
+  <delete id="deleteRoPermisionBy" parameterType="map">
+    delete from a_role_permision where pid = #{pid} and rid = #{rid}
   </delete>
-  <insert id="insert" parameterType="com.qfedu.ams.entity.Permision" >
-    insert into a_permision (pid, resource_name, parent_id, 
-      permision_name, resource_type, url
-      )
-    values (#{pid,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{permisionName,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
-      )
+
+  <insert id="addRoPermision" parameterType="map">
+    insert into a_role_permision(rid, pid) values (#{rid}, #{pid})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.ams.entity.Permision" >
-    insert into a_permision
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="pid != null" >
-        pid,
-      </if>
-      <if test="resourceName != null" >
-        resource_name,
-      </if>
-      <if test="parentId != null" >
-        parent_id,
-      </if>
-      <if test="permisionName != null" >
-        permision_name,
-      </if>
-      <if test="resourceType != null" >
-        resource_type,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pid != null" >
-        #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="resourceName != null" >
-        #{resourceName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="permisionName != null" >
-        #{permisionName,jdbcType=VARCHAR},
-      </if>
-      <if test="resourceType != null" >
-        #{resourceType,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-    </trim>
+
+  <delete id="deleteRoPermisionByRid" parameterType="int">
+    delete from a_role_permision where rid = #{rid}
+  </delete>
+
+  <insert id="updateRopermisionByIds" parameterType="map">
+    insert into a_role_permision(rid, pid) values
+    <foreach collection="list" item="list" separator=",">
+      (#{list.rid},#{list.pid})
+    </foreach>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.ams.entity.Permision" >
-    update a_permision
-    <set >
-      <if test="resourceName != null" >
-        resource_name = #{resourceName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="permisionName != null" >
-        permision_name = #{permisionName,jdbcType=VARCHAR},
-      </if>
-      <if test="resourceType != null" >
-        resource_type = #{resourceType,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where pid = #{pid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.Permision" >
-    update a_permision
-    set resource_name = #{resourceName,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      permision_name = #{permisionName,jdbcType=VARCHAR},
-      resource_type = #{resourceType,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
-    where pid = #{pid,jdbcType=INTEGER}
-  </update>
 </mapper>

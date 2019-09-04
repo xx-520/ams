@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/lib/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="css/lib/css/demo.css">
+</head>
+<body>
+<div class="zTreeDemoBackground">
+    <form action="#" method="post" onsubmit="return false">
+        <ul id="tree" class="ztree"></ul>
+        <button id="per" style="margin-left: 60%" class="layui-btn layui-btn-normal" onclick="updatePer()">更改</button>
+    </form>
+
+</div>
+</body>
+<script type="text/javascript" src="css/lib/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="css/lib/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="css/lib/jquery.ztree.excheck.min.js"></script>
+<script type="text/javascript">
+    var setting = {
+        view: {
+            selectedMulti: false
+        },
+        check: {
+            enable: true,
+        },
+        data: {
+            simpleData: {
+                enable: true,//是否采用简单数据模式
+                idKey: "id",//树节点ID名称
+                pIdKey: "pid",//父节点ID名称
+                rootPId: -1,//根节点ID
+            }
+        }
+    };
+    $(function () {
+        //加载后端构建的ZTree树（节点的数据格式已在后端格式化好了）
+        $.ajax({
+            url: 'admin/permision/getZTreeForUserRoles.do',
+            type: 'get',
+            dataType: "json",
+            success: (data) => {
+                //console.log(data);
+                $.fn.zTree.init($("#tree"), setting, data);//初始化树节点时，添加同步获取的数据
+                checkNodes();
+            },
+            error: (data) => {
+                alert(data.message);
+            }
+        });
+    });
+
+    //处理默认选中的方法
+    function checkNodes(){
+        $.ajax({
+           type: "get",
+           url: "admin/permision/getZTreeByRoles.do" + window.location.search,
+           dataType: "json",
+           success: (data) => {
+                   //模拟数据库中已存在的数据（要实现默认选中的数据）
+                   var data = data;
+                    var zTree = $.fn.zTree.getZTreeObj("tree"); //获取zTree对象
+                    data.forEach(row => {
+                        zTree.selectNode(zTree.getNodeByParam("id", row.id), true, false);
+                        zTree.checkNode(zTree.getNodeByParam("id", row.id), true, false);
+                    })
+           }
+        });
+    }
+    function updatePer() {
+        var treeObj = $.fn.zTree.getZTreeObj("tree");
+        var nodes = treeObj.getCheckedNodes(true);
+        //var nodes = treeObj.getChangeCheckedNodes();
+        console.log(nodes);
+        var ids = "";
+        for (var i = 0; i < nodes.length; i++) {
+            ids += nodes[i].id + ",";
+        }
+        $.ajax({
+            type: "post",
+            url: "admin/permision/updatePermision.do" + window.location.search,
+            data: {"ids": ids},
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    alert(data.info);
+                    window.parent.location.reload();
+                } else {
+                    alert(data.info)
+                }
+            }
+        })
+
+    }
+
+</script>
+</html>
