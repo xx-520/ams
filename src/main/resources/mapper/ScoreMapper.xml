@@ -13,13 +13,22 @@
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
 
-  <select id="selectScore" parameterType="int" resultType="score">
-    select u.uid, u.username, es.subjectName, s.choiceScore, s.totalJudgeScore, s.totalShortScore
-    from score s
+
+  <select id="findSubject" parameterType="map" resultType="ExamSubject">
+    select es.subjectId,es.subjectName,s.sum(totalScore)
+    from exam_subject es
+    inner join score s
+    on es.subjectId=s.subjectId
+  </select>
+
+
+  <select id="selectScore" parameterType="int" resultType="com.qfedu.ams.vo.Stat">
+    select u.uid,u.username,s.subjectName,sc.choiceScore,sc.totalJudgeScore,sc.totalShortScore
+    from score sc
     inner join user u
-    on s.id=u.scoreId
-    inner join exam_subject es
-    on u.subjectId=es.subjectId
+    on sc.uid=u.uid
+    inner join exam_subject s
+    on sc.subjectId=s.subjectId
     where u.uid=#{uid}
   </select>
 

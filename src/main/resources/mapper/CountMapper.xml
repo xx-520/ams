@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.ams.dao.CountDao" >
+    <resultMap id="BaseResultMap" type="com.qfedu.ams.entity.Count">
+        <result column="subjectName" property="subjectName"></result>
+        <result column="total" property="total"></result>
+    </resultMap>
+    <select id="findAllCount" resultMap="BaseResultMap">
+        select exam_subject.subjectName,sum(score.totalScore) total
+        from score
+        inner join exam_subject
+        on score.subjectId=exam_subject.subjectId
+        group by exam_subject.subjectId
+    </select>
+</mapper>
