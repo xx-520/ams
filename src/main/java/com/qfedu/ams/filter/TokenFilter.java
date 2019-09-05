@@ -53,7 +53,7 @@ public class TokenFilter implements Filter{
                         return;
                     }else {
                         // 跳转到登陆页面
-                        resp.sendRedirect("http://127.0.0.1:8020/ams/login.html");
+                        resp.sendRedirect("http://127.0.0.1:8848/h5_ams/login.html");
                         return;
                     }
                 }
@@ -65,7 +65,7 @@ public class TokenFilter implements Filter{
                     return;
                 }else {
                     // 跳转到登陆页面
-                    resp.sendRedirect("http://127.0.0.1:8020/day74h5cross/login.html");
+                    resp.sendRedirect("http://127.0.0.1:8848/h5_ams/login.html");
                     return;
                 }
             }

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 public class LoginController {
 
@@ -26,17 +26,23 @@ public class LoginController {
 
     @RequestMapping("/api/login.do")
     public Map<String, Object> login(String username, String password, String vercode) {
-        JsonResult jsonResult = new JsonResult();
         Map<String, Object> map = new HashMap<>();
 
-        User login = userService.login( username, password );
-        String token = MD5Utils.md5( login.getUsername() + "ams" );
-        map.put( "token", token );
-        map.put( "code", 1 );
+        User login = null;
+        String token = null;
+        try {
+            login = userService.login( username, password );
+            token = MD5Utils.md5( username + "ams" );
+            map.put( "token", token );
+            map.put( "code", 1 );
 
-        // 将token写道redis中
-        redisTemplate.opsForValue().set( "token", login.getUsername() );
-        redisTemplate.expire( token, 1800, TimeUnit.SECONDS );
+            // 将token写道redis中
+            redisTemplate.opsForValue().set(token, username);
+            redisTemplate.expire( token, 1800, TimeUnit.SECONDS );
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", 0);
+        }
         return map;
 
     }
