@@ -35,13 +35,13 @@
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
 <!--        <button class="layui-btn layui-btn-sm" onclick="add()">添加</button>-->
-        <button class="layui-btn layui-btn-sm" lay-event="deleteMany">批量删除</button>
+<!--        <button class="layui-btn layui-btn-sm" lay-event="deleteMany">批量删除</button>-->
     </div>
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">更新</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">判卷</a>
+<!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
 </script>
 
 
@@ -60,22 +60,20 @@
 
         table.render({
             elem: '#test'
-            , url: '/ams/Score/list.do'
+            , url: '/ams/MarkShort/find.do'
             , toolbar: '#toolbarDemo'
             , title: '分数表'
             , cols: [[
-                {type: 'checkbox', fixed: 'left'}
-                ,{field: 'id', title: '序号', width:80, sort: true, fixed: 'left'}
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'userId', title: '序号', width:80, sort: true, fixed: 'left'}
+                ,{field: 'examId', title: '考试场次号', width:80, sort: true}
                 ,{field: 'name', title: '考生姓名', width:80, sort: true}
-                ,{field: 'uid', title: '学生ID', width:80, sort: true}
                 ,{field: 'username', title: '学生考号', width:80, sort: true}
-                , {
-                    field: 'subjectname', title: '科目', width: 350,sort: true
-                }
-                ,{field: 'choicescore', title: '选择题分数', width:80, sort: true}
-                ,{field: 'totaljudgescore', title: '判断题分数', width:80, sort: true}
-                ,{field: 'totalshortscore', title: '简答题分数', width:80, sort: true}
-                ,{field: 'totalscore', title: '总分数', width:80, sort: true}
+                ,{field: 'subjectName', title: '考试科目', width:80, sort: true}
+                ,{field: 'shortAnswer', title: '考生提交的答案', width:80, sort: true}
+                ,{field: 'referenceanswer', title: '参考答案', width:80, sort: true}
+                ,{field: 'totalShortScore', title: '得分', width:80, sort: true}
+
                 , {field: 'right', toolbar: '#barDemo'}
             ]]
             , page: true
@@ -180,7 +178,7 @@
                     type: 2 //此处以iframe举例
                     , title: '修改分数表'
                     , area: ['600px', '400px']
-                    , content: 'updateScore.html?id=' + data.id
+                    , content: 'updateMarkShort.html?userId=' + data.userId+"&examId="+data.examId
                 })
             }
         });

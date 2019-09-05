@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.ams.dao.MarkShortMapper">
+    <select id="findShortByExamId" parameterType="map" resultType="com.qfedu.ams.vo.MarkShort">
+select distinct  ams.ams_exam_answer.examId,ams.ams_exam_answer.short_answer,ams.short_question.referenceanswer,ams.ams_exam.shortId,
+                 ams.ams_exam_answer.id,ams.user.uid,
+                 ams.ams_exam_answer.userId,ams.user.username,ams.user.name,
+                 ams.exam_subject.subjectName,
+                 ams.score.totalShortScore
+from ams.ams_exam_answer
+         inner join ams.user on ams.user.uid = ams.ams_exam_answer.userId
+         inner join ams.score on ams.ams_exam_answer.userId = ams.score.uid
+         inner join ams.exam_subject on ams.ams_exam_answer.subjectId = ams.exam_subject.subjectId
+         inner join ams.ams_exam on ams.ams_exam.examNum = ams.ams_exam_answer.examNum
+         inner join ams.short_question on ams.short_question.id = ams.ams_exam.shortId
+where ams.ams_exam_answer.status = 1
+    </select>
+
+    <select id="findByUserId" parameterType="map" resultType="com.qfedu.ams.vo.MarkShort">
+
+
+select ams.ams_exam_answer.short_answer,ams.exam_subject.subjectName,
+       ams.score.totalShortScore,
+       ams.exam_subject.subjectName
+from ams.ams_exam_answer
+         inner join ams.score on ams.score.uid = ams.ams_exam_answer.userId
+         inner join ams.exam_subject on ams.ams_exam_answer.subjectId = ams.exam_subject.subjectId
+where ams.ams_exam_answer.userId = #{userId} and ams.ams_exam_answer.examId = #{examId}
+
+
+    </select>
+
+    <update id="updateMarkShort" parameterType="com.qfedu.ams.vo.MarkShort">
+        update ams.ams_exam_answer,ams.score set ams.score.totalShortScore = #{totalShortScore},
+ams.ams_exam_answer.status = 0 where ams.ams_exam_answer.userId = ams.score.uid
+    </update>
+
+
+</mapper>
