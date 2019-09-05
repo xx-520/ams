@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-container" style="margin-top: 30px;">
+    <form class="layui-form" action="" lay-filter="example">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">考试科目</label>
+            <div class="layui-input-inline">
+                <select id="subjectId" name="subjectid" lay-filter="aihao">
+                    <option value="">---请选择科目---</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="starttime" class="layui-input" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="endtime" class="layui-input" id="test2" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">学生名字</label>
+            <div class="layui-input-inline">
+                <select id="userId" name="userid" lay-filter="aihao">
+                    <option value="">---请选择学生---</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">考试场次</label>
+            <div class="layui-input-inline">
+                <input type="text" name="examnum" lay-verify="title" autocomplete="off" placeholder="请输入场次"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    layui.use(['layer', 'form', 'laydate'], function () {
+        var form = layui.form
+        layer = layui.layer
+        laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#test'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#test2'
+            , type: 'datetime'
+        });
+
+
+        $.ajax({
+            type: "get",
+            url: "admin/ES/list.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value="' + this.subjectid + '">' + this.subjectname + '</option>';
+                        $("#subjectId").append($(html));
+                    });
+                    layui.form.render("select");
+                    $.ajax({
+                        type: "get",
+                        url: "admin/EC/selectName.do",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 1) {
+                                var infos = data.info;
+                                $(infos).each(function () {
+                                    var html = '<option value="' + this.uid + '"> ' + this.name + ' </option>';
+                                    $("#userId").append($(html));
+                                });
+                                layui.form.render("select");
+                                $.ajax({
+                                    type: "get",
+                                    url: "admin/EC/selectEC.do" + window.location.search, // el表达式,param el中内置对象，存储路径中提交的参数
+                                    dataType: "json",
+                                    success: function (data) {
+
+                                        if (data.code == 1) {
+                                            //表单初始赋值
+                                            form.val('example', data.info);
+                                            // $("#select_teacher").val(data.info.speakerId);
+                                            // $("#select_course").val(data.info.courseId);
+
+                                        } else {
+                                            alert(data.info);
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        form.verify({
+            title: function (value) {
+                if (value.length < 1) {
+                    return '名称至少得1个字符啊';
+                }
+            },
+            content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            $.ajax({
+                type: "post",
+                url: "admin/EC/updateEC.do" + window.location.search,
+                data: data.field,
+                dataType: "json",
+                success: function (data) {  //{code:1,info:....}
+                    if (data.code == 1) {
+                        var t = parent.layui.table;
+                        t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    } else {
+                        alert(data.data);
+                    }
+                }
+            })
+
+            // 阻止默认的提交
+            return false;
+        });
+
+        // layer.msg('Hello World');
+    });
+
+</script>
+
+</body>
+</html>

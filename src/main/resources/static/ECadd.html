@@ -10,62 +10,51 @@
 
 </head>
 <body>
-<div class="layui-container" style="margin-top: 30px;">
+<div class="layui-container" style="margin-top: 5px;">
     <form class="layui-form" action="">
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">学生名字</label>
-            <div class="layui-input-block">
-                <select id="UserId" name="userid" lay-filter="aihao">
-                    <option value="">---请选择学生---</option>
-
-                </select>
-            </div>
-        </div>
-
-        <!--        <div class="layui-form-item">-->
-        <!--            &lt;!&ndash;            <label class="layui-form-label">开始时间</label>&ndash;&gt;-->
-        <!--            &lt;!&ndash;            <div class="layui-input-block">&ndash;&gt;-->
-        <!--            &lt;!&ndash;                <input type="text" name="startTime" lay-verify="title" autocomplete="off" placeholder="具体的开始时间"&ndash;&gt;-->
-        <!--            &lt;!&ndash;                       class="layui-input">&ndash;&gt;-->
-        <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-        <!--        </div>-->
-
-        <div class="layui-form-item">
-
-            <div class="layui-inline">
-                <label class="layui-form-label">开始时间</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="starttime" class="layui-input" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
-                </div>
-            </div>
-        </div>
-
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">结束时间</label>
-            <div class="layui-input-block">
-                <input type="text" name="endtime" lay-verify="title" autocomplete="off" placeholder="具体的结束时间"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">考试场次</label>
-            <div class="layui-input-block">
-                <input type="text" name="examnum" lay-verify="title" autocomplete="off" placeholder="请输入场次"
-                       class="layui-input">
-            </div>
-        </div>
 
 
         <div class="layui-form-item">
             <label class="layui-form-label">考试科目</label>
-            <div class="layui-input-block">
+            <div class="layui-inline">
                 <select id="subjectId" name="subjectid" lay-filter="aihao">
                     <option value="">---请选择科目---</option>
                 </select>
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="starttime" class="layui-input" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="endtime" class="layui-input" id="test2" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">学生名字</label>
+            <div class="layui-inline">
+                <select id="UserId" name="userid" lay-filter="aihao">
+                    <option value="">---请选择学生---</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">考试场次</label>
+            <div class="layui-inline">
+                <input type="text" name="examnum" lay-verify="title" autocomplete="off" placeholder="请输入场次"
+                       class="layui-input">
+            </div>
+        </div>
+
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -76,16 +65,74 @@
 </div>
 
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function () {
-        var form = layui.form,
-            layer = layui.layer,
-            layedit = layui.layedit,
-            laydate = layui.laydate;
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
         //日期时间选择器
         laydate.render({
             elem: '#test'
             , type: 'datetime'
         });
+        laydate.render({
+            elem: '#test2'
+            , type: 'datetime'
+        });
+
+        // var startDate = laydate.render({
+        //     elem: '#test',
+        //     max: $('#test2').var(),
+        //     theme: 'molv',
+        //     trigger: 'click',
+        //     done: function (value, date) {
+        //         //结束时间大于开始时间
+        //         if (value != '') {
+        //             endDate.config.min.year = date.year;
+        //             endDate.config.min.month = date.month - 1;
+        //             endDate.config.min.date = date.date;
+        //         } else {
+        //             endDate.config.min.year = '';
+        //             endDate.config.min.month = '';
+        //             endDate.config.min.date = '';
+        //         }
+        //     }
+        // });
+        // var endDate = laydate.render({
+        //     elem: '#test2',
+        //     min: $('#test').var(),
+        //     theme: 'molv',
+        //     trigger: 'click',
+        //     done: function (value, date) {
+        //         //结束时间大于开始时间
+        //         if (value != '') {
+        //             endDate.config.max.year = date.year;
+        //             endDate.config.max.month = date.month - 1;
+        //             endDate.config.max.date = date.date;
+        //         } else {
+        //             endDate.config.max.year = '';
+        //             endDate.config.max.month = '';
+        //             endDate.config.max.date = '';
+        //         }
+        //     }
+        // });
+
+
+    });
+</script>
+
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
+        // //日期时间选择器
+        // laydate.render({
+        //     elem: '#test'
+        //     , type: 'datetime'
+        // });
+
+
         //创建一个编辑器
         /* var editIndex = layedit.build('LAY_demo_editor'); */
 

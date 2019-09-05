@@ -43,7 +43,7 @@ where ams.user.status = 1
 </select>
 
   <update id="deleteScore" parameterType="int">
-    update ams.user set status = 0 where ams.user.uid = #{id}
+    update ams.user set status = 0 where ams.score.id = #{id}
   </update>
 
   <update id="updateScore" parameterType="score">

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.ChoiceQuestionMapper;
 import com.qfedu.ams.entity.ChoiceQuestion;
 import com.qfedu.ams.service.ChoiceQuestionService;
+import com.qfedu.ams.utils.ListToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,21 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     private ChoiceQuestionMapper choiceQuestionMapper;
 
     @Override
-    public List<Integer> CQfindAll() {
-        List<Integer> list = choiceQuestionMapper.CQfindAll();
-        if (list == null){
-            throw new RuntimeException("题目id不存在");
-        }
+    public void recoverCQ(Integer[] ids) {
+        choiceQuestionMapper.recoverCQ(ids);
+    }
+
+    @Override
+    public String CQfindAll(Integer subjectid,Integer num) {
+        List<Integer> list = choiceQuestionMapper.CQfindAll(subjectid, num);
+        String string = ListToString.create(list);
+
+        return string;
+    }
+    @Override
+    public List<ChoiceQuestion> findRecover() {
+        List<ChoiceQuestion> list = choiceQuestionMapper.findRecover();
+
         return list;
     }
 
@@ -65,6 +76,21 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     public Map<String, Object> findByIndexAndSize(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         List<ChoiceQuestion> list = choiceQuestionMapper.findAll();
+        // 获取总记录数
+        long total = ((Page) list).getTotal();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", total);
+        map.put("data", list);
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> findByIndexAndSize2(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<ChoiceQuestion> list = choiceQuestionMapper.findRecover();
         // 获取总记录数
         long total = ((Page) list).getTotal();
         Map<String, Object> map = new HashMap<>();

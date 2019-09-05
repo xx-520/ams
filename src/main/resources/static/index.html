@@ -29,7 +29,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
-                    贤心
+                    <span id="login_name"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="layui-body">
-        <iframe name="myframe" width="100%" height="100%" frameborder="0"></iframe>
+        <iframe name="myframe" width="100%" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566034529628&di=a7249b9f2813b86c7321a70bbd54233d&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201409%2F08%2F20140908154922_Gw3h5.jpeg" height="100%" frameborder="0"></iframe>
     </div>
 
     <div class="layui-footer">
@@ -95,6 +95,19 @@
 
     });
 </script>
-
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "admin/queryLoginInfo.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    $("#login_name").html(data.info.username)
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>

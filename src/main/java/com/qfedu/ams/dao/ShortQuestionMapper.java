@@ -1,6 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ShortQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,17 @@ import java.util.Map;
  */
 public interface ShortQuestionMapper {
 
+    List<Integer> CQfindAll(@Param("subjectid") Integer subjectid, @Param("snum") Integer snum);
+
     List<ShortQuestion> findAll();
+
+    List<ShortQuestion> findRecover();
 
     int deleteByPrimaryKey(Integer id);
 
     void falseDeletes(Integer[] ids);
+
+    void recoverSQ(Integer[] ids);
 
     int insert(ShortQuestion record);
 
@@ -23,6 +30,8 @@ public interface ShortQuestionMapper {
     void update(ShortQuestion shortQuestion);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<ShortQuestion> list);
 

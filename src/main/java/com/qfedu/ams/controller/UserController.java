@@ -108,5 +108,19 @@ public class UserController {
         return jsonResult;
     }
 
+    @RequestMapping("/admin/us/RecoverpageU.do")
+    @ResponseBody
+    public Map<String, Object> RecoverpageU(Integer page, Integer limit) {
+        Map<String, Object> map = userService.findByIndexAndSize(page,limit);
+        return map;
+    }
+
+    @RequestMapping("/admin/us/recover.do")
+    @ResponseBody
+    public JsonResult recoverCQ(Integer[] ids){
+        userService.recoverU(ids);
+        return new JsonResult(1,null);
+    }
+
 
 }

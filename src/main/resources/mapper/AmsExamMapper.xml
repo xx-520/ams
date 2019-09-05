@@ -10,25 +10,78 @@
         <result column="shortId" property="shortid" jdbcType="VARCHAR"/>
         <result column="examNum" property="examnum" jdbcType="INTEGER"/>
         <result column="locks" property="locks" jdbcType="INTEGER"/>
-        <collection property="choiceQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.ChoiceQuestion"
-                    resultMap="com.qfedu.ams.dao.ChoiceQuestionMapper.BaseResultMap">
-        </collection>
-        <collection property="judgeQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.JudgeQuestion"
-                    resultMap="com.qfedu.ams.dao.JudgeQuestionMapper.JQResultMap">
-        </collection>
-        <collection property="shortQuestionslist" javaType="list" ofType="com.qfedu.ams.entity.ShortQuestion"
-                    resultMap="com.qfedu.ams.dao.ShortQuestionMapper.SQResultMap">
-        </collection>
+    </resultMap>
+
+    <resultMap id="choiceMap" type="com.qfedu.ams.entity.ChoiceQuestion">
+        <id column="id" property="id"></id>
+        <result column="score" property="score"></result>
+        <result column="question" property="question"></result>
+        <result column="choicea" property="choicea"></result>
+        <result column="choiceb" property="choiceb"></result>
+        <result column="choicec" property="choicec"></result>
+        <result column="choiced" property="choiced"></result>
+        <result column="rightanswer" property="rightanswer"></result>
+        <result column="subjectid" property="subjectid"></result>
+    </resultMap>
+    <resultMap id="judegMap" type="com.qfedu.ams.entity.JudgeQuestion">
+        <id column="id" property="id"></id>
+        <result column="score" property="score"></result>
+        <result column="question" property="question"></result>
+        <result column="judgeAnswer" property="judgeanswer"></result>
+        <result column="subjectId" property="subjectid"></result>
+    </resultMap>
+
+    <resultMap id="shortMap" type="com.qfedu.ams.entity.ShortQuestion">
+        <id column="id" property="id"></id>
+        <result column="score" property="score"></result>
+        <result column="question" property="question"></result>
+        <result column="subjectId" property="subjectid"></result>
     </resultMap>
 
     <select id="findAll" resultMap="AEResultMap">
-        select * from ams.ams_exam a, ams.choice_question c, ams.judge_question j, ams.short_question s
-        choiceId in
-        <foreach collection="list" item="list">
-            #{list.choiceid}
-        </foreach>
+         select * from ams.ams_exam where status = 1
     </select>
 
+    <update id="recoverAE" parameterType="list">
+        update ams.ams_exam
+        set status = 1
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+    
+    <select id="findRecover" resultMap="AEResultMap">
+         select * from ams.ams_exam where status = 0
+    </select>
 
+    <update id="deleteById" parameterType="int">
+    update ams.ams_exam
+    set status = 0
+    where id = #{id}
+    </update>
 
+    <insert id="add" parameterType="com.qfedu.ams.entity.AmsExam">
+        insert into ams.ams_exam (choiceId, judgeId, shortId, examNum) values (#{choiceid},#{judgeid},#{shortid},#{examnum})
+    </insert>
+
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.choice_question limit #{index},#{size}
+    </select>
+
+    <select id="findByIndexAndSize2" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.choice_question limit #{index},#{size}
+    </select>
+
+    <select id="findChoiceQuestion" parameterType="int" resultMap="choiceMap">
+        SELECT * FROM choice_question c WHERE (SELECT FIND_IN_SET(c.id,a.choiceId) from ams_exam a where a.id=#{id}) and status = 1
+    </select>
+
+    <select id="findJudegQuestion" parameterType="int" resultMap="judegMap">
+        SELECT * FROM judge_question c WHERE (SELECT FIND_IN_SET(c.id,a.judgeId) from ams_exam a where a.id=#{id}) and status = 1
+    </select>
+
+    <select id="findShortQuestion" parameterType="int" resultMap="shortMap">
+        SELECT * FROM short_question c WHERE (SELECT FIND_IN_SET(c.id,a.shortId) from ams_exam a where a.id=#{id}) and status = 1
+    </select>
 </mapper>

@@ -13,12 +13,36 @@
         ></collection>
     </resultMap>
 
+    <select id="findByIndexAndSize2" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from short_question limit #{index},#{size}
+    </select>
+
+    <select id="findRecover" resultMap="SQResultMap">
+    select id, score, question, referenceAnswer, a.subjectName
+    from short_question c
+    inner join exam_subject a
+    where status = 0 and a.subjectId = c.subjectId
+  </select>
+
+    <update id="recoverSQ" parameterType="list">
+        update ams.short_question
+        set status = 1
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
     <select id="findAll" resultMap="SQResultMap">
     select id, score, question, referenceAnswer, a.subjectName
     from short_question c
     inner join exam_subject a
     where status = 1 and a.subjectId = c.subjectId
   </select>
+
+    <select id="CQfindAll" resultType="int" parameterType="list">
+        select id from ams.short_question where subjectId = #{subjectid} order by rand() limit #{snum};
+    </select>
 
     <select id="selectByPrimaryKey" resultMap="SQResultMap" parameterType="int">
     select * from ams.short_question jq
@@ -50,6 +74,7 @@
     <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
         select * from short_question limit #{index},#{size}
     </select>
+
 
     <update id="update" parameterType="com.qfedu.ams.entity.ShortQuestion">
         update ams.short_question set score = #{score}, question = #{question}, referenceAnswer = #{referenceanswer}, subjectId = #{subjectid} where id = #{id}

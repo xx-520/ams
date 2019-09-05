@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,12 +44,22 @@ public class ExamConfigController {
         return jsonResult;
     }
 
-    @RequestMapping("/admin/EC/addEC.do")
+       @RequestMapping("/admin/EC/addEC.do")
     @ResponseBody
     public JsonResult addEC(ExamConfig examConfig) {
-        examConfigService.insert( examConfig );
-        JsonResult jsonResult = new JsonResult( 1, null );
-        return jsonResult;
+        Date starttime = examConfig.getStarttime();
+        Date endtime = examConfig.getEndtime();
+
+        if (endtime.compareTo( starttime ) > 0 ) {
+            examConfigService.insert( examConfig );
+            JsonResult jsonResult = new JsonResult( 1, null );
+            return jsonResult;
+        } else {
+            JsonResult jsonResult = new JsonResult(0,"考试结束时间有误");
+            return jsonResult;
+        }
+
+
     }
 
 

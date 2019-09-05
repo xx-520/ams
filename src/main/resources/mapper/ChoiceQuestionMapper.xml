@@ -17,8 +17,29 @@
         ></collection>
     </resultMap>
 
-    <select id="CQfindAll" resultType="int">
-        select id from ams.choice_question where subjectId = 1 order by rand()  limit 5;
+
+    <select id="findByIndexAndSize2" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.choice_question limit #{index},#{size}
+    </select>
+
+    <select id="findRecover" resultMap="BaseResultMap">
+    select id, score, question, choiceA, choiceB, choiceC, choiceD, rightAnswer, a.subjectName
+    from choice_question c
+    inner join ams.exam_subject a
+    where status = 0 and a.subjectId = c.subjectId
+  </select>
+
+    <update id="recoverCQ" parameterType="list">
+        update choice_question
+        set status = 1
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="CQfindAll" resultType="int" parameterType="list">
+        select id from ams.choice_question where subjectId = #{subjectid} order by rand() limit #{num};
     </select>
 
     <select id="findAll" resultMap="BaseResultMap">

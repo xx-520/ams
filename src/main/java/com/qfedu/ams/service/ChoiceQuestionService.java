@@ -7,7 +7,11 @@ import java.util.Map;
 
 public interface ChoiceQuestionService {
 
-    List<Integer> CQfindAll();
+    void recoverCQ(Integer[] ids);
+
+    String CQfindAll(Integer subjectid,Integer num);
+
+    List<ChoiceQuestion> findRecover();
 
     List<ChoiceQuestion> findAll();
 
@@ -22,6 +26,8 @@ public interface ChoiceQuestionService {
     int update(ChoiceQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<ChoiceQuestion> list);
 }

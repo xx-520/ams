@@ -13,7 +13,9 @@ public class User {
 
     private String email;
 
+    private String password;
 
+    private String site;
 
     private Integer status;
 
@@ -73,6 +75,19 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
 }
