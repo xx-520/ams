@@ -1,0 +1,167 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>学生成绩</title>
+    <style type="text/css">
+        h3 {
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+<body>
+<div>
+    <h3>学生成绩</h3>
+    <form class="layui-form" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">考试科目</label>
+            <div class="layui-input-block">
+                <input type="text" name="subjectName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">考生提交的答案</label>
+            <div class="layui-input-block">
+                <input type="text" name="shortAnswer" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">参考答案</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input type="text" name="referenceanswer" lay-verify="required" autocomplete="off" class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">得分</label>
+            <div class="layui-input-block">
+                <input type="text" name="totalShortScore" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">学生号</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input type="text" name="uid" lay-verify="required" autocomplete="off" class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer
+            , form = layui.form;
+
+        $.ajax({
+            type: "get",
+            url: "/ams/MarkShort/query.do"+ window.location.search, // el表达式,param el中内置对象，存储路径中提交的参数
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    form.val('example', data.info)
+                } else if (data.code == 0) {
+                    alert(data.info);
+                }
+            }
+        })
+
+        form.on('submit(demo1)', function (data) {
+
+            $.ajax({
+                type: "post",
+                url: "/ams/MarkShort/update.do" + window.location.search,
+                data: data.field,
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        var t = parent.layui.table;
+                        t.reload('test');// 重新加载页面,test 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    } else {
+                        alert(data.info);
+                    }
+                }
+            })
+
+            return false;
+        });
+    });
+
+
+
+    // jQuery.validator.addMethod("regex", //addMethod第1个参数:方法名称
+    //     function(value, element, params) { //addMethod第2个参数:验证方法，参数（被验证元素的值，被验证元素，参数）
+    //         var exp = new RegExp(params); //实例化正则对象，参数为传入的正则表达式
+    //         return exp.test(value); //测试是否匹配
+    //     }, "格式错误"); //addMethod第3个参数:默认错误信息
+
+    // $("form").validate({
+    //     // submitHandler: function() {
+    //     //
+    //     //     $.ajax({
+    //     //         type: "post",
+    //     //         url: "/ams/MarkShort/update.do" + window.location.search,
+    //     //         data: $("form").serialize(),
+    //     //         dataType: "json",
+    //     //         success: function(res) {
+    //     //
+    //     //             if (res.code == 1) {
+    //     //                 layer.open({ content: res.info, style: 'background-color:rgb(20,33,42); color:#fff; border:none;', time: 2 });
+    //     //                 window.location.reload()
+    //     //             } else {
+    //     //                 layer.open({ content: res.info, style: 'background-color:rgb(20,33,42); color:#fff; border:none;', time: 2 });
+    //     //             }
+    //     //         },
+    //     //         error: function() {
+    //     //             layer.open({ content: "请求异常！", style: 'background-color:rgb(20,33,42); color:#fff; border:none;', time: 2 });
+    //     //         }
+    //     //     });
+    //     // },
+    //
+    //     // rules: {
+    //     //     eTid: {
+    //     //         required: true,
+    //     //         regex: "^\\d+$"
+    //     //     },
+    //     //     // uid: {
+    //     //     //     required: true,
+    //     //     //     regex: "^\\d+$"
+    //     //     // },
+    //     //     // score: {
+    //     //     //     required: true,
+    //     //     //     regex: "^([1-4]\\d)|50|\\d$"
+    //     //     // }
+    //     // },
+    //
+    //     // messages: {
+    //     //     eTid: {
+    //     //         required: "缺少eTid！",
+    //     //         regex: "eTid格式错误！"
+    //     //     },
+    //     //     // uid: {
+    //     //     //     required: "缺少uid！",
+    //     //     //     regex: "uid格式错误！"
+    //     //     // },
+    //     //     // score: {
+    //     //     //     required: "缺少score！",
+    //     //     //     regex: "score格式错误！"
+    //     //     // }
+    //     // }
+    //
+    // });
+
+
+</script>
+</body>
+</html>
