@@ -29,7 +29,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
-                    贤心
+                    <span id="login_name"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -95,6 +95,19 @@
 
     });
 </script>
-
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "admin/queryLoginInfo.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    $("#login_name").html(data.info.username)
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>

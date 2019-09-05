@@ -122,4 +122,13 @@ public class AdminController {
         }
         return result;
     }
+
+    @RequestMapping("/queryLoginInfo.do")
+    @ResponseBody
+    public JsonResult findLoginInfo() {
+        Subject subject = SecurityUtils.getSubject();
+        Admin admin = (Admin) subject.getSession().getAttribute("admin");
+        JsonResult result = new JsonResult(1, admin);
+        return result;
+    }
 }
