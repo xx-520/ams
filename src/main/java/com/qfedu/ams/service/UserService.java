@@ -63,6 +63,9 @@ public interface UserService {
     public int deleteUserById(Integer uid);
 
 
+   public User login(String username,String password);
+
+
 
 }
 

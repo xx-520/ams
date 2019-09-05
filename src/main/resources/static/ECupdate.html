@@ -142,7 +142,7 @@
         form.on('submit(demo1)', function (data) {
             $.ajax({
                 type: "post",
-                url: "updateVideo.do" + window.location.search,
+                url: "admin/EC/updateEC.do" + window.location.search,
                 data: data.field,
                 dataType: "json",
                 success: function (data) {  //{code:1,info:....}

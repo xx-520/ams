@@ -44,7 +44,7 @@ public class ExamConfigController {
         return jsonResult;
     }
 
-    @RequestMapping("/admin/EC/addEC.do")
+       @RequestMapping("/admin/EC/addEC.do")
     @ResponseBody
     public JsonResult addEC(ExamConfig examConfig) {
         Date starttime = examConfig.getStarttime();

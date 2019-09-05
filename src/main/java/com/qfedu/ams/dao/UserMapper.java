@@ -30,5 +30,7 @@ public interface UserMapper {
     //修改指定ID的考生
     int updateByPrimaryKey(User record);
 
+    public User login(String username);
+
 
 }

@@ -15,6 +15,11 @@
     select * from user where uid = #{uid} and status = 1
   </select>
 
+    <select id="login" parameterType="string" resultType="user">
+        select * from user where username = #{username}
+    </select>
+
+
     <select id="selectUserList" resultMap="BaseResultMap">
         select * from user
         <where>

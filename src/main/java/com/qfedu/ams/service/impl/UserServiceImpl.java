@@ -49,4 +49,16 @@ public class UserServiceImpl implements UserService {
     public int deleteUserById(Integer uid) {
         return userMapper.deleteByPrimaryKey(uid);
     }
+
+    @Override
+    public User login(String username, String password) {
+        User user = userMapper.login(username);
+        if ( user == null ) {
+            throw new RuntimeException( "账号错误" );
+        }
+        if (!user.getPassword().equals( password )) {
+            throw new RuntimeException( "密码错误" );
+        }
+        return user;
+    }
 }
