@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.ChoiceQuestionMapper;
 import com.qfedu.ams.entity.ChoiceQuestion;
 import com.qfedu.ams.service.ChoiceQuestionService;
+import com.qfedu.ams.utils.ListToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,11 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     private ChoiceQuestionMapper choiceQuestionMapper;
 
     @Override
-    public List<Integer> CQfindAll() {
-        List<Integer> list = choiceQuestionMapper.CQfindAll();
-        if (list == null){
-            throw new RuntimeException("题目id不存在");
-        }
-        return list;
+    public String CQfindAll(Integer subjectid,Integer num) {
+        List<Integer> list = choiceQuestionMapper.CQfindAll(subjectid, num);
+        String string = ListToString.create(list);
+
+        return string;
     }
 
     @Override

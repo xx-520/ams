@@ -1,6 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ChoiceQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public interface ChoiceQuestionMapper {
 
-    List<Integer> CQfindAll();
+    List<Integer> CQfindAll(@Param("subjectid") Integer subjectid,@Param("num") Integer num);
 
     List<ChoiceQuestion> findAll();
 

@@ -17,8 +17,8 @@
         ></collection>
     </resultMap>
 
-    <select id="CQfindAll" resultType="int">
-        select id from ams.choice_question where subjectId = 1 order by rand()  limit 5;
+    <select id="CQfindAll" resultType="int" parameterType="list">
+        select id from ams.choice_question where subjectId = #{subjectid} order by rand() limit #{num};
     </select>
 
     <select id="findAll" resultMap="BaseResultMap">

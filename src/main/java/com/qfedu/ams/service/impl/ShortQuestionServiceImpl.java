@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.ShortQuestionMapper;
 import com.qfedu.ams.entity.ShortQuestion;
 import com.qfedu.ams.service.ShortQuestionSevice;
+import com.qfedu.ams.utils.ListToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,14 @@ public class ShortQuestionServiceImpl implements ShortQuestionSevice {
 
     @Autowired(required = false)
     private ShortQuestionMapper shortQuestionMapper;
+
+    @Override
+    public String CQfindAll(Integer subjectid, Integer snum) {
+        List<Integer> list = shortQuestionMapper.CQfindAll(subjectid, snum);
+        String string = ListToString.create(list);
+
+        return string;
+    }
 
     @Override
     public List<ShortQuestion> findAll() {

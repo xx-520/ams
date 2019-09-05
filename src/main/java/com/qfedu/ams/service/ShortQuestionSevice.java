@@ -9,6 +9,8 @@ import java.util.Map;
 
 public interface ShortQuestionSevice {
 
+    String CQfindAll(Integer subjectid,Integer snum);
+
     List<ShortQuestion> findAll();
 
     int falseDelete(Integer id);

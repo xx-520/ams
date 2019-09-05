@@ -4,8 +4,11 @@ import com.qfedu.ams.entity.AmsExam;
 import com.qfedu.ams.entity.ChoiceQuestion;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AmsExamService {
+
+    String CQfindAll(Integer subjectid, Integer num);
 
     List<AmsExam> findAll();
 
@@ -13,7 +16,5 @@ public interface AmsExamService {
 
     int add(AmsExam record);
 
-    AmsExam findById(Integer id);
-
-    void update(AmsExam amsExam);
+    Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 }

@@ -1,6 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.ShortQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Map;
     简答题dao层
  */
 public interface ShortQuestionMapper {
+
+    List<Integer> CQfindAll(@Param("subjectid") Integer subjectid, @Param("snum") Integer snum);
 
     List<ShortQuestion> findAll();
 

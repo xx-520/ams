@@ -22,6 +22,10 @@
     where status = 1 and a.subjectId = c.subjectId
   </select>
 
+    <select id="CQfindAll" resultType="int" parameterType="list">
+        select id from ams.judge_question where subjectId = #{subjectid} order by rand() limit #{jnum};
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="JQResultMap" parameterType="int">
     select * from ams.judge_question jq
     inner join exam_subject es

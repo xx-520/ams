@@ -1,6 +1,7 @@
 package com.qfedu.ams.dao;
 
 import com.qfedu.ams.entity.JudgeQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Map;
  * 判断题dao层
  */
 public interface JudgeQuestionMapper {
+
+    List<Integer> CQfindAll(@Param("subjectid") Integer subjectid, @Param("jnum") Integer jnum);
 
     List<JudgeQuestion> findAll();
 

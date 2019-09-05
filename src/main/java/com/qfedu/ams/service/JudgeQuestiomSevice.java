@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface JudgeQuestiomSevice {
 
+    String CQfindAll(Integer subjectid,Integer jnum);
+
     List<JudgeQuestion> findAll();
 
     int falseDelete(Integer id);

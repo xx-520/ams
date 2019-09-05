@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface ChoiceQuestionService {
 
-    List<Integer> CQfindAll();
+    String CQfindAll(Integer subjectid,Integer num);
 
     List<ChoiceQuestion> findAll();
 

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.JudgeQuestionMapper;
 import com.qfedu.ams.entity.JudgeQuestion;
 import com.qfedu.ams.service.JudgeQuestiomSevice;
+import com.qfedu.ams.utils.ListToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,14 @@ public class JudgeQuestiomSeviceImpl implements JudgeQuestiomSevice {
 
     @Autowired(required = false)
     private JudgeQuestionMapper judgeQuestionMapper;
+
+    @Override
+    public String CQfindAll(Integer subjectid, Integer jnum) {
+        List<Integer> list = judgeQuestionMapper.CQfindAll(subjectid, jnum);
+        String string = ListToString.create(list);
+
+        return string;
+    }
 
     @Override
     public List<JudgeQuestion> findAll() {

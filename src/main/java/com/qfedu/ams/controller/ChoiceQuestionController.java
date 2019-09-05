@@ -17,13 +17,6 @@ public class ChoiceQuestionController {
     @Autowired
     private ChoiceQuestionService choiceQuestionService;
 
-    @RequestMapping("/admin/CQ/CQlist.do")
-    @ResponseBody
-    public JsonResult list(){
-        List<Integer> list = choiceQuestionService.CQfindAll();
-        return new JsonResult(1,list);
-    }
-
     @RequestMapping("/admin/CQ/list.do")
     @ResponseBody
     public JsonResult listCQ(){
