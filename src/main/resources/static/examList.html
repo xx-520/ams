@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+    <link href="css/exam/lib/main.css" rel="stylesheet" type="text/css">
+    <link href="css/exam/lib/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="css/exam/lib/test.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .hasBeenAnswer {
+            background: #5d9cec;
+            color: #fff;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="app" class="main">
+    <!--nr start-->
+    <div class="test_main">
+        <div class="nr_left">
+            <div class="test">
+                <div>
+                    <div class="test_content">
+                        <div class="test_content_title">
+                            <h2>单选题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit">{{choiceList.length}}</i><span>题</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="test_content_nr">
+                        <ul>
+
+                            <li id="qu_0_0" v-for="(choice,index) in choiceList">
+                                <div class="test_content_nr_tt">
+                                    <i>{{index+1>9?index+1:"0"+(index+1)}}</i><span>({{choice.score}}分)</span><font>{{choice.question}}</font><b
+                                        class="icon iconfont">&#xe881;</b>
+                                </div>
+
+                                <div class="test_content_nr_main">
+                                    <ul>
+
+                                        <li class="option">
+
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['answer'+index]"
+                                                   id="0_answer_1_option_1">
+
+
+                                            <label for="0_answer_1_option_1">
+                                                A.
+                                                <p class="ue" style="display: inline;">{{choice.choicea}}</p>
+                                            </label>
+                                        </li>
+
+                                        <li class="option">
+
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['answer'+index]"
+                                                   id="0_answer_1_option_2">
+
+
+                                            <label for="0_answer_1_option_2">
+                                                B.
+                                                <p class="ue" style="display: inline;">{{choice.choiceb}}</p>
+                                            </label>
+                                        </li>
+
+                                        <li class="option">
+
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['answer'+index]"
+                                                   id="0_answer_1_option_3">
+
+
+                                            <label for="0_answer_1_option_3">
+                                                C.
+                                                <p class="ue" style="display: inline;">{{choice.choicec}}</p>
+                                            </label>
+                                        </li>
+
+                                        <li class="option">
+
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['answer'+index]"
+                                                   id="0_answer_1_option_4">
+
+
+                                            <label for="0_answer_1_option_4">
+                                                D.
+                                                <p class="ue" style="display: inline;">{{choice.choiced}}</p>
+                                            </label>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--判断题-->
+                <div>
+                    <div class="test_content">
+                        <div class="test_content_title">
+                            <h2>判断题</h2>
+                            <p>
+                                <span>共</span><i class="content_lit">{{judgeList.length}}</i><span>题</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="test_content_nr">
+                        <ul>
+                            <li id="qu_0_1" v-for="(judge,index) in judgeList">
+                                <div class="test_content_nr_tt">
+                                    <i>{{index+1>9?index+1:"0"+(index+1)}}</i><span>({{judge.score}}分)</span><font>{{judge.question}}</font><b class="icon iconfont">&#xe881;</b>
+                                </div>
+                                <div class="test_content_nr_main">
+                                    <ul>
+                                        <li class="option">
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['judge'+index]" id="0_answer_2_option_1">
+                                            <label for="0_answer_2_option_1">
+                                                <p class="ue" style="display: inline;">正确</p>
+                                            </label>
+                                        </li>
+                                        <li class="option">
+                                            <input type="radio" class="radioOrCheck" v-bind:name="['judge'+index]" id="0_answer_2_option_2">
+                                            <label for="0_answer_2_option_2">
+                                                <p class="ue" style="display: inline;">错误</p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--简答题-->
+                <div class="test_content">
+                    <div class="test_content_title">
+                        <h2>简答题</h2>
+                        <p>
+                            <span>共</span><i class="content_lit">{{shortList.length}}</i><span>题</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="test_content_nr">
+                    <ul>
+                        <li id="qu_0_2" v-for="(short,index) in shortList">
+                            <div class="test_content_nr_tt">
+                                <i>{{index+1>9?index+1:"0"+(index+1)}}</i><span>({{short.score}}分)</span>
+                                <font>{{short.question}}</font><b class="icon iconfont">&#xe881;</b>
+                            </div>
+                            <div class="test_content_nr_main">
+                                <ul>
+                                    <li class="option">
+                                        <div class="layui-input-block">
+                                            <textarea placeholder="请输入内容" class="layui-textarea" rows="4" cols="106"></textarea>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--nr end-->
+    <div class="foot"></div>
+</div>
+
+<!--<script src="css/exam/lib/jquery-1.11.3.min.js"></script>
+<script src="css/exam/lib/jquery.easy-pie-chart.js"></script>
+&lt;!&ndash;时间js&ndash;&gt;
+<script src="css/exam/time/jquery.countdown.js"></script>-->
+<script src="js/vue.min.js"></script>
+<script src="js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            choiceList: {},
+            judgeList: {},
+            shortList: {},
+        },
+        methods: {
+            loadData: function () {
+                //为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫_this的变量。
+                var _this = this;
+                $.ajax({
+                    type: "get",
+                    url: "admin/exam/queryChoiceQuestion.do" + window.location.search,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.code == 1) {
+                            _this.choiceList = data.info;
+                        }
+                    }
+                });
+
+            },
+            loadData2: function () {
+                var _this = this;
+                $.ajax({
+                    type: "get",
+                    url: "admin/exam/queryJudgeQuestion.do" + window.location.search,
+                    dataType: "json",
+                    success:function (data) {
+                        if (data.code == 1) {
+                            _this.judgeList = data.info;
+                        }
+                    }
+                })
+            },
+            loadData3: function () {
+                var _this = this;
+                $.ajax({
+                    type: "get",
+                    url: "admin/exam/queryShortQuestion.do" + window.location.search,
+                    dataType: "json",
+                    success:function (data) {
+                        if (data.code == 1) {
+                            _this.shortList = data.info;
+                        }
+                    }
+                })
+            }
+
+        },
+        created: function () {
+            this.loadData();
+            this.loadData2();
+            this.loadData3();
+        }
+    })
+</script>
+
+</body>
+
+</html>

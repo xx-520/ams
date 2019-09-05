@@ -54,13 +54,13 @@
 
             } //开启分页
             ,cols: [[ //表头
-                ,{field: 'id', title: '试卷编号', align:"center", width:100, sort: true}
-                ,{field: 'choiceid', title: '选择题编号', align:"center", width:400, sort: true}
-                ,{field: 'judgeid', title: '判断题编号', align:"center", width:400, sort: true}
-                ,{field: 'shortid', title: '简答题答案', align:"center", width:400, sort: true}
-                ,{field: 'examnum', title: '考试场次', align:"center", width:150, sort: true}
+                {field: 'id', title: '试卷编号', align:"center", width:120, sort: true}
+                ,{field: 'choiceid', title: '选择题编号', align:"center", width:200, sort: true}
+                ,{field: 'judgeid', title: '判断题编号', align:"center", width:250, sort: true}
+                ,{field: 'shortid', title: '简答题答案', align:"center", width:250, sort: true}
+                ,{field: 'examnum', title: '考试场次', align:"center", width:130, sort: true}
 
-                ,{fixed: 'right', width: 180, align: 'center', toolbar: '#barDemo'}
+                ,{fixed: 'right', title: '操作',width: 180, align: 'center', toolbar: '#barDemo'}
             ]]
         });
 
@@ -93,8 +93,8 @@
                 layer.open({
                     type: 2 //此处以iframe举例
                     , title: '试卷详情'
-                    , area: ['800px', '600px']
-                    , content: 'JQupdate.html?id=' + data.id
+                    , area: ['830px', '550px']
+                    , content: 'examList.html?id=' + data.id
                 })
             }
         });

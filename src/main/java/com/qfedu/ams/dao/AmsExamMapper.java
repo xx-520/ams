@@ -3,6 +3,8 @@ package com.qfedu.ams.dao;
 import com.qfedu.ams.entity.AmsExam;
 import com.qfedu.ams.entity.ChoiceQuestion;
 import org.apache.ibatis.annotations.Param;
+import com.qfedu.ams.entity.JudgeQuestion;
+import com.qfedu.ams.entity.ShortQuestion;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +26,9 @@ public interface AmsExamMapper {
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
+    public List<ChoiceQuestion> findChoiceQuestion(Integer id);
+
+    public List<JudgeQuestion> findJudegQuestion(Integer id);
+
+    public List<ShortQuestion> findShortQuestion(Integer id);
 }

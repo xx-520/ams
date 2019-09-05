@@ -3,6 +3,8 @@ package com.qfedu.ams.controller;
 import com.qfedu.ams.common.JsonResult;
 import com.qfedu.ams.entity.AmsExam;
 import com.qfedu.ams.entity.ChoiceQuestion;
+import com.qfedu.ams.entity.JudgeQuestion;
+import com.qfedu.ams.entity.ShortQuestion;
 import com.qfedu.ams.service.AmsExamService;
 import com.qfedu.ams.service.ChoiceQuestionService;
 import com.qfedu.ams.service.JudgeQuestiomSevice;
@@ -72,5 +74,29 @@ public class AmsExamController {
         return map;
     }
 
+
+    @RequestMapping("/admin/exam/queryChoiceQuestion.do")
+    @ResponseBody
+    public JsonResult findChoiceQuestion(Integer id) {
+        List<ChoiceQuestion> list = amsExamService.findChoiceQuestion(id);
+        JsonResult result = new JsonResult(1, list);
+        return result;
+    }
+
+    @RequestMapping("/admin/exam/queryJudgeQuestion.do")
+    @ResponseBody
+    public JsonResult findJudgeQuestion(Integer id) {
+        List<JudgeQuestion> list = amsExamService.findJudegQuestion(id);
+        JsonResult result = new JsonResult(1, list);
+        return result;
+    }
+
+    @RequestMapping("/admin/exam/queryShortQuestion.do")
+    @ResponseBody
+    public JsonResult findShortQuestion(Integer id) {
+        List<ShortQuestion> shortQuestion = amsExamService.findShortQuestion(id);
+        JsonResult result = new JsonResult(1, shortQuestion);
+        return result;
+    }
 
 }

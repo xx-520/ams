@@ -4,6 +4,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qfedu.ams.dao.AmsExamMapper;
 import com.qfedu.ams.entity.AmsExam;
+import com.qfedu.ams.entity.ChoiceQuestion;
+import com.qfedu.ams.entity.JudgeQuestion;
+import com.qfedu.ams.entity.ShortQuestion;
 import com.qfedu.ams.service.AmsExamService;
 import com.qfedu.ams.utils.ListToString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +67,32 @@ public class AmsExamServiceImpl implements AmsExamService {
         return map;
     }
 
+    @Override
+    public AmsExam findById(Integer id) {
+        return null;
+    }
 
+    @Override
+    public void update(AmsExam amsExam) {
+
+    }
+
+
+    @Override
+    public List<ChoiceQuestion> findChoiceQuestion(Integer id) {
+        List<ChoiceQuestion> list = amsExamMapper.findChoiceQuestion(id);
+        return list;
+    }
+
+    @Override
+    public List<JudgeQuestion> findJudegQuestion(Integer id) {
+        List<JudgeQuestion> judegQuestion = amsExamMapper.findJudegQuestion(id);
+        return judegQuestion;
+    }
+
+    @Override
+    public List<ShortQuestion> findShortQuestion(Integer id) {
+        List<ShortQuestion> shortQuestion = amsExamMapper.findShortQuestion(id);
+        return shortQuestion;
+    }
 }
