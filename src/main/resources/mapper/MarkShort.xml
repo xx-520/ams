@@ -33,8 +33,8 @@ where ams.ams_exam_answer.userId = #{userId} and ams.ams_exam_answer.examId = #{
     </select>
 
     <update id="updateMarkShort" parameterType="com.qfedu.ams.vo.MarkShort">
-        update ams.ams_exam_answer,ams.score set ams.score.totalShortScore = #{totalShortScore},
-ams.ams_exam_answer.status = 0 where ams.ams_exam_answer.userId = ams.score.uid
+update ams.ams_exam_answer,ams.score set ams.score.totalShortScore = #{totalShortScore},
+ams.ams_exam_answer.status = 0 where ams.ams_exam_answer.userId = ams.score.uid and ams.ams_exam_answer.userId = #{userId}
     </update>
 
 
