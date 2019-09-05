@@ -42,7 +42,7 @@ public class TokenFilter implements Filter{
             if(token != null){
                 // 从redis中取值
                 String name = redisTemplate.opsForValue().get(token);
-                String token2 = MD5Utils.md5(name + "haha");
+                String token2 = MD5Utils.md5(name + "ams");
                 if (token != null && token.equals(token2)) {// 合法用户
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {

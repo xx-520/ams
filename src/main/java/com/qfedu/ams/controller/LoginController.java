@@ -30,7 +30,7 @@ public class LoginController {
         Map<String, Object> map = new HashMap<>();
 
         User login = userService.login( username, password );
-        String token = MD5Utils.md5( login.getUsername() + "登录成功" );
+        String token = MD5Utils.md5( login.getUsername() + "ams" );
         map.put( "token", token );
         map.put( "code", 1 );
 
