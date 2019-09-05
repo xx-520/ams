@@ -3,10 +3,13 @@ package com.qfedu.ams.service;
 import com.qfedu.ams.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
+    public void recoverU(Integer[] ids);
 
+    public List<User> findRecover();
     /**
      * 【考生信息的管理】Service接口
      *
@@ -29,6 +32,8 @@ public interface UserService {
      * @return
      */
     public List<User> selectUserList(User user,Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
     /**
      * 新增考生

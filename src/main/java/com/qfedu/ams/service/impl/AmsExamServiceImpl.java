@@ -43,8 +43,20 @@ public class AmsExamServiceImpl implements AmsExamService {
     }
 
     @Override
+    public List<AmsExam> findRecover() {
+        List<AmsExam> list = amsExamMapper.findAll();
+
+        return list;
+    }
+
+    @Override
     public int deleteById(Integer id) {
         return amsExamMapper.deleteById(id);
+    }
+
+    @Override
+    public void recoverAE(Integer[] ids) {
+        amsExamMapper.recoverAE(ids);
     }
 
     @Override
@@ -68,15 +80,19 @@ public class AmsExamServiceImpl implements AmsExamService {
     }
 
     @Override
-    public AmsExam findById(Integer id) {
-        return null;
+    public Map<String, Object> findByIndexAndSize2(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<AmsExam> list = amsExamMapper.findRecover();
+        // 获取总记录数
+        long total = ((Page) list).getTotal();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", total);
+        map.put("data", list);
+
+        return map;
     }
-
-    @Override
-    public void update(AmsExam amsExam) {
-
-    }
-
 
     @Override
     public List<ChoiceQuestion> findChoiceQuestion(Integer id) {

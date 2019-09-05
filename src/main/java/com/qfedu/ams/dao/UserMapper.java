@@ -3,6 +3,7 @@ package com.qfedu.ams.dao;
 import com.qfedu.ams.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 //考生表
 public interface UserMapper {
@@ -11,6 +12,8 @@ public interface UserMapper {
 
     //批量删除考生
     public void deleteUserByIds(Integer[] ids);
+
+    public void recoverU(Integer[] ids);
 
     //添加考生
     int insert(User record);
@@ -24,6 +27,8 @@ public interface UserMapper {
     //查询所有的考生
     public List<User> selectUserList(User users);
 
+    public List<User> findRecover();
+
     //动态修改
 //    int updateByPrimaryKeySelective(User record);
 
@@ -31,6 +36,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     public User login(String username);
+
+    Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
 
 }

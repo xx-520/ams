@@ -20,6 +20,14 @@
     </select>
 
 
+    <select id="findByIndexAndSize" parameterType="map" resultType="com.qfedu.ams.entity.User">
+        select * from ams.user limit #{index},#{size}
+    </select>
+
+    <select id="findRecover" resultMap="BaseResultMap">
+        select * from user where status = 0
+    </select>
+
     <select id="selectUserList" resultMap="BaseResultMap">
         select * from user
         <where>
@@ -42,6 +50,14 @@
 
     <update id="deleteUserByIds" parameterType="map">
         update user set status = 0 where uid in
+        <foreach collection="array" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+
+    </update>
+
+    <update id="recoverU" parameterType="map">
+        update user set status = 1 where uid in
         <foreach collection="array" item="ids" open="(" separator="," close=")">
             #{ids}
         </foreach>

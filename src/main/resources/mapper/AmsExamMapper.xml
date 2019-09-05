@@ -37,9 +37,22 @@
         <result column="question" property="question"></result>
         <result column="subjectId" property="subjectid"></result>
     </resultMap>
-    
+
     <select id="findAll" resultMap="AEResultMap">
          select * from ams.ams_exam where status = 1
+    </select>
+
+    <update id="recoverAE" parameterType="list">
+        update ams.ams_exam
+        set status = 1
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+    
+    <select id="findRecover" resultMap="AEResultMap">
+         select * from ams.ams_exam where status = 0
     </select>
 
     <update id="deleteById" parameterType="int">
@@ -56,7 +69,9 @@
         select * from ams.choice_question limit #{index},#{size}
     </select>
 
-
+    <select id="findByIndexAndSize2" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.choice_question limit #{index},#{size}
+    </select>
 
     <select id="findChoiceQuestion" parameterType="int" resultMap="choiceMap">
         SELECT * FROM choice_question c WHERE (SELECT FIND_IN_SET(c.id,a.choiceId) from ams_exam a where a.id=#{id}) and status = 1

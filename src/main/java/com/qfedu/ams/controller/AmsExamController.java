@@ -74,6 +74,19 @@ public class AmsExamController {
         return map;
     }
 
+    @RequestMapping("/admin/AE/RecoverpageAE.do")
+    @ResponseBody
+    public Map<String, Object> RecoverpageAE(Integer page, Integer limit) {
+        Map<String, Object> map = amsExamService.findByIndexAndSize2(page, limit);
+        return map;
+    }
+
+    @RequestMapping("/admin/AE/recover.do")
+    @ResponseBody
+    public JsonResult recoverCQ(Integer[] ids){
+        amsExamService.recoverAE(ids);
+        return new JsonResult(1,null);
+    }
 
     @RequestMapping("/admin/exam/queryChoiceQuestion.do")
     @ResponseBody

@@ -20,11 +20,17 @@ public interface AmsExamMapper {
 
     List<AmsExam> findAll();
 
+    List<AmsExam> findRecover();
+
     int deleteById(Integer id);
+
+    void recoverAE(Integer[] ids);
 
     int add(AmsExam record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     public List<ChoiceQuestion> findChoiceQuestion(Integer id);
 
