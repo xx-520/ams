@@ -24,11 +24,25 @@ public class JudegQuestionController {
     @Autowired
     private JudgeQuestiomSevice judgeQuestiomSevice;
 
+    @RequestMapping("/admin/JQ/recover.do")
+    @ResponseBody
+    public JsonResult recoverJQ(Integer[] ids){
+        judgeQuestiomSevice.recoverJQ(ids);
+        return new JsonResult(1,null);
+    }
+
     @RequestMapping("/admin/JQ/list.do")
     @ResponseBody
     public JsonResult listCQ(){
         List<JudgeQuestion> list = judgeQuestiomSevice.findAll();
         return new JsonResult(1,list);
+    }
+
+    @RequestMapping("/admin/JQ/RecoverpageJQ.do")
+    @ResponseBody
+    public Map<String ,Object> RecoverpageJQ(Integer page, Integer limit){
+        Map<String ,Object> map = judgeQuestiomSevice.findByIndexAndSize2(page,limit);
+        return map;
     }
 
     @RequestMapping("/admin/JQ/page.do")

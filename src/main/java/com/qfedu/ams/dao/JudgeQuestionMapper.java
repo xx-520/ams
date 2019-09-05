@@ -15,9 +15,13 @@ public interface JudgeQuestionMapper {
 
     List<JudgeQuestion> findAll();
 
+    List<JudgeQuestion> findRecover();
+
     int falseDelete(Integer id);
 
     void falseDeletes(Integer[] ids);
+
+    void recoverJQ(Integer[] ids);
 
     int insert(JudgeQuestion record);
 
@@ -26,6 +30,8 @@ public interface JudgeQuestionMapper {
     void update(JudgeQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<JudgeQuestion> list);
 

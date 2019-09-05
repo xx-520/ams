@@ -9,7 +9,11 @@ import java.util.Map;
 
 public interface ShortQuestionSevice {
 
+    void recoverSQ(Integer[] ids);
+
     String CQfindAll(Integer subjectid,Integer snum);
+
+    List<ShortQuestion> findRecover();
 
     List<ShortQuestion> findAll();
 
@@ -24,6 +28,8 @@ public interface ShortQuestionSevice {
     void update(ShortQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<ShortQuestion> list);
 }

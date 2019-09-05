@@ -15,9 +15,13 @@ public interface ShortQuestionMapper {
 
     List<ShortQuestion> findAll();
 
+    List<ShortQuestion> findRecover();
+
     int deleteByPrimaryKey(Integer id);
 
     void falseDeletes(Integer[] ids);
+
+    void recoverSQ(Integer[] ids);
 
     int insert(ShortQuestion record);
 
@@ -26,6 +30,8 @@ public interface ShortQuestionMapper {
     void update(ShortQuestion shortQuestion);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<ShortQuestion> list);
 

@@ -15,9 +15,13 @@ public interface ChoiceQuestionMapper {
 
     List<ChoiceQuestion> findAll();
 
+    List<ChoiceQuestion> findRecover();
+
     int falseDelete(Integer id);
 
     void falseDeletes(Integer[] ids);
+
+    void recoverCQ(Integer[] ids);
 
     int insert(ChoiceQuestion record);
 
@@ -26,6 +30,8 @@ public interface ChoiceQuestionMapper {
     int update(ChoiceQuestion record);
 
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
+
+    Map<String ,Object> findByIndexAndSize2(Integer page, Integer limit);
 
     void inserts(List<ChoiceQuestion> list);
 

@@ -17,6 +17,13 @@ public class ChoiceQuestionController {
     @Autowired
     private ChoiceQuestionService choiceQuestionService;
 
+    @RequestMapping("/admin/CQ/recover.do")
+    @ResponseBody
+    public JsonResult recoverCQ(Integer[] ids){
+        choiceQuestionService.recoverCQ(ids);
+        return new JsonResult(1,null);
+    }
+
     @RequestMapping("/admin/CQ/list.do")
     @ResponseBody
     public JsonResult listCQ(){
@@ -28,6 +35,13 @@ public class ChoiceQuestionController {
     @ResponseBody
     public Map<String ,Object> pageCQ(Integer page, Integer limit){
         Map<String ,Object> map = choiceQuestionService.findByIndexAndSize(page,limit);
+        return map;
+    }
+
+    @RequestMapping("/admin/CQ/RecoverpageCQ.do")
+    @ResponseBody
+    public Map<String ,Object> RecoverpageCQ(Integer page, Integer limit){
+        Map<String ,Object> map = choiceQuestionService.findByIndexAndSize2(page,limit);
         return map;
     }
 

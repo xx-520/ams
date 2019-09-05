@@ -15,6 +15,26 @@
         ></collection>
     </resultMap>
 
+    <select id="findByIndexAndSize2" parameterType="map" resultType="com.qfedu.ams.entity.ExamSubject">
+        select * from ams.judge_question limit #{index},#{size}
+    </select>
+
+    <select id="findRecover" resultMap="JQResultMap">
+    select id, score, question, judgeAnswer, a.subjectName
+    from ams.judge_question c
+    inner join ams.exam_subject a
+    where status = 0 and a.subjectId = c.subjectId
+  </select>
+
+    <update id="recoverJQ" parameterType="list">
+        update ams.judge_question
+        set status = 1
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
     <select id="findAll" resultMap="JQResultMap">
     select id, score, question, judgeAnswer, a.subjectName
     from ams.judge_question c

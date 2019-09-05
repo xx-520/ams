@@ -22,11 +22,25 @@ public class ShortQuestionController {
     @Autowired
     private ShortQuestionSevice shortQuestionSevice;
 
+    @RequestMapping("/admin/SQ/recover.do")
+    @ResponseBody
+    public JsonResult recoverSQ(Integer[] ids){
+        shortQuestionSevice.recoverSQ(ids);
+        return new JsonResult(1,null);
+    }
+
     @RequestMapping("/admin/SQ/list.do")
     @ResponseBody
     public JsonResult listSQ(){
         List<ShortQuestion> list = shortQuestionSevice.findAll();
         return new JsonResult(1,list);
+    }
+
+    @RequestMapping("/admin/SQ/RecoverpageSQ.do")
+    @ResponseBody
+    public Map<String ,Object> RecoverpageSQ(Integer page, Integer limit){
+        Map<String ,Object> map = shortQuestionSevice.findByIndexAndSize2(page,limit);
+        return map;
     }
 
     @RequestMapping("/admin/SQ/page.do")
