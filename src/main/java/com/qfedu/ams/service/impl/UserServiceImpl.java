@@ -92,4 +92,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User findAllUser(String username) {
+        User userList = userMapper.findAllUser(username);
+        return userList;
+    }
 }
