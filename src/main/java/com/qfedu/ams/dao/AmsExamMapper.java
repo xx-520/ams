@@ -37,4 +37,13 @@ public interface AmsExamMapper {
     public List<JudgeQuestion> findJudegQuestion(Integer id);
 
     public List<ShortQuestion> findShortQuestion(Integer id);
+    
+    
+    
+
+    public List<ChoiceQuestion> findExamChoiceQuestion(Integer examNum);
+
+    public List<JudgeQuestion> findExamJudegQuestion(Integer examNum);
+
+    public List<ShortQuestion> findExamShortQuestion(Integer examNum);
 }

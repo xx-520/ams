@@ -84,4 +84,17 @@
     <select id="findShortQuestion" parameterType="int" resultMap="shortMap">
         SELECT * FROM short_question c WHERE (SELECT FIND_IN_SET(c.id,a.shortId) from ams_exam a where a.id=#{id}) and status = 1
     </select>
+
+
+    <select id="findExamChoiceQuestion" parameterType="int" resultMap="choiceMap">
+        SELECT * FROM choice_question c WHERE (SELECT FIND_IN_SET(c.id,a.choiceId) from ams_exam a where a.examNum=#{examNum}) and status = 1
+    </select>
+
+    <select id="findExamJudegQuestion" parameterType="int" resultMap="judegMap">
+        SELECT * FROM judge_question c WHERE (SELECT FIND_IN_SET(c.id,a.judgeId) from ams_exam a where a.examNum=#{examNum}) and status = 1
+    </select>
+
+    <select id="findExamShortQuestion" parameterType="int" resultMap="shortMap">
+        SELECT * FROM short_question c WHERE (SELECT FIND_IN_SET(c.id,a.shortId) from ams_exam a where a.examNum=#{examNum}) and status = 1
+    </select>
 </mapper>

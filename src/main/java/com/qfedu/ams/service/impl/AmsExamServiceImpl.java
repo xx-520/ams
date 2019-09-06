@@ -111,4 +111,24 @@ public class AmsExamServiceImpl implements AmsExamService {
         List<ShortQuestion> shortQuestion = amsExamMapper.findShortQuestion(id);
         return shortQuestion;
     }
+
+
+
+    @Override
+    public List<ChoiceQuestion> findExamChoiceQuestion(Integer examNum) {
+        List<ChoiceQuestion> list = amsExamMapper.findExamChoiceQuestion(examNum);
+        return list;
+    }
+
+    @Override
+    public List<JudgeQuestion> findExamJudegQuestion(Integer examNum) {
+        List<JudgeQuestion> examJudegQuestion = amsExamMapper.findExamJudegQuestion(examNum);
+        return examJudegQuestion;
+    }
+
+    @Override
+    public List<ShortQuestion> findExamShortQuestion(Integer examNum) {
+        List<ShortQuestion> examShortQuestion = amsExamMapper.findExamShortQuestion(examNum);
+        return examShortQuestion;
+    }
 }

@@ -31,4 +31,10 @@ public interface AmsExamService {
     public List<JudgeQuestion> findJudegQuestion(Integer id);
 
     public List<ShortQuestion> findShortQuestion(Integer id);
+
+    public List<ChoiceQuestion> findExamChoiceQuestion(Integer examNum);
+
+    List<JudgeQuestion> findExamJudegQuestion(Integer examNum);
+
+    List<ShortQuestion> findExamShortQuestion(Integer examNum);
 }

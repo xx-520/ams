@@ -9,7 +9,7 @@
 
     <select id="findAll" resultType="com.qfedu.ams.entity.ExamSubject">
     select * from exam_subject
-  </select>
+    </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
     select * from exam_subject where subjectId = #{subjectid}
