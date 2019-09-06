@@ -22,4 +22,5 @@ public interface ExamConfigService {
 
     public List<User> selectUser();
 
+    public List<ExamConfig> findAllExamConfig();
 }

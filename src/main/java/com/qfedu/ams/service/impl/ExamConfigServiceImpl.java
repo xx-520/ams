@@ -51,4 +51,10 @@ public class ExamConfigServiceImpl implements ExamConfigService {
     public List<User> selectUser() {
         return examConfigMapper.selectUser();
     }
+
+    @Override
+    public List<ExamConfig> findAllExamConfig() {
+        List<ExamConfig> examConfigList = examConfigMapper.findAllExamConfig();
+        return examConfigList;
+    }
 }

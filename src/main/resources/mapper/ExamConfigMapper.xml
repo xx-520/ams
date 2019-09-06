@@ -28,6 +28,15 @@
 
   </resultMap>
 
+  <resultMap id="examConfigMap" type="com.qfedu.ams.entity.ExamConfig">
+    <id column="id" property="id"></id>
+    <result column="userId" property="userid"></result>
+    <result column="startTime" property="starttime"></result>
+    <result column="endTime" property="endtime"></result>
+    <result column="examNum" property="examnum"></result>
+    <result column="subjectId" property="subjectid"></result>
+  </resultMap>
+
   <select id="selectECList" resultMap="ECMap" parameterType="com.qfedu.ams.vo.VoExamConfig" >
     select ec.startTime,ec.endTime,ec.examNum,ec.id ,es.subjectName,u.name from exam_config ec
     inner join  exam_subject es
@@ -156,4 +165,8 @@
       subjectId = #{subjectid}
     where id = #{id}
   </update>
+
+  <select id="findAllExamConfig" resultMap="examConfigMap">
+    select * from exam_config
+  </select>
 </mapper>

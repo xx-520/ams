@@ -27,4 +27,6 @@ public interface ExamConfigMapper {
     int updateByPrimaryKey(ExamConfig record);
 
     public List<User> selectUser();
+
+    public List<ExamConfig> findAllExamConfig();
 }
