@@ -40,4 +40,5 @@ public interface UserMapper {
     Map<String ,Object> findByIndexAndSize(Integer page, Integer limit);
 
 
+    public User findAllUser(String username);
 }

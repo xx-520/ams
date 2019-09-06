@@ -42,6 +42,7 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", 0);
+            map.put("info", "登录失败");
         }
         return map;
 
