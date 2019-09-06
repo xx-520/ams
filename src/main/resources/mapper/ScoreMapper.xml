@@ -48,11 +48,11 @@ from ams.score
          inner  join exam_subject
                      on ams.exam_subject.subjectId = ams.score.subjectId
 inner join ams.ams_exam_answer on ams.user.uid = ams.ams_exam_answer.userId
-where ams.user.status = 1 and  ams.ams_exam_answer.status = 1
+where ams.user.status = 1 and  ams.ams_exam_answer.status = 1 and ams.score.status = 1
 </select>
 
   <update id="deleteScore" parameterType="int">
-    update ams.user set status = 0 where ams.score.id = #{id}
+    update ams.user set status = 0 where ams.user.uid = #{uid}
   </update>
 
   <update id="updateScore" parameterType="score">
