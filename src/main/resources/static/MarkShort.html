@@ -22,12 +22,12 @@
     <div class="layui-inline">
 
         <div class="layui-input-inline">
-<!--            <select id="subjectname" name="subjectid">-->
-<!--                <option value="">请选择科目</option>-->
-<!--            </select>-->
+            <select id="subjectname" name="subjectid">
+                <option value="">请选择考试场次</option>
+            </select>
 
         </div>
-<!--        <button type="button" class="layui-btn" data-type="reload" >搜索</button>-->
+        <button type="button" class="layui-btn" data-type="reload" >搜索</button>
     </div>
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
@@ -65,7 +65,7 @@
             , title: '分数表'
             , cols: [[
                 {type: 'checkbox', fixed: 'left'},
-                {field: 'userId', title: '序号', width:80, sort: true, fixed: 'left'}
+                {field: 'userId', title: '考生序号', width:80, sort: true, fixed: 'left'}
                 ,{field: 'examId', title: '考试场次号', width:80, sort: true}
                 ,{field: 'name', title: '考生姓名', width:80, sort: true}
                 ,{field: 'username', title: '学生考号', width:80, sort: true}
@@ -191,7 +191,7 @@
                     }
                     , where: { // 额外需要提交的参数
                         // courseId: $("#course").val(),
-                        subjectid: $("#subjectname").val(),
+                        id: $("#subjectname").val(),
                         // title: $("#title").val()
                     }
                 });
@@ -206,14 +206,14 @@
 
     function loadList(form) {
         $.ajax({
-            url: "/ams/admin/ES/list.do",
+            url: "/ams/admin/AE/list.do",
             type: "post",
             dadaType: "json",
             success: function (data) {
                 var html = "";
                 var infos = data.info;
                 $.each(infos, function () {
-                    html += '<option value="' + this.subjectid + '">' + this.subjectname + '</option>'
+                    html += '<option value="' + this.id + '">' + this.examnum + '</option>'
                 })
                 $("#subjectname").append($(html));
                 form.render();
