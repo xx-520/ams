@@ -15,7 +15,7 @@ from ams.ams_exam_answer
          inner join ams.exam_subject on ams.ams_exam_answer.subjectId = ams.exam_subject.subjectId
          inner join ams.ams_exam on ams.ams_exam.examNum = ams.ams_exam_answer.examNum
          inner join ams.short_question on ams.short_question.id = ams.ams_exam.shortId
-where ams.ams_exam_answer.status = 1
+where ams.ams_exam_answer.status = 0
     </select>
 
     <select id="findByUserId" parameterType="map" resultType="com.qfedu.ams.vo.MarkShort">
@@ -34,7 +34,7 @@ where ams.ams_exam_answer.userId = #{userId} and ams.ams_exam_answer.examId = #{
 
     <update id="updateMarkShort" parameterType="com.qfedu.ams.vo.MarkShort">
 update ams.ams_exam_answer,ams.score set ams.score.totalShortScore = #{totalShortScore},
-ams.ams_exam_answer.status = 0 where ams.ams_exam_answer.userId = ams.score.uid and ams.ams_exam_answer.userId = #{userId}
+ams.ams_exam_answer.status =1 where ams.ams_exam_answer.userId = ams.score.uid and ams.ams_exam_answer.userId = #{userId}
     </update>
 
 
