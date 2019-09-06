@@ -29,6 +29,7 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public void updateScore(Score score) {
+
          scoreMapper.updateScore(score);
     }
 

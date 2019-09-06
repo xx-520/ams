@@ -48,7 +48,7 @@ where ams.user.status = 1
 
   <update id="updateScore" parameterType="score">
     update ams.score set ams.score.choicescore = #{choicescore},ams.score.totaljudgescore = #{totaljudgescore},
-    ams.score.totalshortscore = #{totalshortscore} where id = #{id}
+    ams.score.totalshortscore = #{totalshortscore}  where id = #{id}
 
   </update>
 
