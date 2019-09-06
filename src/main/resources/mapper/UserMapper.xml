@@ -167,12 +167,16 @@
 
 
     <update id="updateByPrimaryKey" parameterType="com.qfedu.ams.entity.User">
-    update user
-    set username = #{username},
-      name = #{name},
-      sex = #{sex},
-      phone = #{phone},
-      email = #{email}
-    where uid = #{uid}
-  </update>
+        update user
+        set username = #{username},
+          name = #{name},
+          sex = #{sex},
+          phone = #{phone},
+          email = #{email}
+        where uid = #{uid}
+    </update>
+
+    <select id="findAllUser" parameterType="string" resultType="user">
+        select * from user where username = #{username}
+    </select>
 </mapper>
