@@ -85,19 +85,19 @@
                 // var uid = $("#uid").val()
                 var subjectId = $("#subjectname").val()
 
-
-                //执行重载
-                table.reload('test', {
-                    url:"/ams/Score/findList.do"
-                    ,page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    , where: { // 额外需要提交的参数
-                        // title:Title,
-                        subjectId: subjectId,
-                        // courseId: subjectid,
-                    }
-                });
+                //
+                // //执行重载
+                // table.reload('test', {
+                //     url:"/ams/Score/findList.do"
+                //     ,page: {
+                //         curr: 1 //重新从第 1 页开始
+                //     }
+                //     , where: { // 额外需要提交的参数
+                //         // title:Title,
+                //         subjectId: subjectId,
+                //         // courseId: subjectid,
+                //     }
+                // });
             }
         };
 
@@ -117,37 +117,37 @@
             var checkStatus = table.checkStatus(obj.config.id)
                 , data = checkStatus.data; //获取选中的数据
 
-            if (obj.event = 'deleteMany') {
-                if (data.length === 0) {
-                    layer.msg('请至少选择一行');
-                } else {
-
-                    var ids = "";
-                    if (data.length > 0) {
-                        for (var i = 0; i < data.length; i++) {
-                            ids += data[i].id + ",";  //获取所选对象的id并进行拼接
-                        }
-                    }
-
-                    layer.confirm('确定删除信息吗？' + ids, function (index) {
-                        layer.close(index);
-                        $.ajax({
-                            type: "post",
-                            url: "/ams/Score/deleteMany.do",
-                            data: {"ids": ids},
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.code == 1) {
-                                    alert(data.info);
-                                    table.reload('test');
-                                } else {
-                                    alert(data.info);
-                                }
-                            }
-                        })
-                    });
-                }
-            }
+            // if (obj.event = 'deleteMany') {
+                // if (data.length === 0) {
+                //     layer.msg('请至少选择一行');
+                // } else {
+                //
+                //     var ids = "";
+                //     // if (data.length > 0) {
+                //     //     for (var i = 0; i < data.length; i++) {
+                //     //         ids += data[i].id + ",";  //获取所选对象的id并进行拼接
+                //     //     }
+                //     // }
+                //
+                //     // layer.confirm('确定删除信息吗？' + ids, function (index) {
+                //     //     layer.close(index);
+                //     //     $.ajax({
+                //     //         type: "post",
+                //     //         url: "/ams/Score/deleteMany.do",
+                //     //         data: {"ids": ids},
+                //     //         dataType: "json",
+                //     //         success: function (data) {
+                //     //             if (data.code == 1) {
+                //     //                 alert(data.info);
+                //     //                 table.reload('test');
+                //     //             } else {
+                //     //                 alert(data.info);
+                //     //             }
+                //     //         }
+                //     //     })
+                //     // });
+                // }
+            // }
         });
 
 
@@ -159,19 +159,19 @@
                 layer.confirm('确定删除该条信息吗？', function (index) {
                     obj.del();
                     layer.close(index);
-
-                    $.ajax({
-                        type: "get",
-                        url: "/ams/Score/delete.do?id=" + data.uid,
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.code == 1) {
-                                table.reload('test');
-                            } else {
-                                alert(data.info);
-                            }
-                        }
-                    })
+                    //
+                    // $.ajax({
+                    //     type: "get",
+                    //     url: "/ams/Score/delete.do?id=" + data.uid,
+                    //     dataType: "json",
+                    //     success: function (data) {
+                    //         if (data.code == 1) {
+                    //             table.reload('test');
+                    //         } else {
+                    //             alert(data.info);
+                    //         }
+                    //     }
+                    // })
                 });
             } else if (obj.event === 'edit') {
                 layer.open({
