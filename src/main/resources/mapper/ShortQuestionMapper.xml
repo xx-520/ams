@@ -41,7 +41,7 @@
   </select>
 
     <select id="CQfindAll" resultType="int" parameterType="list">
-        select id from ams.short_question where subjectId = #{subjectid} order by rand() limit #{snum};
+        select id from ams.short_question where subjectId = #{subjectid} and status = 1 order by rand() limit #{snum};
     </select>
 
     <select id="selectByPrimaryKey" resultMap="SQResultMap" parameterType="int">

@@ -57,9 +57,7 @@
                 {field: 'id', title: '试卷编号', align:"center", width:120, sort: true}
                 ,{field: 'choiceid', title: '选择题编号', align:"center", width:200, sort: true}
                 ,{field: 'judgeid', title: '判断题编号', align:"center", width:250, sort: true}
-                ,{field: 'shortid', title: '简答题答案', align:"center", width:250, sort: true}
-                ,{field: 'examnum', title: '考试场次', align:"center", width:130, sort: true}
-
+                ,{field: 'shortid', title: '简答题编号', align:"center", width:250, sort: true}
                 ,{fixed: 'right', title: '操作',width: 180, align: 'center', toolbar: '#barDemo'}
             ]]
         });
@@ -125,7 +123,7 @@
     function add(){
         layer.open({
             type: 2 //此处以iframe举例
-            , title: '添加判断题'
+            , title: '添加试卷'
             , area: ['650px', '550px']
             , content: 'AEadd.html'
         })

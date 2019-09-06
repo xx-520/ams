@@ -9,47 +9,32 @@
 <body>
 <div class="layui-container" style="margin-top: 30px;">
     <form class="layui-form" action="">
-        <span style="color: red; font-size: 15px">注：题型
-1= java,
-2= html,
-3= ui,
-4= php,
-5= python,
-6= c,
-8= MySQL,
-10= C++
+        <span style="color: red; font-size: 15px">注：
 </span>
         <div class="layui-form-item">
             <label class="layui-form-label">题目类型</label>
             <div  class="layui-input-block">
-                <input type="text" name="subjectid" autocomplete="off" class="layui-input">
+                <input type="text" name="subjectid" autocomplete="off" class="layui-input" placeholder="题型编号: 1= java, 2= html, 3= ui, 4= php, 5= python, 6= c, 8= MySQL, 10= C++">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">选择题个数</label>
             <div class="layui-input-block">
-                <input type="text" name="num" autocomplete="off" class="layui-input">
+                <input type="text" name="num" autocomplete="off" placeholder="请输入个数 例:1" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">判断题个数</label>
             <div class="layui-input-block">
-                <input type="text" name="jnum" autocomplete="off" class="layui-input">
+                <input type="text" name="jnum" autocomplete="off" placeholder="请输入个数 例:1" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">简答题个数</label>
             <div class="layui-input-block">
-                <input type="text" name="snum" autocomplete="off" class="layui-input">
+                <input type="text" name="snum" autocomplete="off" placeholder="请输入个数 例:1" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">考试场次</label>
-            <div class="layui-input-block">
-                <input type="text" name="examnum" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="addCourse">保存</button>

@@ -43,7 +43,7 @@
   </select>
 
     <select id="CQfindAll" resultType="int" parameterType="list">
-        select id from ams.judge_question where subjectId = #{subjectid} order by rand() limit #{jnum};
+        select id from ams.judge_question where subjectId = #{subjectid} and status = 1 order by rand() limit #{jnum};
     </select>
 
     <select id="selectByPrimaryKey" resultMap="JQResultMap" parameterType="int">
